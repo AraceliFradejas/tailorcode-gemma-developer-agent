@@ -96,6 +96,7 @@ This project is being developed incrementally alongside my master's studies. The
 
 - [Project story](docs/project-story.md) for a general audience.
 - [Technical architecture](docs/architecture.md) based on the competition harness.
+- [Testing strategy](docs/testing-strategy.md) for the competition agent and optional Workbench.
 - Mermaid diagrams explaining the agent workflow.
 - [Local evaluation notes](docs/evaluation-notes.md) and selected results.
 - A companion notebook for experiments and visual explanations.
