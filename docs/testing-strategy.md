@@ -98,6 +98,10 @@ If the project later includes a `tAilorCode Workbench`, that layer can expose an
 
 Those tests will be clearly separated from the Kaggle submission tests.
 
+## Presentation notebook
+
+The [companion notebook](../notebooks/tailorcode_introduction.ipynb) is public-facing documentation. It explains the project story, shows the Mermaid workflow, and provides a lightweight results table for future runs. It is deliberately separate from `submission.zip` and does not load the competition dataset by default.
+
 ## Author
 
 **Araceli Fradejas Munoz**

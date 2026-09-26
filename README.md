@@ -99,7 +99,7 @@ This project is being developed incrementally alongside my master's studies. The
 - [Testing strategy](docs/testing-strategy.md) for the competition agent and optional Workbench.
 - Mermaid diagrams explaining the agent workflow.
 - [Local evaluation notes](docs/evaluation-notes.md) and selected results.
-- A companion notebook for experiments and visual explanations.
+- [Companion notebook](notebooks/tailorcode_introduction.ipynb) for experiments and visual explanations.
 - A possible `tAilorCode Workbench` demonstration interface.
 
 ## Authorship
