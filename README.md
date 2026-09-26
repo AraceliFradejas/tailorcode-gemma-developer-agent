@@ -2,7 +2,7 @@
 
 ## From customer support AI to autonomous code repair
 
-tAilorCode is an autonomous coding agent being developed for the **Google - The Gemma 4 Developer Agent Competition**.
+tAilorCode is an autonomous coding agent being developed for and submitted to the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent).
 
 Its purpose is simple: help developers turn a repository issue into a focused, tested, and reviewable code patch.
 
@@ -49,6 +49,8 @@ flowchart LR
 The central idea is that a useful agent should understand context, rely on available evidence, take controlled actions, and verify the result before presenting it.
 
 ## Competition setting
+
+This project is being developed as my submission to the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent), hosted by Google DeepMind on Kaggle.
 
 The competition evaluates agents on real-world Python bug fixes and feature requests. The public training set includes repository snapshots, task descriptions, tests, code graphs, and embeddings for local development.
 
@@ -115,3 +117,7 @@ The competition dataset is provided under its published competition terms and is
 
 - GitHub: [AraceliFradejas](https://github.com/AraceliFradejas)
 - Project: [tailorcode-gemma-developer-agent](https://github.com/AraceliFradejas/tailorcode-gemma-developer-agent)
+- LinkedIn: [Araceli Fradejas Munoz](https://www.linkedin.com/in/araceli-fradejas-munoz-transformaciondigital/)
+- X: [@AraceliFradejas](https://twitter.com/AraceliFradejas)
+- Medium: [Araceli Fradejas](https://medium.com/@araceli.fradejas)
+- YouTube: [Araceli Fradejas Munoz](https://www.youtube.com/@aracelifradejasmunoz2758)
