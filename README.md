@@ -94,10 +94,10 @@ This project is being developed incrementally alongside my master's studies. The
 
 ## Documentation roadmap
 
-- Project story for a general audience.
-- Technical architecture based on the competition harness.
+- [Project story](docs/project-story.md) for a general audience.
+- [Technical architecture](docs/architecture.md) based on the competition harness.
 - Mermaid diagrams explaining the agent workflow.
-- Local evaluation notes and selected results.
+- [Local evaluation notes](docs/evaluation-notes.md) and selected results.
 - A companion notebook for experiments and visual explanations.
 - A possible `tAilorCode Workbench` demonstration interface.
 
