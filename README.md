@@ -2,116 +2,131 @@
 
 ## From customer support AI to autonomous code repair
 
-tAilorCode is an autonomous coding agent being developed for and submitted to the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent).
+tAilorCode is my autonomous coding agent project for the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent), hosted by Google DeepMind on Kaggle.
 
-Its purpose is simple: help developers turn a repository issue into a focused, tested, and reviewable code patch.
-
-The project grows out of my previous work building AI assistants and autonomous workflows for the fictional KelceTS company. In that work, the agent helped customer support teams understand messages, use trusted information, follow business rules, and decide when an issue needed escalation. tAilorCode takes those same principles into software engineering.
-
-Instead of answering a customer incident, it investigates a repository issue. Instead of drafting a support reply, it proposes a code change. Instead of stopping at a plausible answer, it runs targeted tests and returns a patch that can be independently verified.
-
-## The idea
+The project transfers ideas from my previous KelceTS customer-support and autonomous-agent work into software engineering. Instead of answering a customer incident, tAilorCode investigates a repository issue, edits the relevant source code, runs targeted tests, and returns a reviewable Git patch.
 
 ```mermaid
 flowchart LR
-    A[Developer issue] --> B[tAilorCode understands the request]
-    B --> C[Explores the repository]
-    C --> D[Finds relevant code and tests]
-    D --> E[Creates a focused patch]
-    E --> F[Runs targeted tests]
-    F --> G{Do the tests pass?}
-    G -->|Yes| H[Verified patch for human review]
-    G -->|No| I[Investigates the failure]
-    I --> E
+	A[Developer issue] --> B[Understand the request]
+	B --> C[Explore repository]
+	C --> D[Make minimal source change]
+	D --> E[Run targeted tests]
+	E --> F{Tests pass?}
+	F -->|Yes| G[Submit verified patch]
+	F -->|No| C
 ```
 
-The agent is designed to work carefully rather than blindly:
+## Competition requirements
 
-1. Understand the problem statement and available hints.
-2. Navigate the repository and identify the smallest relevant area.
-3. Use source files, tests, and code-intelligence tools as evidence.
-4. Make a minimal implementation change.
-5. Run targeted verification inside the sandbox.
-6. Submit the resulting Git diff for independent evaluation.
+The competition submission is a declarative `submission.zip` archive containing `agent.yaml` at its root. The agent must use the registered Gemma 4 model and work through the competition harness. The public dataset contains repository snapshots, tasks, graphs, embeddings, and offline dependency wheels.
 
-## Why this project exists
+The evaluation process privately re-runs the selected Kaggle Notebook with a hidden dataset, extracts `submission.zip` from `/kaggle/working`, and evaluates the generated agent configuration. The main metric is Resolution Rate: the proportion of repository tasks whose generated patches pass verification.
 
-This project represents a progression in my practical work with generative AI:
+## Current implementation
 
-```mermaid
-flowchart LR
-    A[tAilor\nCustomer support assistant] --> B[Grounded answers\nand controlled behavior]
-    B --> C[Autonomous agents\nand tool use]
-    C --> D[tAilorCode\nRepository-level code repair]
-    D --> E[Tested and verifiable\nsoftware patches]
-```
+The tAilorCode configuration includes:
 
-The central idea is that a useful agent should understand context, rely on available evidence, take controlled actions, and verify the result before presenting it.
+- `agent.yaml` with the required Gemma 4 model;
+- prompts for the root coding agent and a read-only code analyst;
+- an `AgentTool` sub-agent for repository navigation;
+- repository, file, editing, testing, status, patch, and graph tools;
+- sampling and evaluation budget configuration;
+- a self-contained notebook path that can recreate the submission without Internet access.
 
-## Competition setting
+The first public smoke-test tasks selected for future evaluation are:
 
-This project is being developed as my submission to the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent), hosted by Google DeepMind on Kaggle.
+- `fastapi_14786`: strip unwanted whitespace from authorization credentials;
+- `rich_4077`: proxy `isatty()` in `FileProxy`;
+- `requests_6592`: add the `too_early` alias for HTTP status code 425.
 
-The competition evaluates agents on real-world Python bug fixes and feature requests. The public training set includes repository snapshots, task descriptions, tests, code graphs, and embeddings for local development.
+## Kaggle progress
 
-tAilorCode is packaged as a declarative Google ADK submission. The submission is built from YAML configuration, prompts, optional skills, optional sub-agents, and optional LoRA adapters. It does not use a custom Python entry point.
+The Kaggle Notebook was created as `tAilorCode - First Evaluation`.
 
-The evaluation process uses two isolated stages:
+Completed successfully:
 
-```mermaid
-sequenceDiagram
-    participant H as Evaluation harness
-    participant A as Agent sandbox
-    participant V as Verification sandbox
+1. Joined the competition.
+2. Attached the competition dataset.
+3. Created a private dataset named `tAilorCode-submission-package`.
+4. Verified the submission structure and model declaration.
+5. Created a valid `submission.zip` with `agent.yaml` at the archive root.
+6. Saved Notebook versions successfully.
 
-    H->>A: Load repository snapshot
-    H->>A: Send issue and execution rules
-    A->>A: Explore, edit, and test
-    A-->>H: Return Git diff
-    H->>V: Load a clean repository snapshot
-    H->>V: Apply the generated patch and protected tests
-    V-->>H: Pass or fail result
-```
+The first competition submission failed during Kaggle's private re-run. Kaggle only exposed the generic code-competition debugging page, so the exact hidden error was not shown.
 
-The final result is measured by **Resolution Rate**: the proportion of evaluated tasks whose patches pass the required verification tests.
+The likely root cause was the Notebook's dependency on the additional private input dataset. Kaggle may not preserve that extra dataset during the hidden competition re-run, even though it is available during interactive development.
 
-## Repository structure
+## Important correction for the next submission
+
+The local Notebook has been changed so that it embeds the small tAilorCode submission files directly in a Python cell. It no longer depends on:
+
+- `git clone`;
+- Internet access;
+- the private `tAilorCode-submission-package` dataset;
+- a fixed `/kaggle/input` path.
+
+The embedded cell creates these files directly in the working directory:
 
 ```text
-tailorcode-gemma-developer-agent/
-├── README.md
-├── submission/       # Competition agent configuration
-├── notebooks/        # Public experiments and visual explanations
-├── docs/             # Project story, architecture, and diagrams
-└── results/          # Selected local evaluation summaries
+agent.yaml
+eval_config.yaml
+configs/sampling.yaml
+prompts/system.md
+prompts/analyzer.md
+sub_agents/code_analyzer.yaml
 ```
 
-Competition data and large local evaluation assets are intentionally kept outside the public project source. They are not required to understand the agent configuration and must not be committed as part of this repository.
+It uses `/kaggle/working` inside Kaggle and a local fallback directory when tested on macOS. The local validation passed for both the submission structure and ZIP creation.
 
-## Project status
+## Resume here tomorrow
 
-This project is being developed incrementally alongside my master's studies. The first milestone is a valid, understandable baseline submission. Later milestones will focus on targeted repository navigation, reliable editing, test verification, local evaluation, and a small visual demonstration for developers.
+Use the corrected Notebook located locally at:
 
-## Documentation roadmap
+```text
+/Users/LDAAFM/Downloads/tailorcode-first-evaluation.ipynb
+```
 
-- [Project story](docs/project-story.md) for a general audience.
-- [Technical architecture](docs/architecture.md) based on the competition harness.
-- [Testing strategy](docs/testing-strategy.md) for the competition agent and optional Workbench.
-- [Kaggle evaluation runbook](docs/kaggle-runbook.md) for the first manual smoke test.
-- Mermaid diagrams explaining the agent workflow.
-- [Local evaluation notes](docs/evaluation-notes.md) and selected results.
-- [Companion notebook](notebooks/tailorcode_introduction.ipynb) for experiments and visual explanations.
-- A possible `tAilorCode Workbench` demonstration interface.
+Before making another submission:
+
+1. Import the corrected Notebook into Kaggle as a new version.
+2. Attach only the competition dataset. The private submission dataset should no longer be required.
+3. Keep Internet disabled.
+4. Run the embedded submission-generation cell.
+5. Run the validation cell and confirm:
+
+```text
+The tAilorCode submission structure is valid.
+The required Gemma 4 model is declared correctly.
+```
+
+6. Run the packaging cell and confirm:
+
+```text
+The submission archive is ready.
+```
+
+7. Save a new Notebook version.
+8. Wait for the daily submission limit to reset before submitting again.
+9. Submit once using:
+
+```text
+Version name: tAilorCode - Baseline 02
+Description: Offline-ready tAilorCode Gemma 4 coding-agent baseline.
+Output file: submission.zip
+```
+
+Do not submit repeatedly if Kaggle reports a failure. Record the exact error class first.
+
+## Local environment note
+
+The Mac workspace contains the public competition data, but it does not have the `swegemma` CLI, Docker, or the local Gemma server. The Google ADK package is available in the Kaggle Notebook, but the full harness evaluation is performed by the competition infrastructure.
+
+Insomnia is not needed for the competition agent because it is not evaluated as an HTTP API. It may be used later for an optional `tAilorCode Workbench` demonstration.
 
 ## Authorship
 
-This project is created, directed, and owned by **Araceli Fradejas Munoz**. The design decisions, project direction, experiments, and final submission remain under my authorship and review.
-
-The project is inspired by my earlier KelceTS AI assistant and autonomous-agent work, but the tAilorCode competition implementation is developed specifically for this challenge and its technical constraints.
-
-## License and competition notice
-
-The competition dataset is provided under its published competition terms and is not included in this repository. Any future public release of competition code, documentation, or results will follow the applicable Kaggle rules and third-party licenses.
+This project is created, directed, and owned by **Araceli Fradejas Munoz**. The project is inspired by my previous KelceTS AI assistant and autonomous-agent work, but the competition implementation is developed specifically for this challenge.
 
 ## Author
 
