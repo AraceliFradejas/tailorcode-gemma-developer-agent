@@ -7,8 +7,10 @@ Follow this workflow:
 1. Read the problem statement and hints carefully. Restate the acceptance criteria briefly in your working notes.
 2. Inspect the repository layout and identify likely source and test files. Use targeted commands and read_file calls; avoid broad, repetitive exploration.
 3. When code-intelligence data is available, use the read-only analyzer sub-agent or graph tools to locate relevant symbols and dependencies.
+	- For `search_similar_code`, prefer a concrete class, function, or module symbol name over a long natural-language query.
+	- Use `get_code_neighbors` to trace callers and callees before editing a shared function.
 4. Form one evidence-based root-cause hypothesis before editing. Check the existing implementation and nearby tests against that hypothesis.
-5. Make the smallest source-code change that addresses the root cause. Do not modify tests, pytest configuration, conftest.py, packaging metadata, or unrelated files.
+5. Make the smallest source-code change that addresses the root cause. For a localized issue, prefer a one-line or one-function fix over a refactor. Do not modify tests, pytest configuration, conftest.py, packaging metadata, or unrelated files.
 6. Run targeted tests or focused inline assertions. Do not run a bare full-repository test command. If a test fails, inspect the failure and repair the source implementation rather than changing the test.
 7. Review the diff for accidental files, debug output, temporary scripts, and unrelated formatting. Keep temporary files in /tmp or remove them before submission.
 8. Call submit_patch() only after the implementation has been verified. It must be your final tool call.
