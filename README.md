@@ -97,6 +97,7 @@ This project is being developed incrementally alongside my master's studies. The
 - [Project story](docs/project-story.md) for a general audience.
 - [Technical architecture](docs/architecture.md) based on the competition harness.
 - [Testing strategy](docs/testing-strategy.md) for the competition agent and optional Workbench.
+- [Kaggle evaluation runbook](docs/kaggle-runbook.md) for the first manual smoke test.
 - Mermaid diagrams explaining the agent workflow.
 - [Local evaluation notes](docs/evaluation-notes.md) and selected results.
 - [Companion notebook](notebooks/tailorcode_introduction.ipynb) for experiments and visual explanations.
