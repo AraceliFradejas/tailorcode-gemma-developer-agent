@@ -1,0 +1,24 @@
+# Local environment
+.DS_Store
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Competition data and local assets
+tasks.jsonl
+HARNESS_README.md
+snapshots/
+graphs/
+embeddings/
+wheels/
+docker/
+sandbox/
+sample_submission/
+
+# Local evaluation output
+results/
+*.parquet
+*.tgz
+*.zip
