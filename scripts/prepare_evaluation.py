@@ -54,6 +54,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path, default=ROOT)
     parser.add_argument("--suite", type=Path, default=ROOT / "evaluation/smoke-suite.json")
+    parser.add_argument("--sandbox", choices=["docker", "subprocess"], default="docker")
     parser.add_argument("--output", type=Path, required=True, help="New directory for local data and report")
     args = parser.parse_args()
     suite = json.loads(args.suite.read_text(encoding="utf-8"))
@@ -73,12 +74,12 @@ def main():
     blockers = []
     if not checks["swegemma"]:
         blockers.append("Official swegemma CLI is unavailable")
-    if not checks["docker_ready"]:
+    if args.sandbox == "docker" and not checks["docker_ready"]:
         blockers.append("Docker daemon is unavailable")
     if not checks["nvidia-smi_ready"]:
         blockers.append("No functioning NVIDIA GPU runtime detected")
     report = {
-        "suite": suite["name"], "platform": platform.system(), "architecture": platform.machine(),
+        "suite": suite["name"], "sandbox": args.sandbox, "platform": platform.system(), "architecture": platform.machine(),
         "task_count": len(tasks), "snapshots": snapshots,
         "subset_sha256": hashlib.sha256(subset.encode()).hexdigest(),
         "runtime": checks, "blockers": blockers,

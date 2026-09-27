@@ -37,6 +37,14 @@ On September 27 the local check found all three tasks and snapshots, but no `swe
 
 ## Running the agent later
 
+The [prepared one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) now follows the organizer's [getting-started example](https://www.kaggle.com/code/ryanholbrook/getting-started-gemma-4-developer-agent) using `sandbox='subprocess'`. Docker is not needed for this path. `prepare_evaluation.py --sandbox subprocess` reports prerequisites accordingly; its default remains Docker for the CLI workflow below.
+
+This notebook is **not yet tested with a model** and does not provision Colab. The inspected Colab session had Python 3.13 and incompatible/missing dependencies. The prepared workflow checks Linux x86_64, Python 3.12, package versions, GPU visibility and input presence before launching anything. GPU memory sufficiency and full dependency compatibility still need validation. It requires preinstalled official dependencies and predownloaded data/model files.
+
+`scripts/run_public_smoke.py` requires explicit `--run-agent`, selects one pinned task and records its inputs, configuration hashes, environment, outcome and generated patch in a new output directory. Its 5-minute agent budget is a diagnostic override of the baseline's 30-minute budget. Startup and verification take additional time; this is not a spending cap. Cleanup stops the model server but does not disconnect the cloud machine. Save output files separately before terminating a runtime.
+
+The user's inspected Colab account consumed paid compute units even on CPU. Review and approve consumption **before connecting**, and disconnect/delete the runtime after use. The prior session was closed and no GPU evaluation has been started.
+
 On a properly provisioned Linux GPU host, install the organizer's [evaluation wheelhouse](https://www.kaggle.com/datasets/metric/gemma-4-developer-agent-wheelhouse), configure the required model and sandbox following `HARNESS_README.md`, then verify the installed `swegemma eval --help` options. Do not install Linux GPU wheels into the Mac environment.
 
 The local dataset guide documents this command pattern, adapted to the prepared task subset:
