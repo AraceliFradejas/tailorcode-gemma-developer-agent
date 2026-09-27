@@ -57,3 +57,7 @@ swegemma eval \
 This command has NOT been executed here. The three selected public tasks are development cases; their results will not establish generalization to hidden tasks. Preserve the commit/configuration digest, package versions, task outcomes, runtimes, patches, and logs for every real run. Compare prompt or budget changes against the same baseline before promoting a new submission.
 
 Cloud allocation and spending require a separate decision after hardware and budget are known. No cloud resources have been created.
+
+## Official compiler checkpoint
+
+The baseline subsequently passed an [official compiler construction check](compiler-check-2026-09-27.md) using `adk-submission 0.2.11` and `google-adk 1.36.1`. This uses real ADK objects with inert tool bindings and no inference. The report is in `evaluation/compiler-check-2026-09-27.json`; full harness evaluation remains outstanding.

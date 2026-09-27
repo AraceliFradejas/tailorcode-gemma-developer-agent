@@ -54,7 +54,7 @@ The self-contained notebook created `submission.zip` in Kaggle. Version 11 and t
 
 A support request has been sent. The root cause is unconfirmed; neither successful packaging nor the generic error establishes whether the agent compiles or performs well. See [the support checkpoint](docs/progress-2026-09-27.md) for the version link and recorded observations.
 
-The local smoke-suite preparation found all three public tasks and their snapshots. Actual agent evaluation has not run: the Mac lacks the official harness CLI, Docker, and NVIDIA inference runtime. The next step is official compiler validation and a measured public smoke run in a suitable environment.
+The local smoke-suite preparation found all three public tasks and their snapshots. Actual agent evaluation has not run: the Mac lacks the official harness CLI, Docker, and NVIDIA inference runtime. The baseline has now passed an [official compiler construction check](docs/compiler-check-2026-09-27.md) with inert tool bindings and no inference. A measured public smoke run in a suitable environment remains outstanding.
 
 ## Local environment note
 

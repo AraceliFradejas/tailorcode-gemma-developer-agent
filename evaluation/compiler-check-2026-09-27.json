@@ -1,0 +1,29 @@
+{
+  "check": "official_compiler_construction",
+  "status": "passed",
+  "configuration_sha256": "34b25bb836e009380f01718599bc80066f7c6a892c8305de0861e6e4f2060f83",
+  "python": "3.12.13",
+  "platform": "Darwin",
+  "packages": {
+    "adk-submission": "0.2.11",
+    "google-adk": "1.36.1",
+    "google-genai": "2.25.0",
+    "pydantic": "2.13.5"
+  },
+  "root_agent": "tAilorCode",
+  "root_class": "LlmAgent",
+  "analyzer_agent": "tAilorCode_analyzer",
+  "declared_models": [
+    "gemma-4-31b-it-qat-w4a16-ct"
+  ],
+  "registered_tool_count": 9,
+  "tool_bindings": "inert placeholders; never invoked",
+  "model_binding": "declared model string; no inference server or weights loaded",
+  "limits": "compiler defaults plus file/token restrictions from HARNESS_README; not imported from swegemma",
+  "inference": "not_run",
+  "sandbox_evaluation": "not_run",
+  "score": null,
+  "compiler_source": "https://www.kaggle.com/datasets/metric/gemma-4-developer-agent-wheelhouse",
+  "wheelhouse_version_observed": 25,
+  "compiler_wheel_sha256": "d14f7d31e724f507322c763bc7c1ed56ac603085b3709afed954e50006b494a8"
+}
