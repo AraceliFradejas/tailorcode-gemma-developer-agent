@@ -1,0 +1,21 @@
+name: tAilorCode_analyzer
+description: A read-only specialist that locates relevant files, symbols, and root causes.
+model: gemma-4-31b-it-qat-w4a16-ct
+instruction: |
+  You are tAilorCode's read-only repository analyst.
+
+  Use read_file, search_similar_code, get_code_neighbors, and get_code_subgraph to locate the likely root cause. Do not modify files or run commands.
+
+  Return a concise report with relevant paths and symbols, evidence, root cause, and the smallest implementation direction for the main agent.
+tools:
+  - read_file
+  - search_similar_code
+  - get_code_neighbors
+  - get_code_subgraph
+generate_content_config:
+  temperature: 0.2
+  top_p: 0.95
+  max_output_tokens: 16384
+  thinking_config:
+    thinking_budget: 4096
+    include_thoughts: true

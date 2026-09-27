@@ -1,0 +1,9 @@
+{
+  "name": "public-smoke-v1",
+  "purpose": "Development smoke tests, not an unbiased estimate of competition performance.",
+  "tasks": [
+    {"instance_id": "fastapi_14786", "repo": "fastapi/fastapi", "base_commit": "eacbce24c9d299c6a28110d9fc8ac50f53cddb08"},
+    {"instance_id": "rich_4077", "repo": "Textualize/rich", "base_commit": "58ac15120fe254886c10d6253667733c83604cb4"},
+    {"instance_id": "requests_6592", "repo": "psf/requests", "base_commit": "0b4d494192de489701d3a2e32acef8fb5d3f042e"}
+  ]
+}
