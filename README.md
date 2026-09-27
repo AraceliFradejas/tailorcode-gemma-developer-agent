@@ -46,6 +46,8 @@ The current source of truth is `agents/baseline/`. Rebuild the self-contained Ka
 
 See [Development workflow](docs/development-workflow.md) for local commands and the three-task smoke suite, or [open the development checks in Colab](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-colab-checks.ipynb). CPU is sufficient for the development checks.
 
+CPU sufficiency does not mean zero cost: the inspected Colab account consumed compute units even on CPU. Runtime use requires the owner's prior approval of costs or paid-credit consumption.
+
 For Kaggle packaging, use `deliverables/tailorcode-submit-ready.ipynb`. The older notebook under `notebooks/tailorcode-first-evaluation.ipynb` is historical development work.
 
 ## Kaggle status — September 27, 2026
@@ -54,7 +56,27 @@ The self-contained notebook created `submission.zip` in Kaggle. Version 11 and t
 
 A support request has been sent. The root cause is unconfirmed; neither successful packaging nor the generic error establishes whether the agent compiles or performs well. See [the support checkpoint](docs/progress-2026-09-27.md) for the version link and recorded observations.
 
-The local smoke-suite preparation found all three public tasks and their snapshots. Actual agent evaluation has not run: the Mac lacks the official harness CLI, Docker, and NVIDIA inference runtime. The baseline has now passed an [official compiler construction check](docs/compiler-check-2026-09-27.md) with inert tool bindings and no inference. A measured public smoke run in a suitable environment remains outstanding.
+The local smoke-suite preparation found all three public tasks and their snapshots. The baseline has passed an [official compiler construction check](docs/compiler-check-2026-09-27.md) with inert tool bindings and no inference. A measured public smoke run in a suitable environment remains outstanding. The organizer's starter supports a subprocess sandbox, so Docker is not required for the prepared notebook path.
+
+## Latest checkpoint and project memory
+
+Read [MEMORY.md — session record and explanation in Spanish](MEMORY.md) to resume the work or explain its development. It records completed work, decisions, limitations, the Colab stop message, and the next steps.
+
+| Stage | Verified status |
+| --- | --- |
+| Submission packaging | Reproducible notebook and ZIP checked locally; an earlier ZIP was created on Kaggle |
+| Configuration compilation | Real official compiler/ADK objects constructed; tools were inert and no model ran |
+| Development checks in Colab | CPU checks passed; notebook and outputs saved privately in Drive |
+| One-task public evaluation | Notebook and runner prepared and saved; **not executed with Gemma** |
+| Local tests | 10 automated tests passed; installer hash and stop checks also passed |
+| GPU setup | Candidate installer and package pins prepared; **not installed or validated on Colab** |
+| Kaggle scoring | Four observed system-error submissions; support contacted; no score recorded |
+
+The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) is a prepared template, not a ready-to-run cloud environment. See [Colab setup](docs/colab-setup.md) for the remaining provisioning steps. Colab **2026.04** is the current candidate: its documented Python 3.12 and PyTorch 2.10 match the selected serving stack more closely than 2026.07. This does not establish CUDA compatibility or sufficient GPU memory.
+
+Kaggle CLI 2.2.4 was installed in an isolated temporary Mac environment. Public wheelhouse listing and small package downloads worked; the model-file listing required authentication. No model weights were downloaded and no GPU was activated. Both connected Colab CPU sessions were subsequently terminated, with the UI confirming no active sessions at the last check.
+
+The next milestone is authenticated input access and a validated installation, followed by an explicitly approved GPU session for **one public task**. Its result will be a diagnostic outcome, not a leaderboard score or proof of general agent quality.
 
 ## Local environment note
 
