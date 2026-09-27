@@ -1,0 +1,11 @@
+# Candidate Linux Python 3.12 runtime; not yet installed/tested on Colab.
+# Official harness wheels are supplied separately with SHA256 verification.
+google-adk==1.36.1
+google-genai==2.11.0
+vllm==0.19.1
+torch==2.10.0
+torchaudio==2.10.0
+torchvision==0.25.0
+transformers==5.13.1
+tokenizers==0.22.2
+compressed-tensors==0.15.0.1
