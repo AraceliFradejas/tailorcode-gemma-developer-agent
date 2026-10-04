@@ -1,4 +1,4 @@
-# Memoria de tAilorCode — 27 de septiembre de 2026
+# Memoria de tAilorCode — actualizada el 4 de octubre de 2026
 
 Este documento conserva el contexto del proyecto para retomarlo y para explicar
 su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
@@ -30,10 +30,38 @@ para resolver tareas. Preparar un ZIP no equivale a ejecutar al agente.
    observado era Version 11, a las 19:18:58 de Madrid, con el ZIP en Uploaded Files.
    El mensaje describía un error de sistema y recomendaba contactar con soporte.
 5. Se preparó la consulta a soporte y Araceli confirmó que la había enviado.
-   No se ha registrado respuesta ni número de ticket. No se conoce la causa exacta.
-   No se ha hecho otro envío durante la preparación posterior.
+   Soporte respondió el 28 de septiembre: recomendó preguntar en el foro de la
+   competición, sin aportar diagnóstico ni confirmar una incidencia de infraestructura.
+   No se conoce la causa exacta. No se ha hecho otro envío durante esta continuación.
 
 Referencia: [checkpoint del envío](docs/progress-2026-09-27.md).
+
+## Decisión del 4 de octubre: continuar en Colab
+
+- Araceli publicará personalmente la consulta preparada en el
+  [foro de la competición](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion).
+  No se ha confirmado la publicación ni registrado todavía un enlace al tema.
+- El intento de publicación asistida se abandonó porque no se completó el acceso
+  en la pestaña compartida. No se publicó ningún mensaje.
+- Se continuará desarrollando y evaluando tAilorCode en Colab; no es necesario
+  instalar Linux en el Mac. El entorno de Colab debe prepararse y comprobarse.
+- Kaggle queda pendiente: se retomará el envío cuando se resuelva el problema o
+  haya orientación concreta que justifique un nuevo intento.
+- Se documentarán en GitHub los resultados y limitaciones, sin subir credenciales,
+  datos de competición, pesos del modelo ni enlaces privados de Drive.
+- Elegir Colab no autoriza por sí solo consumir créditos. Antes de conectar una
+  máquina hay que revisar el consumo; antes de ejecutar Gemma, confirmar GPU,
+  memoria, entorno e inputs, y autorizar la prueba de una tarea.
+
+Las comprobaciones locales del 4 de octubre pasaron: 10 tests, ejecución completa
+del notebook de empaquetado dos veces y comprobación de frescura. El preflight
+local encontró las tres tareas y sus snapshots, pero no `swegemma` ni runtime
+NVIDIA. No se ejecutó Gemma ni se obtuvo puntuación. El subset y su informe se
+prepararon en una carpeta temporal fuera del repositorio; no son resultados del agente.
+
+Siguiente paso en Colab: abrir la [plantilla de una tarea pública](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb)
+sin conectar el runtime, revisar la configuración y seguir
+[la preparación documentada](docs/colab-setup.md) con aprobación previa de consumo.
 
 ## Qué hemos comprobado realmente
 
@@ -172,7 +200,9 @@ privados de Drive y las credenciales no se publican en este repositorio.
 6. Ejecutar una tarea, guardar parche, logs, tiempo y resultado de las pruebas.
    Guardar el notebook en Drive no conserva por sí solo esos archivos temporales.
 7. Terminar los recursos y verificar que no quedan sesiones activas.
-8. Incorporar la respuesta de soporte antes de atribuir una causa al error de Kaggle.
+8. Registrar el enlace del tema y cualquier respuesta del foro cuando estén
+   disponibles. La respuesta de soporte ya está incorporada; no atribuir todavía
+   una causa al error de Kaggle.
 
 ## Cómo contarlo después
 

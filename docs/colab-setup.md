@@ -4,6 +4,24 @@ Status: candidate setup prepared, **not installed or validated on Colab**. No GP
 evaluation has run. Opening the saved notebook is safe; connecting any runtime
 can consume the user's paid compute units and requires prior cost approval.
 
+## October 4 continuation decision
+
+Colab is the chosen path for continued development; no local Linux installation
+on the Mac is needed. Kaggle submissions are deferred while the scoring error
+remains unresolved. See [the support update](progress-2026-09-27.md#october-4-update).
+The candidate installation and one-task evaluation are still unvalidated.
+
+Start by opening the [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb)
+without connecting a runtime. Review runtime availability and consumption before
+connecting; keep both execution approval flags false until the corresponding
+steps are approved. The runtime version below is the September 27 candidate,
+not a claim that it is currently available or that any available GPU will fit Gemma.
+
+Record the project revision, environment versions, setup logs and any future
+task outcome. Publish only non-sensitive reports in GitHub; keep model weights,
+competition data, credentials and private Drive links outside the repository.
+Saving a notebook does not preserve files on a temporary Colab machine.
+
 ## Runtime choice
 
 Use **2026.04** as the candidate runtime. The [Colab runtime table](https://research.google.com/colaboratory/runtime-version-faq.html)
