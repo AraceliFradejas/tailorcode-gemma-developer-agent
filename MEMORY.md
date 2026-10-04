@@ -68,7 +68,17 @@ A las 13:38 del 4 de octubre confirmó que había guardado y desconectado.
 No se verificó independientemente la eliminación del runtime ni el panel de
 sesiones activas. La autorización no se extiende a otra conexión o instalación.
 
-Siguiente paso: comprobar acceso a los inputs sin descargar pesos y preparar la
+Después Araceli confirmó que no había sesiones activas y autorizó por separado
+otra comprobación CPU de hasta unos cinco minutos. A las 13:56 compartió la
+descarga correcta de `config.json` (18.711 bytes) de la versión 2 mediante
+KaggleHub, solicitando solo ese archivo. Su configuración declara
+`Gemma4ForConditionalGeneration`, `compressed-tensors`, estado `compressed`
+y pesos enteros de 4 bits con grupos de 32 y cuantización simétrica.
+Esto confirma acceso a ese archivo desde la sesión, no la descarga de todos
+los pesos ni compatibilidad de ejecución. No se ejecutó el modelo.
+Falta confirmar el cierre de esta segunda sesión CPU.
+
+Siguiente paso: comprobar acceso a los datos de tareas y paquetes oficiales, y preparar la
 instalación aislada y conservación de logs antes de autorizar otro consumo.
 Los detalles están en [la preparación documentada](docs/colab-setup.md).
 
