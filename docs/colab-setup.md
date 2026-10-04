@@ -105,6 +105,20 @@ runs `pip check` and import checks, and records installed versions. Dependency
 resolution may still reveal conflicts. It downloads dependencies but no model,
 starts no inference, and does not disconnect a billable machine.
 
+### Colab environment creation without ensurepip
+
+At 18:51 on October 4, the first Colab installation attempt failed while creating
+the venv, before dependency installation. The diagnostic output confirmed that
+`/usr/bin/python3` has pip but no `ensurepip` or `virtualenv`.
+The installer now uses standard `venv` when `ensurepip` exists, otherwise
+`virtualenv` if installed. If neither is available, it stops with an explicit
+setup requirement before creating a directory.
+
+In an approved setup session, install `requirements-setup.txt` using the notebook
+interpreter, then rerun the updated installer with a new venv path. Never reuse
+or overwrite the partial environment from the failed attempt. This changes only
+environment creation; dependency resolution and real GPU execution remain unverified.
+
 Use `/content/tailorcode-gpu-venv/bin/python` for `check_smoke_environment.py` and
 `run_public_smoke.py`; the notebook's default `sys.executable` must be changed to
 this interpreter after successful setup. The saved Drive notebook remains a
