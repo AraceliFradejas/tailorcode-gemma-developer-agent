@@ -71,6 +71,25 @@ wheelhouse. Three small official wheels were downloaded and inspected on the Mac
 they were not installed into the project environment. Their hashes and requirements
 are saved in `evaluation/official-harness-wheels.json`.
 
+### October 4 Colab download verification
+
+Araceli separately authorized a CPU check of up to roughly five minutes to
+download only these three wheels, without installation. Her supplied output
+at 16:12 Europe/Madrid confirms downloads via KaggleHub from wheelhouse
+version 25 and SHA256 matches against the recorded manifest:
+
+| Wheel | Bytes | SHA256 check |
+| --- | --- | --- |
+| adk_submission-0.2.11-py3-none-any.whl | 62,404 | Matched |
+| adk_eval_core-0.1.0-py3-none-any.whl | 89,306 | Matched |
+| swegemma-0.2.7-py3-none-any.whl | 111,548 | Matched |
+
+No packages were installed or executed. Dependency resolution, serving and
+task-data access remain unverified. These cache files are on a temporary
+runtime and will need downloading again after deletion. Saving cell outputs
+does not preserve the downloaded files. Shutdown of this check's runtime has
+not yet been confirmed.
+
 In an approved cloud runtime with Kaggle CLI available, download these three files:
 
 ```bash
@@ -110,9 +129,9 @@ configuration download:
 This confirms access from that Colab session to this particular small file.
 It does not establish whether authentication was used, that all model files
 can be downloaded, GPU memory sufficiency, or serving compatibility.
-No weights were requested and no inference was performed. Araceli previously
-reported no active sessions after the first CPU check; shutdown of this second
-session has not yet been confirmed.
+No weights were requested and no inference was performed. Araceli reported
+the session disconnected at 16:09, before the subsequent wheel-download check;
+runtime deletion was not independently verified.
 
 The browser displays [the required model version](https://www.kaggle.com/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2)
 as 23.3 GB. No weights have been downloaded. Model size is not a GPU VRAM estimate.
@@ -127,8 +146,8 @@ model/data access, available disk space, required GPU memory and the displayed c
 
 ## Resume
 
-1. Verify access to the task inputs and official wheels; the pinned model's
-   `config.json` is accessible via KaggleHub. Authenticate only if the chosen
+1. Verify access to the task inputs; the pinned model's `config.json` and the
+   three recorded official wheels are accessible via KaggleHub. Authenticate only if the chosen
    download method requires it; never publish credentials.
 2. Agree on a bounded CPU setup session if cloud installation testing is needed.
 3. Install and check the candidate environment, preserving logs and package versions.
