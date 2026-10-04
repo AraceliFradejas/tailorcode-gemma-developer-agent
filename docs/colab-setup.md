@@ -1,7 +1,7 @@
 # Colab preparation checkpoint — September 27, 2026
 
-Status: candidate setup prepared, **not installed or validated on Colab**. No GPU
-evaluation has run. Opening the saved notebook is safe; connecting any runtime
+Status: the October 4 CPU installation passed dependency and selected import
+checks; **GPU serving and task evaluation remain unvalidated**. Opening the saved notebook is safe; connecting any runtime
 can consume the user's paid compute units and requires prior cost approval.
 
 ## October 4 continuation decision
@@ -9,7 +9,8 @@ can consume the user's paid compute units and requires prior cost approval.
 Colab is the chosen path for continued development; no local Linux installation
 on the Mac is needed. Kaggle submissions are deferred while the scoring error
 remains unresolved. See [the support update](progress-2026-09-27.md#october-4-update).
-The candidate installation and one-task evaluation are still unvalidated.
+The subsequent CPU installation checkpoint is recorded below. GPU serving and
+one-task evaluation remain unvalidated.
 
 Start by opening the [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb)
 without connecting a runtime. Review runtime availability and consumption before
@@ -186,6 +187,32 @@ Do not upload the dataset to the public repository. Before starting the GPU, ver
 model/data access, available disk space, required GPU memory and the displayed credit rate.
 
 ## Resume
+
+### October 4 installation and notebook organization
+
+The uploaded owner notebook records a successful installation using installer
+revision `a9bfa3e54f6d57936216dcf34d15a9290e26749b`, after the missing-ensurepip
+fix. The captured output reports exit code 0, `No broken requirements found.`,
+successful selected imports and `CUDA available: False` in the CPU session.
+This is not proof of working GPU inference or a preserved environment.
+
+The public notebook now separates approvals, CPU inspection, Secrets-based
+authentication, configuration/metadata checks, project/wheel preparation,
+isolated installation, pending full-input preparation, and GPU evaluation.
+Historical useful outputs are labeled Markdown records; executable cells have
+no saved outputs and start with approval checks. Repetitive installation logs
+are summarized; the owner's original download is unchanged.
+
+The corrected installer revision is used from the start, so the ad hoc update
+cell and duplicate wheel check are no longer needed. Installation progress is
+streamed to the notebook and recorded in a log. Preflight and inference use the
+isolated environment's Python. Existing project, venv and log paths are preserved.
+Changing runtime may discard all temporary preparation.
+
+The notebook still does not automate full model/snapshot/graph/embedding
+provisioning. It explicitly stops at that pending stage. Inference approval stays
+false. Revoke notebook Secret access before repository-code evaluation; do not
+expose credentials or personal Drive files to that sandbox.
 
 1. Prepare the remaining task inputs and their persistence strategy. The model's
    `config.json`, official wheels and authenticated task metadata access have

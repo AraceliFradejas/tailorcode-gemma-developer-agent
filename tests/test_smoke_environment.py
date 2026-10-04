@@ -50,6 +50,30 @@ class SmokeEnvironmentTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'approve runtime'):
             exec(cells[0], {})
 
+    def test_guided_notebook_requires_approval_before_each_step(self):
+        root = Path(__file__).resolve().parents[1]
+        notebook = json.loads((root / 'notebooks/tailorcode-public-smoke.ipynb').read_text())
+        ids = [cell['id'] for cell in notebook['cells']]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertLess(ids.index('project-setup'), ids.index('install-environment'))
+        self.assertLess(ids.index('a58JyR6YS5sU'), ids.index('Vv3-uZkxRhom'))
+        for cell in notebook['cells']:
+            if cell['cell_type'] == 'code':
+                with self.subTest(cell=cell['id']):
+                    self.assertEqual(cell['outputs'], [])
+                    with self.assertRaises(RuntimeError):
+                        exec(''.join(cell['source']), {})
+
+    def test_evaluation_uses_isolated_interpreter(self):
+        root = Path(__file__).resolve().parents[1]
+        notebook = json.loads((root / 'notebooks/tailorcode-public-smoke.ipynb').read_text())
+        cells = {cell['id']: ''.join(cell['source']) for cell in notebook['cells']}
+        for cell_id in ('tailorcode-smoke-06', 'tailorcode-smoke-08'):
+            self.assertIn('str(PYTHON)', cells[cell_id])
+            self.assertNotIn('sys.executable', cells[cell_id])
+        self.assertIn('RUN_AGENT = False', cells['tailorcode-smoke-08'])
+        self.assertIn('INSTALL_APPROVED = False', cells['install-environment'])
+
 
 if __name__ == '__main__':
     unittest.main()
