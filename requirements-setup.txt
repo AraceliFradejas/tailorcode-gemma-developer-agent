@@ -1,0 +1,2 @@
+# Environment creation for Colab interpreters without standard-library ensurepip.
+virtualenv>=20.26,<21

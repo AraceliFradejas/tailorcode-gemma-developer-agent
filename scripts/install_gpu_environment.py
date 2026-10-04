@@ -6,6 +6,7 @@ unverified until resolution, pip check, imports and a real GPU run succeed.
 """
 import argparse
 import hashlib
+import importlib.util
 import json
 import platform
 import subprocess
@@ -13,6 +14,25 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def create_environment(directory):
+    if directory.exists():
+        raise ValueError('Choose a new venv path; existing environments are not overwritten.')
+    if importlib.util.find_spec('ensurepip') is not None:
+        module = 'venv'
+        options = []
+    elif importlib.util.find_spec('virtualenv') is not None:
+        module = 'virtualenv'
+        options = ['--python', sys.executable]
+    else:
+        raise RuntimeError(
+            'Python has no ensurepip and virtualenv is not installed. '
+            'Install requirements-setup.txt with this interpreter in an approved '
+            'runtime, then retry using a new environment path.'
+        )
+    print(f'Creating isolated environment with {module}: {directory}', flush=True)
+    subprocess.run([sys.executable, '-m', module, *options, str(directory)], check=True)
 
 
 def verified_wheels(directory):
@@ -39,7 +59,7 @@ def main():
     wheels = verified_wheels(args.wheelhouse)
     if args.venv.exists():
         parser.exit(1, 'Choose a new venv path; existing environments are not overwritten.\n')
-    subprocess.run([sys.executable, '-m', 'venv', str(args.venv)], check=True)
+    create_environment(args.venv)
     python = str(args.venv.resolve() / 'bin/python')
     subprocess.run([python, '-m', 'pip', 'install', '--disable-pip-version-check',
                     '-r', str(ROOT / 'requirements-gpu.txt'), *wheels], check=True)
