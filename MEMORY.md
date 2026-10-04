@@ -76,9 +76,18 @@ KaggleHub, solicitando solo ese archivo. Su configuración declara
 y pesos enteros de 4 bits con grupos de 32 y cuantización simétrica.
 Esto confirma acceso a ese archivo desde la sesión, no la descarga de todos
 los pesos ni compatibilidad de ejecución. No se ejecutó el modelo.
-Falta confirmar el cierre de esta segunda sesión CPU.
+Araceli confirmó la desconexión a las 16:09, antes de la siguiente comprobación.
 
-Siguiente paso: comprobar acceso a los datos de tareas y paquetes oficiales, y preparar la
+A continuación autorizó otra comprobación CPU de hasta cinco minutos para
+descargar solo los tres paquetes oficiales. A las 16:12 compartió resultados
+correctos desde el wheelhouse versión 25: `adk-submission 0.2.11` (62.404 bytes),
+`adk-eval-core 0.1.0` (89.306 bytes) y `swegemma 0.2.7` (111.548 bytes).
+Los tres hashes SHA256 coinciden con el manifiesto registrado. No se instaló
+ni ejecutó ninguno. Las descargas son temporales y no persisten al eliminar
+la máquina; guardar sus salidas no conserva los archivos.
+Falta confirmar el cierre de esta última sesión.
+
+Siguiente paso: comprobar acceso a los datos de tareas y preparar la
 instalación aislada y conservación de logs antes de autorizar otro consumo.
 Los detalles están en [la preparación documentada](docs/colab-setup.md).
 
