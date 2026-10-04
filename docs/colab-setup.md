@@ -44,8 +44,8 @@ The runtime settings screenshot offered 2026.04 and allowed selecting A100;
 H100 was disabled. No GPU allocation, memory capacity or credit rate was verified.
 The supplied model configuration declares `Gemma4ForConditionalGeneration`,
 `quant_method: compressed-tensors` and `quantization_status: compressed`.
-The expanded quantization groups were not supplied, so their exact bit settings
-were not independently checked.
+The expanded quantization groups were not supplied in the first check; the
+subsequent small-file download below supplied those settings.
 
 This establishes basic CPU platform/version observations, not a working serving
 stack or authenticated download access. No model inference was performed.
@@ -53,8 +53,8 @@ At 13:38 Europe/Madrid, Araceli confirmed saving the notebook and disconnecting.
 Runtime deletion and absence of active sessions were not independently verified.
 The previous CPU authorization does not extend to another session or installation.
 
-The next preparation step is to verify access to the pinned model and public
-task inputs without downloading weights, then plan the isolated installation
+The next preparation step is to verify access to the public task inputs
+without downloading weights, then plan the isolated installation
 and persistence of its logs before requesting further runtime consumption.
 
 Use **2026.04** as the candidate runtime. The [Colab runtime table](https://research.google.com/colaboratory/runtime-version-faq.html)
@@ -93,6 +93,27 @@ prepared template, not a ready-to-run environment.
 
 ## Model and task access
 
+### October 4 small-file download
+
+After separately authorizing another CPU check of up to roughly five minutes,
+Araceli ran `kagglehub.model_download` with the pinned handle
+`google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2` and `path="config.json"`.
+The supplied output at 13:56 Europe/Madrid reported a successful 18,711-byte
+configuration download:
+
+- Architecture: `Gemma4ForConditionalGeneration`.
+- Quantization: `compressed-tensors`, status `compressed`.
+- Group format: `pack-quantized`, targeting `Linear`.
+- Weights: 4-bit integers, group size 32, symmetric group quantization.
+- Input and output activation quantization: null in the reported group.
+
+This confirms access from that Colab session to this particular small file.
+It does not establish whether authentication was used, that all model files
+can be downloaded, GPU memory sufficiency, or serving compatibility.
+No weights were requested and no inference was performed. Araceli previously
+reported no active sessions after the first CPU check; shutdown of this second
+session has not yet been confirmed.
+
 The browser displays [the required model version](https://www.kaggle.com/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2)
 as 23.3 GB. No weights have been downloaded. Model size is not a GPU VRAM estimate.
 The CLI model-file listing requires authentication; no local credentials were found.
@@ -106,7 +127,9 @@ model/data access, available disk space, required GPU memory and the displayed c
 
 ## Resume
 
-1. Complete the authorized Kaggle CLI sign-in and verify read-only access.
+1. Verify access to the task inputs and official wheels; the pinned model's
+   `config.json` is accessible via KaggleHub. Authenticate only if the chosen
+   download method requires it; never publish credentials.
 2. Agree on a bounded CPU setup session if cloud installation testing is needed.
 3. Install and check the candidate environment, preserving logs and package versions.
 4. Review GPU consumption separately before starting the one-task evaluation.
