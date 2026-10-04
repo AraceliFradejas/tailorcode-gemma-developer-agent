@@ -50,11 +50,13 @@ CPU sufficiency does not mean zero cost: the inspected Colab account consumed co
 
 For Kaggle packaging, use `deliverables/tailorcode-submit-ready.ipynb`. The older notebook under `notebooks/tailorcode-first-evaluation.ipynb` is historical development work.
 
-## Kaggle status — September 27, 2026
+## Kaggle status — October 4, 2026
 
 The self-contained notebook created `submission.zip` in Kaggle. Version 11 and three earlier submissions were listed as **Kaggle Error**, with a message describing a system error and advising contact with support. The submission details list the ZIP, but no specific hidden diagnostic or score is available.
 
-A support request has been sent. The root cause is unconfirmed; neither successful packaging nor the generic error establishes whether the agent compiles or performs well. See [the support checkpoint](docs/progress-2026-09-27.md) for the version link and recorded observations.
+Kaggle Support replied on September 28, directing the question to the competition forums without providing a diagnostic or confirming an infrastructure incident. On October 4, Araceli decided to post the prepared question herself in the [competition discussion forum](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion). Publication and a topic URL have not yet been confirmed.
+
+Development will continue in Colab, with progress documented in this repository. Another Kaggle submission is deferred until the submission problem is resolved or there is actionable guidance for a new attempt. The root cause remains unconfirmed; neither successful packaging nor the generic error establishes whether the agent runs or performs well. See [the support checkpoint](docs/progress-2026-09-27.md) for the version link and recorded observations.
 
 The local smoke-suite preparation found all three public tasks and their snapshots. The baseline has passed an [official compiler construction check](docs/compiler-check-2026-09-27.md) with inert tool bindings and no inference. A measured public smoke run in a suitable environment remains outstanding. The organizer's starter supports a subprocess sandbox, so Docker is not required for the prepared notebook path.
 
@@ -68,9 +70,9 @@ Read [MEMORY.md — session record and explanation in Spanish](MEMORY.md) to res
 | Configuration compilation | Real official compiler/ADK objects constructed; tools were inert and no model ran |
 | Development checks in Colab | CPU checks passed; notebook and outputs saved privately in Drive |
 | One-task public evaluation | Notebook and runner prepared and saved; **not executed with Gemma** |
-| Local tests | 10 automated tests passed; installer hash and stop checks also passed |
+| Local tests | All 10 automated tests passed again on October 4; earlier installer hash and stop checks also passed |
 | GPU setup | Candidate installer and package pins prepared; **not installed or validated on Colab** |
-| Kaggle scoring | Four observed system-error submissions; support contacted; no score recorded |
+| Kaggle scoring | Four observed system-error submissions; support referred the case to the forum; no score recorded |
 
 The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) is a prepared template, not a ready-to-run cloud environment. See [Colab setup](docs/colab-setup.md) for the remaining provisioning steps. Colab **2026.04** is the current candidate: its documented Python 3.12 and PyTorch 2.10 match the selected serving stack more closely than 2026.07. This does not establish CUDA compatibility or sufficient GPU memory.
 
