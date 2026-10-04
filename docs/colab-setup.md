@@ -136,19 +136,46 @@ runtime deletion was not independently verified.
 The browser displays [the required model version](https://www.kaggle.com/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2)
 as 23.3 GB. No weights have been downloaded. Model size is not a GPU VRAM estimate.
 The CLI model-file listing requires authentication; no local credentials were found.
-Use Kaggle's official OAuth login when authorized, not tokens pasted into notebooks,
-chat or GitHub. Browser sign-in alone does not authenticate a separate CLI.
+For the verified KaggleHub 1.0.0 Colab path, store an API token in Colab Secrets
+under `KAGGLE_API_TOKEN` and enable notebook access only for trusted code.
+KaggleHub reads this secret automatically; this is token authentication, not OAuth.
+Never paste the token into notebook source, outputs, chat or GitHub.
+Browser sign-in alone does not authenticate a separate runtime.
 
-The public task data already exists on the Mac, but is not mounted in Colab. It
-still needs an authorized download or private transfer into the temporary runtime.
+### October 4 authenticated task metadata check
+
+The initial request for `tasks.jsonl` failed with `UnauthenticatedError`.
+After configuring Colab Secrets and separately authorizing a CPU session of up
+to roughly five minutes, Araceli supplied successful output at 16:30 Europe/Madrid.
+`kagglehub.whoami(verbose=False)` completed, followed by a request for only
+`tasks.jsonl` through `kagglehub.competition_download`:
+
+- File size: 1,984,455 bytes.
+- Records: 129.
+- Exactly one matching task: `fastapi_14786`.
+- Repository: `fastapi/fastapi`.
+- Base commit: `eacbce24c9d299c6a28110d9fc8ac50f53cddb08`.
+
+This confirms authenticated access to the metadata and the pinned task identity.
+No snapshots or model weights were downloaded, and no task code or inference
+was executed. Runtime shutdown after this check has not yet been confirmed.
+
+Secrets values are not included in an exported notebook, but trusted notebook
+code with secret access can read them. Do not expose them through expressions,
+logs, shell commands or saved widget outputs. Each person using a shared notebook
+must configure their own credentials and accept the competition terms.
+
+Full task inputs still need preparation in the eventual evaluation runtime:
+the snapshot, graph, embeddings and offline dependencies are not established
+by the metadata download.
 Do not upload the dataset to the public repository. Before starting the GPU, verify
 model/data access, available disk space, required GPU memory and the displayed credit rate.
 
 ## Resume
 
-1. Verify access to the task inputs; the pinned model's `config.json` and the
-   three recorded official wheels are accessible via KaggleHub. Authenticate only if the chosen
-   download method requires it; never publish credentials.
+1. Prepare the remaining task inputs and their persistence strategy. The model's
+   `config.json`, official wheels and authenticated task metadata access have
+   been checked; full snapshot and model downloads remain outstanding.
 2. Agree on a bounded CPU setup session if cloud installation testing is needed.
 3. Install and check the candidate environment, preserving logs and package versions.
 4. Review GPU consumption separately before starting the one-task evaluation.
