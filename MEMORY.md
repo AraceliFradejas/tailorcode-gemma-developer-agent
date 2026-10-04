@@ -87,7 +87,18 @@ ni ejecutó ninguno. Las descargas son temporales y no persisten al eliminar
 la máquina; guardar sus salidas no conserva los archivos.
 Falta confirmar el cierre de esta última sesión.
 
-Siguiente paso: comprobar acceso a los datos de tareas y preparar la
+A las 16:18, descargar `tasks.jsonl` falló con `UnauthenticatedError`: la sesión
+del navegador no autenticaba Colab. Se configuró el secreto `KAGGLE_API_TOKEN`
+con acceso al notebook, sin introducir su valor en el código ni en GitHub.
+KaggleHub 1.0.0 lo reconoce automáticamente; esta vía usa token API, no OAuth.
+Tras autorizar otra sesión CPU de hasta cinco minutos, Araceli compartió a las
+16:30 la autenticación correcta y la descarga de `tasks.jsonl` (1.984.455 bytes,
+129 registros). La tarea `fastapi_14786`, el repositorio `fastapi/fastapi` y el
+commit `eacbce24c9d299c6a28110d9fc8ac50f53cddb08` coincidieron con el baseline.
+No se descargaron snapshots ni pesos, ni se ejecutó la tarea.
+Falta confirmar el cierre de esta sesión; no prolongar su autorización.
+
+Siguiente paso: preparar los inputs restantes de la tarea y planificar la
 instalación aislada y conservación de logs antes de autorizar otro consumo.
 Los detalles están en [la preparación documentada](docs/colab-setup.md).
 
