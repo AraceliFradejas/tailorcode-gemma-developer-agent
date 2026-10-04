@@ -24,6 +24,39 @@ Saving a notebook does not preserve files on a temporary Colab machine.
 
 ## Runtime choice
 
+### October 4 CPU observation
+
+Araceli supplied output from a diagnostic cell in her private Colab copy after
+authorizing only a roughly five-minute CPU check. The reported environment was:
+
+| Check | Reported value |
+| --- | --- |
+| Python | 3.12.13 |
+| Platform | Linux x86_64 |
+| Free disk | 210.5 GiB |
+| kagglehub | 1.0.0 |
+| kaggle | 2.0.0 |
+| torch | 2.10.0+cpu |
+| transformers | 5.0.0 |
+| vllm | Not installed |
+
+The runtime settings screenshot offered 2026.04 and allowed selecting A100;
+H100 was disabled. No GPU allocation, memory capacity or credit rate was verified.
+The supplied model configuration declares `Gemma4ForConditionalGeneration`,
+`quant_method: compressed-tensors` and `quantization_status: compressed`.
+The expanded quantization groups were not supplied, so their exact bit settings
+were not independently checked.
+
+This establishes basic CPU platform/version observations, not a working serving
+stack or authenticated download access. No model inference was performed.
+At 13:38 Europe/Madrid, Araceli confirmed saving the notebook and disconnecting.
+Runtime deletion and absence of active sessions were not independently verified.
+The previous CPU authorization does not extend to another session or installation.
+
+The next preparation step is to verify access to the pinned model and public
+task inputs without downloading weights, then plan the isolated installation
+and persistence of its logs before requesting further runtime consumption.
+
 Use **2026.04** as the candidate runtime. The [Colab runtime table](https://research.google.com/colaboratory/runtime-version-faq.html)
 lists Python 3.12.13 and PyTorch 2.10.0. Although 2026.07 also has Python 3.12,
 its PyTorch 2.11.0 differs from vLLM 0.19.1's declared `torch==2.10.0` requirement
