@@ -71,10 +71,10 @@ Read [MEMORY.md — session record and explanation in Spanish](MEMORY.md) to res
 | Development checks in Colab | CPU checks passed; notebook and outputs saved privately in Drive |
 | One-task public evaluation | Notebook and runner prepared and saved; **not executed with Gemma** |
 | Local tests | All 10 automated tests passed again on October 4; earlier installer hash and stop checks also passed |
-| GPU setup | Candidate installer and package pins prepared; **not installed or validated on Colab** |
+| GPU setup | Isolated stack installed and selected imports passed on Colab CPU October 4; **GPU serving not validated** |
 | Kaggle scoring | Four observed system-error submissions; support referred the case to the forum; no score recorded |
 
-The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) is a prepared template, not a ready-to-run cloud environment. See [Colab setup](docs/colab-setup.md) for the remaining provisioning steps. Colab **2026.04** is the current candidate: its documented Python 3.12 and PyTorch 2.10 match the selected serving stack more closely than 2026.07. This does not establish CUDA compatibility or sufficient GPU memory.
+The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) now has guided preparation sections and labeled historical CPU results. It remains a template with full-input provisioning pending, not a ready-to-run GPU environment. See [Colab setup](docs/colab-setup.md) for the remaining steps. Colab **2026.04** is the current candidate: its observed Python 3.12 and CPU PyTorch 2.10 match the selected stack's versions. This does not establish CUDA compatibility or sufficient GPU memory.
 
 Kaggle CLI 2.2.4 was installed in an isolated temporary Mac environment. Public wheelhouse listing and small package downloads worked; the model-file listing required authentication. No model weights were downloaded and no GPU was activated. Both connected Colab CPU sessions were subsequently terminated, with the UI confirming no active sessions at the last check.
 

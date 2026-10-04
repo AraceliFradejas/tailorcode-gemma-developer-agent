@@ -104,6 +104,20 @@ Los detalles están en [la preparación documentada](docs/colab-setup.md).
 
 ## Qué hemos comprobado realmente
 
+Actualización de la tarde del 4 de octubre: la primera instalación falló porque
+el Python de Colab no tenía `ensurepip`. Se corrigió el instalador para usar
+`virtualenv` cuando falte ese módulo, con cinco pruebas de regresión locales.
+El notebook aportado por Araceli registra después código de salida 0,
+`No broken requirements found.`, importaciones correctas y CUDA no disponible
+en CPU. No se cargó Gemma ni se validó GPU.
+
+Araceli pidió ordenar su copia, que acumulaba celdas al principio. La plantilla
+de GitHub se reorganizó a partir de su archivo: explicaciones Markdown por etapa,
+resultados históricos útiles identificados como tales, instalación después de
+los preparativos y Python aislado para preflight/evaluación. Las autorizaciones
+siguen desactivadas y falta preparar inputs completos. El archivo original
+descargado no se modificó. Guardar el notebook no conserva el entorno temporal.
+
 - `agents/baseline/` es la fuente de la configuración: agente principal, analista
   de código de solo lectura y presupuesto de evaluación. Ambos usan
   `gemma-4-31b-it-qat-w4a16-ct`.
