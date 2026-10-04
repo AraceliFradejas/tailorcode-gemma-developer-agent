@@ -59,9 +59,18 @@ local encontró las tres tareas y sus snapshots, pero no `swegemma` ni runtime
 NVIDIA. No se ejecutó Gemma ni se obtuvo puntuación. El subset y su informe se
 prepararon en una carpeta temporal fuera del repositorio; no son resultados del agente.
 
-Siguiente paso en Colab: abrir la [plantilla de una tarea pública](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb)
-sin conectar el runtime, revisar la configuración y seguir
-[la preparación documentada](docs/colab-setup.md) con aprobación previa de consumo.
+Araceli creó su copia privada en Colab y autorizó únicamente una comprobación CPU
+de unos cinco minutos. La salida compartida mostró Python 3.12.13, Linux x86_64,
+210,5 GiB de disco libre, kagglehub 1.0.0, kaggle 2.0.0, torch 2.10.0+cpu,
+transformers 5.0.0 y vLLM ausente. No se comprobó acceso autenticado al modelo,
+no se instalaron las dependencias de evaluación ni se ejecutó Gemma.
+A las 13:38 del 4 de octubre confirmó que había guardado y desconectado.
+No se verificó independientemente la eliminación del runtime ni el panel de
+sesiones activas. La autorización no se extiende a otra conexión o instalación.
+
+Siguiente paso: comprobar acceso a los inputs sin descargar pesos y preparar la
+instalación aislada y conservación de logs antes de autorizar otro consumo.
+Los detalles están en [la preparación documentada](docs/colab-setup.md).
 
 ## Qué hemos comprobado realmente
 
