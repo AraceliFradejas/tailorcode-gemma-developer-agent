@@ -70,15 +70,19 @@ Read [MEMORY.md — session record and explanation in Spanish](MEMORY.md) to res
 | Configuration compilation | Real official compiler/ADK objects constructed; tools were inert and no model ran |
 | Development checks in Colab | CPU checks passed; notebook and outputs saved privately in Drive |
 | One-task public evaluation | Notebook and runner prepared and saved; **not executed with Gemma** |
-| Local tests | All 10 automated tests passed again on October 4; earlier installer hash and stop checks also passed |
+| Local tests | All 17 automated tests passed at the October 4 evening checkpoint, including installer and notebook approval regression checks |
 | GPU setup | Isolated stack installed and selected imports passed on Colab CPU October 4; **GPU serving not validated** |
 | Kaggle scoring | Four observed system-error submissions; support referred the case to the forum; no score recorded |
 
 The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) now has guided preparation sections and labeled historical CPU results. It remains a template with full-input provisioning pending, not a ready-to-run GPU environment. See [Colab setup](docs/colab-setup.md) for the remaining steps. Colab **2026.04** is the current candidate: its observed Python 3.12 and CPU PyTorch 2.10 match the selected stack's versions. This does not establish CUDA compatibility or sufficient GPU memory.
 
-Kaggle CLI 2.2.4 was installed in an isolated temporary Mac environment. Public wheelhouse listing and small package downloads worked; the model-file listing required authentication. No model weights were downloaded and no GPU was activated. Both connected Colab CPU sessions were subsequently terminated, with the UI confirming no active sessions at the last check.
+Earlier, Kaggle CLI 2.2.4 was installed in an isolated temporary Mac environment; model-file listing required authentication. On October 4, Colab KaggleHub accessed the pinned model's small configuration file, verified the three official wheel hashes, and authenticated through Colab Secrets to download task metadata. The isolated CPU installation subsequently passed dependency and selected import checks after fixing missing `ensurepip`. No model weights were downloaded and no GPU was activated. Colab was visibly disconnected after installation; runtime deletion and the current active-session list were not independently verified.
 
-The next milestone is authenticated input access and a validated installation, followed by an explicitly approved GPU session for **one public task**. Its result will be a diagnostic outcome, not a leaderboard score or proof of general agent quality.
+The next milestone is full task/model input preparation and a storage plan, followed by an explicitly approved GPU session, CUDA/VRAM checks and **one public task**. The CPU installation is evidence for that environment, not a guarantee that it survives runtime deletion or works on GPU. The task result will be diagnostic, not a leaderboard score or proof of general agent quality.
+
+### Opening the guided notebook manually
+
+If the Colab GitHub link does not open, [download the notebook source](https://raw.githubusercontent.com/AraceliFradejas/tailorcode-gemma-developer-agent/main/notebooks/tailorcode-public-smoke.ipynb) and use **File → Upload notebook** in Colab, then save a private Drive copy. Araceli confirmed receiving the organized copy on October 4. Keep runtime, installation and inference approvals false until each new session is agreed. Do not run all cells.
 
 ## Local environment note
 
