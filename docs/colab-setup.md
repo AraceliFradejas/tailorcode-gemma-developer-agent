@@ -221,3 +221,26 @@ expose credentials or personal Drive files to that sandbox.
 3. Install and check the candidate environment, preserving logs and package versions.
 4. Review GPU consumption separately before starting the one-task evaluation.
 5. Save result files, then disconnect/delete the runtime and verify no active sessions.
+
+### October 4 evening handoff
+
+The owner confirmed receiving the organized downloadable notebook at 19:26
+Europe/Madrid after the direct Colab link failed to open. The maintained source
+is `notebooks/tailorcode-public-smoke.ipynb`; import its downloaded `.ipynb` with
+Colab's **File → Upload notebook** and save a private Drive copy. Local distribution
+copies do not constitute another independently maintained source.
+
+The complete local suite passed 17 tests at this checkpoint. No runtime was
+connected for notebook organization. Colab appeared disconnected in the earlier
+post-installation screenshot, but runtime deletion and current session status
+have not been independently checked.
+
+An OS paste-protection warning was reported during attempts to share installation
+output. Its trigger was not determined. The protection was not bypassed; the
+installation result was read from screenshots and the owner-provided notebook.
+Do not characterize the warning as a confirmed false positive or a specific
+package vulnerability.
+
+Before the next session, finish full-input provisioning and decide how to retain
+downloads and logs. Do not spend GPU time reviewing or editing preparation cells.
+The original CPU approval does not carry over to another session or GPU inference.

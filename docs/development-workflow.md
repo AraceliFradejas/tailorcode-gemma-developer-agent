@@ -39,7 +39,7 @@ On September 27 the local check found all three tasks and snapshots, but no `swe
 
 The [prepared one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) now follows the organizer's [getting-started example](https://www.kaggle.com/code/ryanholbrook/getting-started-gemma-4-developer-agent) using `sandbox='subprocess'`. Docker is not needed for this path. `prepare_evaluation.py --sandbox subprocess` reports prerequisites accordingly; its default remains Docker for the CLI workflow below.
 
-This notebook is **not yet tested with a model** and does not provision Colab. The inspected Colab session had Python 3.13 and incompatible/missing dependencies. The prepared workflow checks Linux x86_64, Python 3.12, package versions, GPU visibility and input presence before launching anything. GPU memory sufficiency and full dependency compatibility still need validation. It requires preinstalled official dependencies and predownloaded data/model files.
+This notebook is **not yet tested with a model**. The initial Colab session had Python 3.13 and incompatible/missing dependencies; the October 4 CPU session used Linux x86_64/Python 3.12.13 and passed isolated installation and selected import checks. The guided notebook now includes project/wheel preparation and opt-in installation, but full model/task input provisioning remains pending. Preflight and inference use the isolated interpreter. GPU memory, CUDA and serving compatibility still need validation; historical outputs do not prove that runtime files persist.
 
 `scripts/run_public_smoke.py` requires explicit `--run-agent`, selects one pinned task and records its inputs, configuration hashes, environment, outcome and generated patch in a new output directory. Its 5-minute agent budget is a diagnostic override of the baseline's 30-minute budget. Startup and verification take additional time; this is not a spending cap. Cleanup stops the model server but does not disconnect the cloud machine. Save output files separately before terminating a runtime.
 
@@ -64,7 +64,7 @@ swegemma eval \
 
 This command has NOT been executed here. The three selected public tasks are development cases; their results will not establish generalization to hidden tasks. Preserve the commit/configuration digest, package versions, task outcomes, runtimes, patches, and logs for every real run. Compare prompt or budget changes against the same baseline before promoting a new submission.
 
-Cloud allocation and spending require a separate decision after hardware and budget are known. No cloud resources have been created.
+Each cloud connection and its consumption require prior agreement. CPU Colab sessions have been used for preparation; no GPU inference has been authorized or started. Save logs before deleting runtimes, and do not assume a CPU environment survives switching to GPU.
 
 ## Official compiler checkpoint
 

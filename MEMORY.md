@@ -104,6 +104,38 @@ Los detalles están en [la preparación documentada](docs/colab-setup.md).
 
 ## Qué hemos comprobado realmente
 
+### Cierre documental del 4 de octubre, 19:26
+
+Araceli confirmó que tenía la plantilla ordenada, obtenida mediante el archivo
+descargable porque el enlace directo de Colab no se abría. La fuente mantenida
+es `notebooks/tailorcode-public-smoke.ipynb`; la copia local de distribución
+`deliverables/tailorcode-guided-colab.ipynb` contiene el mismo notebook y no
+requiere mantener una segunda versión en GitHub.
+
+La suite local completa pasó **17 pruebas** en este cierre: cuatro del pipeline,
+cinco del creador de entornos y ocho de compatibilidad/notebook. No equivalen
+a tareas resueltas por el agente. Las pruebas comprueban también que las celdas
+se detienen sin autorización y que preflight/inferencia usan el Python aislado.
+
+Durante la instalación apareció un aviso que bloqueaba una acción de copiar
+y pegar por contenido detectado como malicioso. No se identificó qué contenido
+lo provocó ni se estableció un falso positivo. No se desactivó la protección
+ni se forzó el pegado; la instalación se verificó mediante capturas y el notebook
+aportado, que registran código de salida 0. No atribuir el aviso a un paquete
+concreto ni afirmar que hubo infección del Mac.
+
+No se conectó ninguna máquina para ordenar el notebook. La captura posterior
+a la instalación mostraba Colab desconectado; falta verificar la eliminación
+del runtime y el estado actual de sesiones. La autorización de preparación CPU
+no autoriza más consumo ni GPU.
+
+**Para retomar:** revisar la copia guiada sin conectar, completar las celdas
+de descarga de snapshot, grafo, embeddings, dependencias offline y pesos,
+y decidir cómo conservar archivos y registros entre sesiones. Después acordar
+consumo, preparar el runtime, verificar CUDA/VRAM e iniciar una tarea con aprobación
+separada. Siguen sin ejecutarse Gemma, tAilorCode y la evaluación pública;
+el error de Kaggle sigue sin diagnóstico y no se ha confirmado enlace del foro.
+
 Actualización de la tarde del 4 de octubre: la primera instalación falló porque
 el Python de Colab no tenía `ensurepip`. Se corrigió el instalador para usar
 `virtualenv` cuando falte ese módulo, con cinco pruebas de regresión locales.
