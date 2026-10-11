@@ -73,6 +73,11 @@ class SmokeEnvironmentTests(unittest.TestCase):
             self.assertNotIn('sys.executable', cells[cell_id])
         self.assertIn('RUN_AGENT = False', cells['tailorcode-smoke-08'])
         self.assertIn('INSTALL_APPROVED = False', cells['install-environment'])
+        self.assertIn('DOWNLOAD_TASK_INPUTS = False', cells['download-task-inputs'])
+        self.assertIn('DOWNLOAD_MODEL_WEIGHTS = False', cells['download-model-inputs'])
+        self.assertIn('model-check.json', cells['tailorcode-smoke-04'])
+        self.assertNotIn('sys.executable', cells['download-task-inputs'])
+        self.assertNotIn('sys.executable', cells['download-model-inputs'])
 
 
 if __name__ == '__main__':

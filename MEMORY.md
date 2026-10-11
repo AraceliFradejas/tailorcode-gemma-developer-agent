@@ -1,11 +1,31 @@
-# Memoria de tAilorCode — actualizada el 4 de octubre de 2026
+# Memoria de tAilorCode — actualizada el 11 de octubre de 2026
 
 Este documento conserva el contexto del proyecto para retomarlo y para explicar
 su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
-## Qué queremos construir
+## Continuación del 11 de octubre
+
+Araceli eligió retomar el agente original Gemma 4 31B en Colab, sin enviar nada
+a Kaggle. Tiene abierto el cuaderno; «continuar» no autoriza otra conexión,
+descargas ni GPU. No se ejecutó ningún recurso cloud al preparar esta actualización.
+
+Se completó la sección 8 de la plantilla con dos descargas independientes,
+desactivadas: inputs de `fastapi_14786` (~276 MiB, 129 archivos) y modelo
+versión 2 (~23,3 GB). El manifiesto público guarda rutas/tamaños/hashes de
+los archivos locales, no contenido de tareas ni parches de referencia.
+El descargador verifica hashes y la identidad de la tarea, conserva y rechaza
+archivos incompatibles y puede reutilizar archivos verificados. El modelo
+se conserva en caché, con comprobaciones de archivos y configuración; no se
+ha probado todavía su descarga completa ni ejecución.
+
+El siguiente paso práctico es abrir la plantilla actualizada sin conectar,
+acordar runtime, duración/consumo y almacenamiento, y después preparar la sesión.
+No asumir que pasar de CPU a GPU conserva instalaciones o descargas. Revocar
+acceso a Secrets antes de evaluar código del repositorio. Gemma sigue sin ejecutar.
+
+## Objetivo del agente
 
 tAilorCode es un agente para la competición Gemma 4 Developer Agent de Kaggle.
 Su objetivo es recibir una incidencia de programación, investigar el repositorio,

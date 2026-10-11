@@ -209,8 +209,8 @@ streamed to the notebook and recorded in a log. Preflight and inference use the
 isolated environment's Python. Existing project, venv and log paths are preserved.
 Changing runtime may discard all temporary preparation.
 
-The notebook still does not automate full model/snapshot/graph/embedding
-provisioning. It explicitly stops at that pending stage. Inference approval stays
+At that October 4 checkpoint, full model/snapshot/graph/embedding provisioning
+was still pending. The October 11 update below adds opt-in downloads. Inference approval stays
 false. Revoke notebook Secret access before repository-code evaluation; do not
 expose credentials or personal Drive files to that sandbox.
 
@@ -244,3 +244,31 @@ package vulnerability.
 Before the next session, finish full-input provisioning and decide how to retain
 downloads and logs. Do not spend GPU time reviewing or editing preparation cells.
 The original CPU approval does not carry over to another session or GPU inference.
+
+## October 11 continuation outside the submission workflow
+
+Araceli chose to continue the original Gemma 4 31B agent in Colab without submitting
+to Kaggle. Public competition data remains subject to each user's authorized access;
+this is a diagnostic development run, not a leaderboard attempt.
+
+Section 8 of the guided notebook now has separate, disabled-by-default task and
+model download cells. The project pins a revision containing
+`scripts/prepare_colab_inputs.py` and `evaluation/colab-inputs.json`.
+The task manifest records 129 public input filenames, sizes and SHA256 hashes
+from the local workspace, totaling 288,994,765 bytes (~276 MiB). It covers only
+the selected snapshot/graph/embeddings, metadata, sandbox setup and all 124
+offline task wheels. No task/reference patch contents are embedded in GitHub.
+Remote changes cause explicit verification failure; they are not silently accepted.
+
+Verified existing files can be reused; mismatched files are preserved and rejected.
+The separate model download requests pinned version 2 (~23.3 GB), checks required
+configuration/tokenizer/weight file presence and compressed-tensors settings,
+and records the cache path without copying weights again. It does not establish
+numerical weight integrity, GPU compatibility or sufficient VRAM.
+
+Download cells run in the notebook interpreter so KaggleHub can read Colab
+Secrets; evaluation still uses the isolated interpreter. Task and model reports
+are required before evaluation paths are configured. This is not an inference
+approval or a durable storage solution. Decide runtime/storage and consumption
+before downloads; a runtime change can lose preparation. No cloud downloads or
+model execution were performed while adding this implementation.
