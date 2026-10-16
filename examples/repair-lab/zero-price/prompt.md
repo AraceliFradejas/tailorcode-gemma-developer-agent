@@ -1,0 +1,1 @@
+El precio puede ser cero: un producto gratuito no debe usar el precio de reserva. Solo None significa precio ausente. Conserva también los precios negativos. Corrige el fallo y explícame cómo lo has comprobado.

@@ -1,0 +1,1 @@
+La función debe devolver los números pares del intervalo incluyendo ambos extremos, en orden ascendente. Un intervalo invertido devuelve una lista vacía. Corrige el fallo y explícame cómo lo has comprobado.

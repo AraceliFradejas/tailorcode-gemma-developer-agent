@@ -1,123 +1,140 @@
-# tAilorCode
+# tAilorCode · Corrige y aprende
 
-## Verified milestone — October 16, 2026
+**Una skill para corregir pequeños errores de Python y entender por qué funciona
+el arreglo.** Proyecto de portfolio creado y dirigido por **Araceli Fradejas Muñoz**.
 
-A real single-task Colab A100 run completed with **`resolved: true`** for
-`fastapi_14786`, test exit code 0, 6 recorded tool calls and 43.65 seconds of
-reported evaluation time. The patch strips surrounding credential whitespace.
-This is one public development task, not a Kaggle score or a general resolution rate.
-Model startup and preparation are additional to the reported evaluation time.
+El usuario abre su proyecto en Codex o Claude Code, describe un fallo y recibe
+una corrección revisable, una explicación y evidencia de las comprobaciones.
+La primera versión está preparada para instalarse en ambos asistentes; falta
+validar su descubrimiento y comportamiento en sesiones nuevas de cada producto.
 
-The FastAPI server compatibility issue was addressed by pinning FastAPI 0.136.3;
-HTTP checks and CUDA passed. Diagnostics were downloaded before runtime deletion,
-and Colab showed zero active sessions afterwards. See the
-[detailed session memory in Spanish](docs/memoria-2026-10-16.md),
-[structured result](evaluation/public-smoke-2026-10-16.json), and
-[new clean guided notebook](notebooks/tailorcode-colab-limpio.ipynb).
-The clean notebook has not itself been run end to end. Earlier checkpoints below
-record the preparation history and should be read with this newer result.
+## Por qué cambió el proyecto
 
-## From customer support AI to autonomous code repair
+Empecé desarrollando un agente para el reto Gemma de Kaggle. El 16 de octubre de
+2026 logré ejecutar Gemma en una A100 y resolver una tarea pública de FastAPI.
+Sin embargo, preparar el entorno consumió mucho más esfuerzo que el resultado
+visible, y decidí no continuar hacia un envío al reto. Mi objetivo era aprender
+y crear algo comprensible y útil para mi portfolio.
 
-tAilorCode is my autonomous coding agent project for the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent), hosted by Google DeepMind on Kaggle.
+Por eso tAilorCode evoluciona hacia una herramienta reutilizable que combina
+**corregir, comprobar y explicar**. Conserva lo aprendido del agente, pero utiliza
+el modelo y las herramientas del asistente donde se instala. No incluye Gemma
+ni necesita Kaggle o una GPU para funcionar; el uso del asistente está sujeto a
+su propia cuenta, disponibilidad y límites.
 
-The project transfers ideas from my previous KelceTS customer-support and autonomous-agent work into software engineering. Instead of answering a customer incident, tAilorCode investigates a repository issue, edits the relevant source code, runs targeted tests, and returns a reviewable Git patch.
+La decisión, sus motivos y el plan están en la
+[memoria del cambio de enfoque](docs/cambio-de-enfoque-2026-10-16.md).
 
-```mermaid
-flowchart LR
-	A[Developer issue] --> B[Understand the request]
-	B --> C[Explore repository]
-	C --> D[Make minimal source change]
-	D --> E[Run targeted tests]
-	E --> F{Tests pass?}
-	F -->|Yes| G[Submit verified patch]
-	F -->|No| C
+## Cómo interactúa el usuario
+
+En Codex:
+
+> Usa $tailorcode para corregir este error de Python. Explícame la causa, muestra
+> el cambio y comprueba el resultado con las pruebas disponibles.
+
+En Claude Code:
+
+> /tailorcode Corrige este error de Python y explícame cómo comprobar el arreglo.
+
+La skill inspecciona el código y busca una reproducción, aplica una corrección
+acotada cuando se ha solicitado, ejecuta las comprobaciones pertinentes y explica
+el resultado. También respeta peticiones de diagnóstico sin modificar archivos.
+Distingue **verificado con pruebas**, **solo sintaxis**, **sin verificar** y
+**sin resolver**. Una propuesta plausible no se presenta como una corrección probada.
+
+## Probar el primer ejercicio
+
+Requiere Python 3.10 o superior. Desde la raíz de este repositorio:
+
+```bash
+python3 scripts/repair_lab.py prepare --case zero-price --workspace /tmp/tailorcode-zero-price
+python3 scripts/install_tailorcode_skill.py --target codex --project /tmp/tailorcode-zero-price
 ```
 
-## Competition requirements
+Para Claude Code, sustituye `--target codex` por `--target claude`. Después abre
+**esa carpeta** en el asistente; inicia una sesión nueva si no aparece la skill.
+Lee `prompt.md` y envía su contenido junto con la invocación anterior. El
+instalador conserva cualquier instalación existente: no la sobrescribe.
 
-The competition submission is a declarative `submission.zip` archive containing `agent.yaml` at its root. The agent must use the registered Gemma 4 model and work through the competition harness. The public dataset contains repository snapshots, tasks, graphs, embeddings, and offline dependency wheels.
+Después de la reparación, desde este repositorio:
 
-The evaluation process privately re-runs the selected Kaggle Notebook with a hidden dataset, extracts `submission.zip` from `/kaggle/working`, and evaluates the generated agent configuration. The main metric is Resolution Rate: the proportion of repository tasks whose generated patches pass verification.
+```bash
+python3 scripts/repair_lab.py check --case zero-price --workspace /tmp/tailorcode-zero-price
+```
 
-## Current implementation
+Antes de reparar, ese comando debe fallar por una aserción. Después, permitirá
+comprobar si se cumplen los requisitos. Ejecuta Python local de la carpeta:
+**no es un sandbox para código desconocido**. Estos ejemplos son ejercicios
+propios y no descargan datos ni llaman a una API.
 
-The tAilorCode configuration includes:
+El instalador copia la fuente única de [la skill](skills/tailorcode/SKILL.md) en
+`.agents/skills/tailorcode/` para Codex o `.claude/skills/tailorcode/` para Claude
+Code, dentro del proyecto elegido. No modifica la configuración global.
+Las ubicaciones se basan en la documentación oficial de
+[Codex](https://learn.chatgpt.com/docs/build-skills) y
+[Claude Code](https://code.claude.com/docs/en/skills), consultada el 16 de octubre.
 
-- `agent.yaml` with the required Gemma 4 model;
-- inline prompts for the root coding agent and a read-only code analyst;
-- an `AgentTool` sub-agent for repository navigation;
-- repository, file, editing, testing, status, patch, and graph tools;
-- sampling and evaluation budget configuration;
-- a self-contained notebook path that can recreate the submission without Internet access.
+La [guía de la primera demo](docs/skill-quickstart.md) desarrolla este recorrido
+paso a paso, desde el fallo inicial hasta su comprobación independiente.
 
-The selected public smoke-test tasks are (FastAPI completed on October 16; the others remain pending):
+## Tres casos reproducibles
 
-- `fastapi_14786`: strip unwanted whitespace from authorization credentials;
-- `rich_4077`: proxy `isatty()` in `FileProxy`;
-- `requests_6592`: add the `too_early` alias for HTTP status code 425.
-
-## Current development workflow
-
-The current source of truth is `agents/baseline/`. Rebuild the self-contained Kaggle notebook with `scripts/build_submission.py`; `--check` detects a stale notebook before submission. GitHub Actions checks YAML, archive contents, and reproducibility. These checks do not run Gemma or establish a competition score.
-
-See [Development workflow](docs/development-workflow.md) for local commands and the three-task smoke suite, or [open the development checks in Colab](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-colab-checks.ipynb). CPU is sufficient for the development checks.
-
-CPU sufficiency does not mean zero cost: the inspected Colab account consumed compute units even on CPU. Runtime use requires the owner's prior approval of costs or paid-credit consumption.
-
-For Kaggle packaging, use `deliverables/tailorcode-submit-ready.ipynb`. The older notebook under `notebooks/tailorcode-first-evaluation.ipynb` is historical development work.
-
-## Kaggle status — October 4, 2026
-
-The self-contained notebook created `submission.zip` in Kaggle. Version 11 and three earlier submissions were listed as **Kaggle Error**, with a message describing a system error and advising contact with support. The submission details list the ZIP, but no specific hidden diagnostic or score is available.
-
-Kaggle Support replied on September 28, directing the question to the competition forums without providing a diagnostic or confirming an infrastructure incident. On October 4, Araceli decided to post the prepared question herself in the [competition discussion forum](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion). Publication and a topic URL have not yet been confirmed.
-
-Development will continue in Colab, with progress documented in this repository. Another Kaggle submission is deferred until the submission problem is resolved or there is actionable guidance for a new attempt. The root cause remains unconfirmed; neither successful packaging nor the generic error establishes whether the agent runs or performs well. See [the support checkpoint](docs/progress-2026-09-27.md) for the version link and recorded observations.
-
-The local smoke-suite preparation found all three public tasks and their snapshots. The baseline has passed an [official compiler construction check](docs/compiler-check-2026-09-27.md) with inert tool bindings and no inference. A measured public smoke run in a suitable environment remains outstanding. The organizer's starter supports a subprocess sandbox, so Docker is not required for the prepared notebook path.
-
-## Latest checkpoint and project memory
-
-Read [MEMORY.md — session record and explanation in Spanish](MEMORY.md) to resume the work or explain its development. It records completed work, decisions, limitations, the Colab stop message, and the next steps.
-
-| Stage | Verified status |
+| Caso | Comportamiento que debe conservar el arreglo |
 | --- | --- |
-| Submission packaging | Reproducible notebook and ZIP checked locally; an earlier ZIP was created on Kaggle |
-| Configuration compilation | Real official compiler/ADK objects constructed; tools were inert and no model ran |
-| Development checks in Colab | CPU checks passed; notebook and outputs saved privately in Drive |
-| One-task public evaluation | **FastAPI resolved on October 16**; see the structured result above |
-| Local tests | All 17 automated tests passed at the October 4 evening checkpoint, including installer and notebook approval regression checks |
-| GPU setup | A100 serving, HTTP health and one task validated on October 16 with the FastAPI compatibility pin |
-| Kaggle scoring | Four observed system-error submissions; support referred the case to the forum; no score recorded |
+| `independent-lists` | Llamadas sin lista crean listas independientes; una lista proporcionada mantiene su identidad. |
+| `zero-price` | Cero es un precio válido; solo `None` activa el valor de reserva. |
+| `inclusive-range` | Los pares incluyen ambos extremos; un intervalo invertido está vacío. |
 
-The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) has guided preparation sections and labeled historical CPU results. On October 11, separate opt-in downloads were added for verified public task inputs (~276 MiB) and pinned model weights (~23.3 GB); these new download steps have not been exercised in Colab. Development continues without Kaggle submissions. It is not yet a validated GPU environment. See [Colab setup](docs/colab-setup.md) for the remaining steps. Colab **2026.04** is the current candidate: its observed Python 3.12 and CPU PyTorch 2.10 match the selected stack's versions. This does not establish CUDA compatibility or sufficient GPU memory.
+La [validación local registrada](evaluation/skill-lab-validation-2026-10-16.json)
+conserva el hash de la skill y los resultados del laboratorio sin invocar modelos.
 
-Earlier, Kaggle CLI 2.2.4 was installed in an isolated temporary Mac environment; model-file listing required authentication. On October 4, Colab KaggleHub accessed the pinned model's small configuration file, verified the three official wheel hashes, and authenticated through Colab Secrets to download task metadata. The isolated CPU installation subsequently passed dependency and selected import checks after fixing missing `ensurepip`. No model weights were downloaded and no GPU was activated. Colab was visibly disconnected after installation; runtime deletion and the current active-session list were not independently verified.
+Los casos están en [examples/repair-lab](examples/repair-lab/). El mismo comando
+`prepare` sirve para cualquiera de ellos, usando una carpeta nueva. Los tests
+originales deben conservarse para que el comprobador acepte el resultado.
 
-The preparation and one-task milestone was completed on October 16. Next are the clean notebook handoff and separately approved evaluation of additional public tasks. The CPU installation is evidence for that environment, not a guarantee that it survives runtime deletion or works on GPU. The task result will be diagnostic, not a leaderboard score or proof of general agent quality.
+## Qué está comprobado y qué falta
 
-### Opening the guided notebook manually
+| Elemento | Estado |
+| --- | --- |
+| Skill y metadatos | Creados y validados estructuralmente. |
+| Instalación para ambos asistentes | Copias verificadas en carpetas temporales; no sobrescriben instalaciones. |
+| Tres ejercicios | Fallan antes y pasan con correcciones de referencia; esto comprueba el laboratorio. |
+| Comportamiento de la skill en Codex y Claude Code | Pendiente de pruebas en sesiones nuevas. |
+| Mejora frente al asistente sin skill | Sin medir; [protocolo de comparación](docs/skill-evaluation.md) y [registro vacío](evaluation/skill-comparison.json). |
+| Demo web con Streamlit | Planificada, todavía no implementada. |
 
-If the Colab GitHub link does not open, [download the notebook source](https://raw.githubusercontent.com/AraceliFradejas/tailorcode-gemma-developer-agent/main/notebooks/tailorcode-public-smoke.ipynb) and use **File → Upload notebook** in Colab, then save a private Drive copy. Araceli confirmed receiving the organized copy on October 4. Keep runtime, installation and inference approvals false until each new session is agreed. Do not run all cells.
+Validación local del proyecto:
 
-## Local environment note
+```bash
+python3 -m pip install -r requirements-dev.txt
+python3 -m unittest discover -s tests -v
+python3 scripts/build_submission.py --check
+python3 scripts/check_submission_notebook.py
+```
 
-The Mac workspace contains the public competition data, but it does not have the `swegemma` CLI, Docker, or the local Gemma server. The Google ADK package is available in the Kaggle Notebook, but the full harness evaluation is performed by the competition infrastructure.
+Las dos últimas comprobaciones conservan la reproducibilidad del trabajo previo
+de Kaggle; no ejecutan modelos ni prueban la nueva skill.
 
-Insomnia is not needed for the competition agent because it is not evaluated as an HTTP API. It may be used later for an optional `tAilorCode Workbench` demonstration.
+## Evidencia de la etapa anterior
 
-## Authorship
+El resultado real de Gemma fue `resolved: true` para `fastapi_14786`, con código
+de salida de pruebas 0, seis llamadas registradas y 43,65 segundos de evaluación.
+Es una tarea pública de desarrollo, no una puntuación de Kaggle ni una validación
+de esta nueva skill. La GPU quedó desconectada.
 
-This project is created, directed, and owned by **Araceli Fradejas Munoz**. The project is inspired by my previous KelceTS AI assistant and autonomous-agent work, but the competition implementation is developed specifically for this challenge.
+- [Resultado estructurado](evaluation/public-smoke-2026-10-16.json).
+- [Memoria técnica de la sesión](docs/memoria-2026-10-16.md).
+- [Colab limpio conservado](notebooks/tailorcode-colab-limpio.ipynb).
+- [Historia de Kaggle y Gemma](docs/historia-kaggle.md).
+- [Memoria general para retomar el proyecto](MEMORY.md).
 
-## Author
+Las capturas originales y los diagnósticos con enlaces privados se conservan
+localmente y están excluidos de Git.
 
-**Araceli Fradejas Munoz**
+## Autoría
 
-- GitHub: [AraceliFradejas](https://github.com/AraceliFradejas)
-- Project: [tailorcode-gemma-developer-agent](https://github.com/AraceliFradejas/tailorcode-gemma-developer-agent)
-- LinkedIn: [Araceli Fradejas Munoz](https://www.linkedin.com/in/araceli-fradejas-munoz-transformaciondigital/)
-- X: [@AraceliFradejas](https://twitter.com/AraceliFradejas)
-- Medium: [Araceli Fradejas](https://medium.com/@araceli.fradejas)
-- YouTube: [Araceli Fradejas Munoz](https://www.youtube.com/@aracelifradejasmunoz2758)
+**Araceli Fradejas Muñoz** · [GitHub](https://github.com/AraceliFradejas)
+
+Proyecto desarrollado con asistencia de IA. El diseño del flujo, los scripts,
+las pruebas y la evaluación constituyen el trabajo del proyecto; no se ha
+entrenado un modelo propio ni demostrado una mejora general sobre otros agentes.

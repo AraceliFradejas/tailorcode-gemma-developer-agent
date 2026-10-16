@@ -1,0 +1,11 @@
+{
+  "status": "not_run",
+  "protocol": "docs/skill-evaluation.md",
+  "cases": ["independent-lists", "zero-price", "inclusive-range"],
+  "runs": [],
+  "limitations": [
+    "Fixture self-checks are not model evaluations.",
+    "Codex and Claude Code discovery and execution have not yet been tested in fresh sessions.",
+    "The previous Gemma result does not validate this skill."
+  ]
+}

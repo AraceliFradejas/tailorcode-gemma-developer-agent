@@ -5,7 +5,33 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
-## Estado vigente — 16 de octubre de 2026
+## Objetivo vigente — cambio de enfoque aprobado el 16 de octubre
+
+Araceli no va a presentar el reto de Kaggle. Busca un proyecto de portfolio que
+pueda enseñar, entender y usar para demostrar lo que está aprendiendo. Tras
+comprobar una tarea real con Gemma, consideró el resultado demasiado abstracto
+respecto al tiempo de preparación. Aprobó convertir tAilorCode en una skill para
+Codex y Claude Code: **corrige y aprende**. Una demo visual sería una etapa posterior.
+
+La primera implementación está en `skills/tailorcode/`; el instalador de ámbito
+de proyecto es `scripts/install_tailorcode_skill.py`. Hay tres ejercicios propios
+en `examples/repair-lab/` y un comprobador local en `scripts/repair_lab.py`.
+Las correcciones de referencia comprueban el laboratorio, no evalúan un modelo.
+Pasaron 31 pruebas locales, el validador de skills y los checks de empaquetado.
+El primer recorrido está en `docs/skill-quickstart.md`.
+La comparación con/sin skill sigue sin ejecutar y su registro está vacío.
+
+Leer primero el [README](README.md), la
+[memoria de la decisión](docs/cambio-de-enfoque-2026-10-16.md) y el
+[protocolo de comparación](docs/skill-evaluation.md). Lo siguiente es probar la
+skill en sesiones nuevas de los dos asistentes y registrar evidencia real.
+No retomar Kaggle, conectar una GPU ni contratar APIs para esta nueva etapa.
+
+El commit `0432668` de la etapa anterior sí se subió a `main` bajo la autoría de
+Araceli; las frases históricas «no se hizo push» describen el momento anterior.
+Las capturas privadas permanecen excluidas de Git.
+
+## Hito técnico conservado — 16 de octubre de 2026
 
 **Primera tarea pública resuelta con Gemma:** `fastapi_14786`.
 El evaluador registró `resolved: true`, `test_exit_code: 0`, 6 llamadas a

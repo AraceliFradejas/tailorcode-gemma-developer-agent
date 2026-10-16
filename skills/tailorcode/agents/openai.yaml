@@ -1,0 +1,4 @@
+interface:
+  display_name: "tAilorCode · Corrige y aprende"
+  short_description: "Corrige errores Python con pruebas y explicaciones"
+  default_prompt: "Usa $tailorcode para corregir este error de Python y explicarme cómo comprobar el arreglo."

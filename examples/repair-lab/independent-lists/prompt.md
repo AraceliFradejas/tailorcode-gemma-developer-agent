@@ -1,0 +1,1 @@
+Dos llamadas para añadir etiquetas sin proporcionar lista deben producir listas independientes. Si paso una lista, se debe añadir a esa misma lista. Corrige el fallo y explícame cómo lo has comprobado.
