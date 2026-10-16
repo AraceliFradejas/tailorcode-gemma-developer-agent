@@ -1,9 +1,46 @@
-# Memoria de tAilorCode — actualizada el 11 de octubre de 2026
+# Memoria de tAilorCode — actualizada el 16 de octubre de 2026
 
 Este documento conserva el contexto del proyecto para retomarlo y para explicar
 su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
+
+## Estado vigente — 16 de octubre de 2026
+
+**Primera tarea pública resuelta con Gemma:** `fastapi_14786`.
+El evaluador registró `resolved: true`, `test_exit_code: 0`, 6 llamadas a
+herramientas y 43,65 segundos de evaluación. Esto no es una puntuación de Kaggle
+ni mide la calidad general del agente. Se verificó el ZIP descargado y su parche:
+`return scheme, param.strip()` en `fastapi/security/utils.py`.
+
+La sesión utilizó A100 40 GB, Python 3.12.13 y el entorno aislado
+`/content/tailorcode-gpu-venv-20261016`. Se corrigió la incompatibilidad HTTP
+`_IncludedRouter` fijando `fastapi==0.136.3`. Pasaron la comprobación HTTP/CUDA
+y las 27 pruebas locales del proyecto. Son controles distintos a la tarea real.
+
+Araceli autorizó hasta 60 minutos, con límite a las 20:40 de Madrid, y acceso
+temporal al token de Kaggle. Se revocó ese acceso antes de evaluar. Al terminar,
+se guardaron los resultados y se eliminó el runtime. Colab mostró **0 sesiones
+activas y 0 unidades/hora**. El saldo mostrado pasó de 391,34 a 389,42 unidades;
+la diferencia 1,92 puede tener retraso de liquidación. No se compraron unidades.
+
+- [Memoria detallada, errores, decisiones y cronología](docs/memoria-2026-10-16.md).
+- [Resultado estructurado](evaluation/public-smoke-2026-10-16.json).
+- [Cuaderno limpio nuevo](notebooks/tailorcode-colab-limpio.ipynb): 26 celdas,
+  explicaciones en español, sin outputs antiguos, flags false y plazo vacío.
+  Sintaxis validada; la reorganización no se ha ejecutado de principio a fin.
+- Evidencia privada preservada en `deliverables/session-20261016/`: notebook
+  ejecutado, ZIP original, informe, parche, logs, freeze e informes de inputs.
+- Capturas locales en `docs/evidence/2026-10-16/`, excluidas de Git por contener
+  enlaces privados de Drive. No se publicaron credenciales ni se hizo push.
+
+El cuaderno limpio se importó en una nueva copia de Drive, sin conectar recursos.
+La ruta privada se conserva en `deliverables/session-20261016/drive-copies.json`.
+El archivo `tailorcode-colab-limpio.ipynb` está preparado también en Descargas.
+
+El resto de esta memoria conserva los checkpoints anteriores como historia.
+Sus referencias a «Gemma no ejecutado» describen aquellos momentos y quedan
+superadas por el resultado comprobado de hoy.
 
 ## Continuación del 11 de octubre
 
@@ -32,9 +69,10 @@ Su objetivo es recibir una incidencia de programación, investigar el repositori
 proponer una modificación, ejecutar pruebas y entregar un parche revisable.
 Araceli dirige y es autora del proyecto, inspirado en su trabajo anterior con KelceTS.
 
-El objetivo inmediato es más pequeño: ejecutar **una tarea pública** con el agente
-y comprobar el resultado. Todavía no hemos ejecutado Gemma ni medido su capacidad
-para resolver tareas. Preparar un ZIP no equivale a ejecutar al agente.
+El primer objetivo de ejecutar **una tarea pública** quedó cumplido el 16 de
+octubre: FastAPI resuelta según el evaluador. El siguiente objetivo es conservar
+una ruta clara y comprobar otras tareas sin confundir este éxito individual con
+una medición general. Preparar un ZIP sigue siendo distinto de ejecutar el agente.
 
 ## Qué ocurrió con Kaggle
 

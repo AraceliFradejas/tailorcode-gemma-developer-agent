@@ -64,6 +64,7 @@ def main():
     subprocess.run([python, '-m', 'pip', 'install', '--disable-pip-version-check',
                     '-r', str(ROOT / 'requirements-gpu.txt'), *wheels], check=True)
     subprocess.run([python, '-m', 'pip', 'check'], check=True)
+    subprocess.run([python, str(ROOT / 'scripts/check_server_http.py')], check=True)
     subprocess.run([python, '-c', 'import torch, vllm, swegemma, adk_submission; '
                     'print("Imports passed; CUDA available:", torch.cuda.is_available())'], check=True)
     frozen = subprocess.check_output([python, '-m', 'pip', 'freeze'], text=True)

@@ -9,3 +9,5 @@ torchvision==0.25.0
 transformers==5.13.1
 tokenizers==0.22.2
 compressed-tensors==0.15.0.1
+# FastAPI 0.137 changed included routes, breaking the server's metrics middleware.
+fastapi==0.136.3

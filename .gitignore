@@ -22,3 +22,6 @@ results/
 *.parquet
 *.tgz
 *.zip
+
+# Private session originals (notebooks, account links and logs)
+deliverables/session-*/

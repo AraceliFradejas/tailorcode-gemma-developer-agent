@@ -79,6 +79,31 @@ class SmokeEnvironmentTests(unittest.TestCase):
         self.assertNotIn('sys.executable', cells['download-task-inputs'])
         self.assertNotIn('sys.executable', cells['download-model-inputs'])
 
+    def test_notebook_blocks_expired_session_before_setup(self):
+        root = Path(__file__).resolve().parents[1]
+        notebook = json.loads((root / 'notebooks/tailorcode-public-smoke.ipynb').read_text())
+        cells = {cell['id']: ''.join(cell['source']) for cell in notebook['cells']}
+        approval = cells['tailorcode-smoke-02'].replace(
+            'RUNTIME_COST_APPROVED = False', 'RUNTIME_COST_APPROVED = True'
+        ).replace('2026-10-11T16:00:00+00:00', '2000-01-01T00:00:00+00:00')
+        with self.assertRaisesRegex(RuntimeError, 'Session deadline reached'):
+            exec(approval, {})
+        for cell_id in ('project-setup', 'install-environment', 'download-task-inputs',
+                        'download-model-inputs', 'tailorcode-smoke-08'):
+            self.assertIn('require_session_time()', cells[cell_id])
+
+    def test_diagnostics_exclude_inputs_and_remain_available_after_deadline(self):
+        root = Path(__file__).resolve().parents[1]
+        notebook = json.loads((root / 'notebooks/tailorcode-public-smoke.ipynb').read_text())
+        cells = {cell['id']: ''.join(cell['source']) for cell in notebook['cells']}
+        export = cells['download-diagnostics']
+        self.assertIn('installed-packages.txt', export)
+        self.assertIn('files.download', export)
+        self.assertNotIn('rglob', export)
+        self.assertNotIn('tasks.jsonl', export)
+        self.assertNotIn('require_session_time()', export)
+        self.assertIn('NVIDIA A100-SXM4-40GB', cells['gpu-diagnostic-record'])
+
 
 if __name__ == '__main__':
     unittest.main()

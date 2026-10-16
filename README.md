@@ -1,5 +1,22 @@
 # tAilorCode
 
+## Verified milestone — October 16, 2026
+
+A real single-task Colab A100 run completed with **`resolved: true`** for
+`fastapi_14786`, test exit code 0, 6 recorded tool calls and 43.65 seconds of
+reported evaluation time. The patch strips surrounding credential whitespace.
+This is one public development task, not a Kaggle score or a general resolution rate.
+Model startup and preparation are additional to the reported evaluation time.
+
+The FastAPI server compatibility issue was addressed by pinning FastAPI 0.136.3;
+HTTP checks and CUDA passed. Diagnostics were downloaded before runtime deletion,
+and Colab showed zero active sessions afterwards. See the
+[detailed session memory in Spanish](docs/memoria-2026-10-16.md),
+[structured result](evaluation/public-smoke-2026-10-16.json), and
+[new clean guided notebook](notebooks/tailorcode-colab-limpio.ipynb).
+The clean notebook has not itself been run end to end. Earlier checkpoints below
+record the preparation history and should be read with this newer result.
+
 ## From customer support AI to autonomous code repair
 
 tAilorCode is my autonomous coding agent project for the [Google - The Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent), hosted by Google DeepMind on Kaggle.
@@ -34,7 +51,7 @@ The tAilorCode configuration includes:
 - sampling and evaluation budget configuration;
 - a self-contained notebook path that can recreate the submission without Internet access.
 
-The first public smoke-test tasks selected for future evaluation are:
+The selected public smoke-test tasks are (FastAPI completed on October 16; the others remain pending):
 
 - `fastapi_14786`: strip unwanted whitespace from authorization credentials;
 - `rich_4077`: proxy `isatty()` in `FileProxy`;
@@ -69,16 +86,16 @@ Read [MEMORY.md — session record and explanation in Spanish](MEMORY.md) to res
 | Submission packaging | Reproducible notebook and ZIP checked locally; an earlier ZIP was created on Kaggle |
 | Configuration compilation | Real official compiler/ADK objects constructed; tools were inert and no model ran |
 | Development checks in Colab | CPU checks passed; notebook and outputs saved privately in Drive |
-| One-task public evaluation | Notebook and runner prepared and saved; **not executed with Gemma** |
+| One-task public evaluation | **FastAPI resolved on October 16**; see the structured result above |
 | Local tests | All 17 automated tests passed at the October 4 evening checkpoint, including installer and notebook approval regression checks |
-| GPU setup | Isolated stack installed and selected imports passed on Colab CPU October 4; **GPU serving not validated** |
+| GPU setup | A100 serving, HTTP health and one task validated on October 16 with the FastAPI compatibility pin |
 | Kaggle scoring | Four observed system-error submissions; support referred the case to the forum; no score recorded |
 
 The [one-task notebook](https://colab.research.google.com/github/AraceliFradejas/tailorcode-gemma-developer-agent/blob/main/notebooks/tailorcode-public-smoke.ipynb) has guided preparation sections and labeled historical CPU results. On October 11, separate opt-in downloads were added for verified public task inputs (~276 MiB) and pinned model weights (~23.3 GB); these new download steps have not been exercised in Colab. Development continues without Kaggle submissions. It is not yet a validated GPU environment. See [Colab setup](docs/colab-setup.md) for the remaining steps. Colab **2026.04** is the current candidate: its observed Python 3.12 and CPU PyTorch 2.10 match the selected stack's versions. This does not establish CUDA compatibility or sufficient GPU memory.
 
 Earlier, Kaggle CLI 2.2.4 was installed in an isolated temporary Mac environment; model-file listing required authentication. On October 4, Colab KaggleHub accessed the pinned model's small configuration file, verified the three official wheel hashes, and authenticated through Colab Secrets to download task metadata. The isolated CPU installation subsequently passed dependency and selected import checks after fixing missing `ensurepip`. No model weights were downloaded and no GPU was activated. Colab was visibly disconnected after installation; runtime deletion and the current active-session list were not independently verified.
 
-The next milestone is full task/model input preparation and a storage plan, followed by an explicitly approved GPU session, CUDA/VRAM checks and **one public task**. The CPU installation is evidence for that environment, not a guarantee that it survives runtime deletion or works on GPU. The task result will be diagnostic, not a leaderboard score or proof of general agent quality.
+The preparation and one-task milestone was completed on October 16. Next are the clean notebook handoff and separately approved evaluation of additional public tasks. The CPU installation is evidence for that environment, not a guarantee that it survives runtime deletion or works on GPU. The task result will be diagnostic, not a leaderboard score or proof of general agent quality.
 
 ### Opening the guided notebook manually
 

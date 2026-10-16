@@ -25,6 +25,33 @@ Saving a notebook does not preserve files on a temporary Colab machine.
 
 ## Runtime choice
 
+### October 11 A100 observation and guided session
+
+Araceli supplied a hardware-only diagnostic reporting Python 3.12.13,
+Linux x86_64, 194.6 GiB free disk and an NVIDIA A100-SXM4-40GB
+(40960 MiB, driver 580.82.07). The runtime release selection remains
+unconfirmed; Python alone does not establish that it is 2026.04.
+This confirms hardware allocation, not model serving or task success.
+
+Her resource-panel screenshot reported approximately 5.3 compute units/hour
+and 399.55 available units. Ninety minutes at that observed rate would use
+approximately 7.95 units; the rate is not a guaranteed spending cap.
+She approved installation, task/model downloads and one task in the existing
+session, bounded by 18:00 Europe/Madrid on October 11 (16:00 UTC).
+
+The guided notebook incorporates her uploaded notebook and moves its
+hardware output into a historical Markdown record. A Spanish block guide
+groups environment preparation, downloads, evaluation and result export.
+All opt-in flags remain false. A timezone-aware deadline check blocks new
+preparation/evaluation steps after the approved deadline, but does not
+interrupt running cells or disconnect a billable Colab runtime.
+New sessions require renewed approval and an updated deadline.
+
+The final export cell downloads only selected diagnostics, package versions
+and the generated patch, excluding task inputs and full evaluator directories.
+Review logs before sharing: they may contain task text. Installation, full
+downloads and GPU evaluation are still unverified for this session.
+
 ### October 4 CPU observation
 
 Araceli supplied output from a diagnostic cell in her private Colab copy after

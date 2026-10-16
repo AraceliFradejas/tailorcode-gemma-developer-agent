@@ -1,0 +1,49 @@
+{
+  "python": "3.12.13",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "packages": {
+    "swegemma": "0.2.7",
+    "adk-submission": "0.2.11",
+    "adk-eval-core": "0.1.0",
+    "google-adk": "1.36.1",
+    "vllm": "0.19.1"
+  },
+  "gpu": "NVIDIA A100-SXM4-40GB, 40960 MiB",
+  "task_id": "fastapi_14786",
+  "blockers": [],
+  "status": "completed",
+  "inference": "completed",
+  "note": "Passing does not guarantee sufficient VRAM, working dependencies, or a working subprocess sandbox.",
+  "max_time_minutes": 5,
+  "max_tool_calls": 50,
+  "max_turns": 100,
+  "agent_files_sha256": {
+    "agent.yaml": "e805a50cdb3369d4d6001b20227e50ff3543f5d9511ac30df8799dd43eb38fc0",
+    "eval_config.yaml": "bbb1c17ef202d3020e6bfd98665c244114554691a1fc621b2eb71613cac9c461",
+    "sub_agents/code_analyzer.yaml": "1a38c54b8861a45c140ef5c236995b848105b394a5c5afd048d470b3f9b8308b"
+  },
+  "resolved": true,
+  "test_exit_code": 0,
+  "tool_calls": 6,
+  "duration_seconds": 43.64516995100007,
+  "recorded_date": "2026-10-16",
+  "timezone": "Europe/Madrid",
+  "model": "gemma-4-31b-it-qat-w4a16-ct",
+  "model_version": 2,
+  "source_revision": "7cf2e84bdf126b916a6afaa78635715ce30b8ee0",
+  "runtime_cost": {
+    "observed_units_per_hour": 5.3,
+    "displayed_balance_before": 391.34,
+    "displayed_balance_after": 389.42,
+    "displayed_delta": 1.92,
+    "note": "Displayed balances may lag; this is not a final invoice or a euro amount."
+  },
+  "runtime_closed": true,
+  "active_sessions_observed_after_close": 0,
+  "limitations": [
+    "One public development task; no hidden evaluation or Kaggle score.",
+    "43.65 seconds is evaluator duration, not total cloud session or model startup time.",
+    "Clean notebook reorganizes tested components but has not been run end to end."
+  ]
+}
