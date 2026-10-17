@@ -28,6 +28,13 @@
   ],
   "repository_description_updated": true,
   "repository_homepage_updated": true,
-  "screenshots": "Original release screenshots still show the prior interface language; refresh pending browser availability.",
-  "evidence_policy": "Original measured revisions/prompts remain historical facts; equivalent clean revisions are recorded separately."
+  "screenshots": "Four real screenshots captured and visually reviewed from the public English interface; README and formal report updated.",
+  "evidence_policy": "Original measured revisions/prompts remain historical facts; equivalent clean revisions are recorded separately.",
+  "screenshots_sha256": {
+    "01-price.png": "0aa6eef4d97c4330c6f78b6670dbd040f87fc71f4919cf8be8e0422963b7907a",
+    "02-baskets.png": "05581dec67cf92bdf2f582aa91aaad540422d772e316006641bf0a062e181e2e",
+    "03-calendar.png": "19b304aeaaf65af89d5667aded1e487579daa66d7d779cfe43dfce114d8cc7aa",
+    "04-basket-tests.png": "ae66023bc3285c2f2765555e698936b3e6ac31396731484c79e27005c6e657f8"
+  },
+  "hosted_basket_test_rechecked": 3
 }

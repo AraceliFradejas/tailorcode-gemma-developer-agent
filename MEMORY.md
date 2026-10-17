@@ -92,7 +92,8 @@ English. All 37 local tests, three English AppTest screens, and the skill valida
 passed. The hosted English interface was observed. GitHub description/homepage
 were updated and the contributor API currently lists only AraceliFradejas.
 
-The original release screenshots remain language-specific historical evidence.
-Refresh them from the public English app when Chrome is available; a request to
-keep that tab in the foreground is pending. Do not pretend that original screenshots
-show the new interface or change their recorded hashes without preserving provenance.
+Four new screenshots were captured and visually reviewed from the public English
+app. README and MEMORIA.md now reference that image set. Original Spanish images
+were backed up privately; their recorded release hashes are preserved unchanged.
+The public English basket screen was also checked again: all three tests pass.
+See evaluation/english-release-2026-10-17.json for current screenshot hashes.

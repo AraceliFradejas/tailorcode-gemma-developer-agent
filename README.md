@@ -51,10 +51,7 @@ and [Kaggle history](docs/historia-kaggle.md) preserve that evolution.
 Explore three examples, compare the original and corrected behavior, run their
 acceptance tests, and download the skill from the sidebar.
 
-The screenshots below document the initial release. The live interface has since
-been translated into English.
-
-![Live demo: a free product incorrectly charged at 20 euros](docs/images/demo/01-precio.png)
+![Live demo: a free product incorrectly charged at 20 euros](docs/images/demo/01-price.png)
 
 | Example | The bug | What the visitor can check |
 | --- | --- | --- |
@@ -65,21 +62,21 @@ been translated into English.
 <details>
 <summary>Shopping baskets: before and after</summary>
 
-![Separate shopping baskets after the correction](docs/images/demo/02-cestas.png)
+![Separate shopping baskets after the correction](docs/images/demo/02-baskets.png)
 
 </details>
 
 <details>
 <summary>Calendar: the final day is included</summary>
 
-![Watering calendar with its final day restored](docs/images/demo/03-calendario.png)
+![Watering calendar with its final day restored](docs/images/demo/03-calendar.png)
 
 </details>
 
 <details>
 <summary>Actual test results and authorship footer</summary>
 
-![Acceptance tests executed in the public app](docs/images/demo/04-pruebas-cestas.png)
+![Acceptance tests executed in the public app](docs/images/demo/04-basket-tests.png)
 
 </details>
 

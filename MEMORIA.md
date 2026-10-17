@@ -151,7 +151,7 @@ The three acceptance tests cover zero, `None`, and other values including a
 negative technical case. The price correction was produced in an actual Codex
 conversation and independently checked against the original tests.
 
-![Price example: expected and actual charges](docs/images/demo/01-precio.png)
+![Price example: expected and actual charges](docs/images/demo/01-price.png)
 
 ### 5.2 Shopping baskets that share their contents
 
@@ -170,7 +170,7 @@ intentionally faulty example from carrying state between simulations or visitors
 The correction is a prepared reference, not a result attributed to an unperformed
 Claude or Codex session.
 
-![Basket example: shared and independent lists](docs/images/demo/02-cestas.png)
+![Basket example: shared and independent lists](docs/images/demo/02-baskets.png)
 
 ### 5.3 A watering plan that misses its final day
 
@@ -184,7 +184,7 @@ single-day period and an odd final day, where no watering is expected on that
 last day. Four acceptance tests cover those boundaries and additional technical
 cases such as negative values and reversed intervals.
 
-![Calendar example: restoring the final day](docs/images/demo/03-calendario.png)
+![Calendar example: restoring the final day](docs/images/demo/03-calendar.png)
 
 ## 6. Technical architecture
 
@@ -253,10 +253,10 @@ validation.
 | Codex usage | The recorded price repair was independently verified. | That repair satisfies the original tests. |
 | Claude Code | No assistant execution performed. | No behavior claim is made. |
 
-![Tests executed in the public application](docs/images/demo/04-pruebas-cestas.png)
+![Tests executed in the public application](docs/images/demo/04-basket-tests.png)
 
-The images document the initial interface language. The current interface and
-this report are in English; refreshed screenshots are pending browser availability.
+The screenshots show the public English interface. The original release images
+are preserved privately; the publication record retains their original hashes.
 
 The [publication record](evaluation/publication-2026-10-17.json) includes the
 verification results and screenshot hashes. The images were captured from the

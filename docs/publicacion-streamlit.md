@@ -50,13 +50,13 @@ remains pending; the original screenshots were desktop captures.
 
 Four real screenshots were captured with CUA from the published app, with browser
 bars hidden. They were reviewed before publication and were not generated or
-assembled as mockups. A later English-language refresh replaces the image set;
-the original release observation remains in the evidence record.
+assembled as mockups. The current image set was refreshed from the public English interface;
+the original release hashes remain in the evidence record and the originals are preserved privately.
 
-- [Price example](images/demo/01-precio.png).
-- [Basket example](images/demo/02-cestas.png).
-- [Calendar example](images/demo/03-calendario.png).
-- [Tests and author footer](images/demo/04-pruebas-cestas.png).
+- [Price example](images/demo/01-price.png).
+- [Basket example](images/demo/02-baskets.png).
+- [Calendar example](images/demo/03-calendar.png).
+- [Tests and author footer](images/demo/04-basket-tests.png).
 
 The [structured record](../evaluation/publication-2026-10-17.json) preserves
 results and hashes. The [project report](../MEMORIA.md) explains the project journey.

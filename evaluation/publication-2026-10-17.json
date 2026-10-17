@@ -36,5 +36,16 @@
   ],
   "anonymous_access_verified": true,
   "anonymous_access_method": "Opened public URL in a new Chrome Incognito window; app rendered without Streamlit sign-in.",
-  "equivalent_rewritten_initial_revision": "00164070810a9178ad0b4669593a256ddc416593"
+  "equivalent_rewritten_initial_revision": "00164070810a9178ad0b4669593a256ddc416593",
+  "english_interface_refresh": {
+    "date": "2026-10-17",
+    "screenshots_sha256": {
+      "01-price.png": "0aa6eef4d97c4330c6f78b6670dbd040f87fc71f4919cf8be8e0422963b7907a",
+      "02-baskets.png": "05581dec67cf92bdf2f582aa91aaad540422d772e316006641bf0a062e181e2e",
+      "03-calendar.png": "19b304aeaaf65af89d5667aded1e487579daa66d7d779cfe43dfce114d8cc7aa",
+      "04-basket-tests.png": "ae66023bc3285c2f2765555e698936b3e6ac31396731484c79e27005c6e657f8"
+    },
+    "source": "CUA captures of the public English app; browser bars hidden; visually reviewed.",
+    "original_screenshots": "Retained privately; original screenshots_sha256 above remains unchanged."
+  }
 }
