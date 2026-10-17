@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-17",
+  "scope": "English project presentation and author attribution maintenance",
+  "formal_report": "MEMORIA.md",
+  "reference_structure": [
+    "Context and motivation",
+    "Objectives and scope",
+    "Technical architecture",
+    "User experience",
+    "Validation",
+    "Difficulties and decisions",
+    "Learning"
+  ],
+  "local_tests_passed": 37,
+  "english_ui_apptest_cases": [
+    "A free product",
+    "Mixed shopping baskets",
+    "The missing final day"
+  ],
+  "skill_structure_validation": "passed",
+  "public_english_interface_observed": true,
+  "unwanted_coauthor_trailers_removed": 11,
+  "history_backup_verified": true,
+  "all_rewritten_commit_trees_unchanged": true,
+  "author_metadata_preserved": true,
+  "github_contributor_api_logins_observed": [
+    "AraceliFradejas"
+  ],
+  "repository_description_updated": true,
+  "repository_homepage_updated": true,
+  "screenshots": "Original release screenshots still show the prior interface language; refresh pending browser availability.",
+  "evidence_policy": "Original measured revisions/prompts remain historical facts; equivalent clean revisions are recorded separately."
+}

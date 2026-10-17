@@ -255,6 +255,9 @@ validation.
 
 ![Tests executed in the public application](docs/images/demo/04-pruebas-cestas.png)
 
+The images document the initial interface language. The current interface and
+this report are in English; refreshed screenshots are pending browser availability.
+
 The [publication record](evaluation/publication-2026-10-17.json) includes the
 verification results and screenshot hashes. The images were captured from the
 actual public application with browser bars hidden. They were not generated or

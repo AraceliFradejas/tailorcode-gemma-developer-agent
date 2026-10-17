@@ -51,6 +51,9 @@ and [Kaggle history](docs/historia-kaggle.md) preserve that evolution.
 Explore three examples, compare the original and corrected behavior, run their
 acceptance tests, and download the skill from the sidebar.
 
+The screenshots below document the initial release. The live interface has since
+been translated into English.
+
 ![Live demo: a free product incorrectly charged at 20 euros](docs/images/demo/01-precio.png)
 
 | Example | The bug | What the visitor can check |

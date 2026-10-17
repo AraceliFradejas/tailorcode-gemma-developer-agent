@@ -82,3 +82,17 @@ verified Git bundle and revision map are retained privately under
 The Colab templates now pin the tree-equivalent clean historical revision.
 Measured records keep their original identifiers and an additional equivalent
 revision so that evidence is not represented as a new execution.
+
+## English presentation revision
+
+The author requested English throughout the current public documentation and UI.
+A full report was written following the structure of her earlier portfolio
+reports, separating it from this handoff. Guides and active UI/package text are
+English. All 37 local tests, three English AppTest screens, and the skill validator
+passed. The hosted English interface was observed. GitHub description/homepage
+were updated and the contributor API currently lists only AraceliFradejas.
+
+The original release screenshots remain language-specific historical evidence.
+Refresh them from the public English app when Chrome is available; a request to
+keep that tab in the foreground is pending. Do not pretend that original screenshots
+show the new interface or change their recorded hashes without preserving provenance.
