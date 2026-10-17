@@ -17,7 +17,8 @@ python3 -m venv .venv
 ```
 
 Abre la URL local que muestra Streamlit, habitualmente http://127.0.0.1:8501.
-Para detenerlo, pulsa Ctrl+C en la terminal. No se ha desplegado públicamente.
+Para detenerlo, pulsa Ctrl+C en la terminal. La versión pública está en
+https://tailorcode-corrige-y-aprende.streamlit.app/.
 
 ## Recorrido
 

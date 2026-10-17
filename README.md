@@ -8,7 +8,29 @@ una corrección revisable, una explicación y evidencia de las comprobaciones.
 Disponible para descargar e instalar en **Codex y Claude Code**.
 Prueba de uso realizada en Codex; validación en Claude Code pendiente.
 
-## Demo local interactiva
+## Demo pública interactiva
+
+**[Abrir tAilorCode · Corrige y aprende](https://tailorcode-corrige-y-aprende.streamlit.app/)**
+
+Puedes probar los tres ejemplos y descargar la skill para tu asistente.
+
+![Demo publicada: producto gratuito y selección de los tres casos](docs/images/demo/01-precio.png)
+
+<details>
+<summary>Ver el ejemplo de las cestas</summary>
+
+![Dos cestas: comparación antes y después](docs/images/demo/02-cestas.png)
+
+</details>
+
+<details>
+<summary>Ver el ejemplo del calendario</summary>
+
+![Calendario: el último día vuelve a estar incluido](docs/images/demo/03-calendario.png)
+
+</details>
+
+### Ejecutar también en local
 
 La demo permite explorar tres casos: un producto gratis que se cobra a 20 €,
 dos cestas que mezclan sus artículos y un calendario que excluye el último día. Incluye explicación, cambio y pruebas
@@ -119,7 +141,7 @@ originales deben conservarse para que el comprobador acepte el resultado.
 | Primera prueba guiada en Codex | Caso `zero-price` corregido; tres tests comprobados independientemente. Invocación comunicada por la usuaria, sin traza de herramientas. |
 | Claude Code y descubrimiento automático | Pendientes de comprobar. |
 | Comparación exploratoria con/sin skill | `zero-price`: mismo parche y tres tests pasan en ambas condiciones; sin ventaja funcional observada. Configuración y activación no confirmadas con trazas. [Registro parcial](evaluation/skill-comparison.json). |
-| Demo local con Streamlit | Tres ejemplos interactivos: precio cero, cestas compartidas y último día excluido. Pruebas reales; sin generación nueva ni despliegue público. |
+| Demo local con Streamlit | Tres ejemplos interactivos: precio cero, cestas compartidas y último día excluido. Pruebas reales; publicada en Streamlit Community Cloud, sin generación nueva. |
 
 Validación local del proyecto:
 

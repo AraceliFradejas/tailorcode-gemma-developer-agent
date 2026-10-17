@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-17",
+  "timezone": "Europe/Madrid",
+  "url": "https://tailorcode-corrige-y-aprende.streamlit.app/",
+  "status": "deployed_verified",
+  "initial_source_revision": "2239242",
+  "python_selected": "3.12",
+  "cloud_button_results": {
+    "zero-price": 3,
+    "independent-lists": 3,
+    "inclusive-range": 4
+  },
+  "downloads": {
+    "codex": {
+      "bytes": 2860,
+      "sha256": "81e86254f062e63088936ef6507073af1d6dbcbe688bdc92cdc75ecb339f375d",
+      "downloaded_from_public_app": true
+    },
+    "claude": {
+      "bytes": 2553,
+      "sha256": "8c45852f23cd1c69b031142d05963dd2c0edd6986b5adb3f10c94ae85687f01a",
+      "downloaded_from_public_app": true
+    }
+  },
+  "screenshots_sha256": {
+    "01-precio.png": "5a65aff6d824e256e2500d5cd0aef601838e9c510cacecbed75af3972348ad16",
+    "02-cestas.png": "7c95d275c0d300c4ee486f72fa0f5a769ebac94293d653dd658dd989db15f2ec",
+    "03-calendario.png": "757b83eb6cad8b74eb0c619dc848d70fad258a59b17cdbf16725516dce083853",
+    "04-pruebas-cestas.png": "d1dd847b5427b9a55a53f3a6a32c0bb307159e02133924e03577b7fcd0dd6065"
+  },
+  "screenshots_source": "Actual public app captured with CUA; browser chrome hidden; not generated or edited.",
+  "limitations": [
+    "No new model evaluation performed during deployment.",
+    "Claude Code skill execution remains untested.",
+    "Mobile layout not yet checked on a physical device."
+  ],
+  "anonymous_access_verified": true,
+  "anonymous_access_method": "Opened public URL in a new Chrome Incognito window; app rendered without Streamlit sign-in."
+}

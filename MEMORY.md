@@ -5,6 +5,21 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
+## Publicación completada — 17 de octubre de 2026
+
+URL pública: https://tailorcode-corrige-y-aprende.streamlit.app/
+
+Se desplegó desde `main/app.py` en Streamlit Community Cloud, Python 3.12,
+revisión inicial `2239242`. Los tres botones funcionaron en la aplicación real:
+3 tests del precio, 3 de cestas y 4 del calendario. Se descargaron los ZIP de
+Codex y Claude y se inspeccionaron sus contenidos. Una ventana nueva de incógnito
+mostró la demo sin iniciar sesión. No se ejecutaron modelos.
+
+Cuatro capturas limpias y revisadas en `docs/images/demo/` se incorporaron al
+README y a `docs/publicacion-streamlit.md`. Hashes/resultados en
+`evaluation/publication-2026-10-17.json`. Se conserva la validación pendiente
+de Claude Code. Las referencias anteriores a publicación pendiente son historia.
+
 ## Preparación de publicación — 17 de octubre de 2026
 
 Araceli autorizó publicar la demo y la presentación “Disponible para descargar
