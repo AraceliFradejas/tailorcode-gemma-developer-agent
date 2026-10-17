@@ -1,4 +1,4 @@
-"""Run the repository's two known examples and their acceptance tests."""
+"""Run the repository's three known examples and their acceptance tests."""
 from pathlib import Path
 import difflib
 import runpy
@@ -12,6 +12,8 @@ ORIGINAL_PATH = ROOT / 'examples/repair-lab/zero-price/repair_target.py'
 CORRECTED_PATH = ROOT / 'demo/verified_price.py'
 CASES = {
     'zero-price': (ORIGINAL_PATH, CORRECTED_PATH),
+    'inclusive-range': (ROOT / 'examples/repair-lab/inclusive-range/repair_target.py',
+                        ROOT / 'demo/verified_range.py'),
     'independent-lists': (ROOT / 'examples/repair-lab/independent-lists/repair_target.py',
                           ROOT / 'demo/verified_labels.py'),
 }
@@ -55,4 +57,12 @@ def basket_trace(first_item, second_item):
         traces[version] = {'first_after_own_purchase': first_snapshot,
                            'first_final': list(first), 'second_final': list(second),
                            'same_basket': first is second}
+    return traces
+
+
+def range_trace(start, end):
+    traces = {}
+    for version, path in zip(('before', 'after'), CASES['inclusive-range']):
+        function = runpy.run_path(str(path))['even_numbers']
+        traces[version] = function(start, end)
     return traces

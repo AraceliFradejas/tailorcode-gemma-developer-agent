@@ -1,8 +1,9 @@
 # Demo local · Un cero también tiene valor
 
-Esta aplicación Streamlit permite elegir dos ejemplos: el precio cero corregido
-por Codex y dos cestas que se mezclan por compartir una lista. El segundo usa una
-corrección de referencia preparada, sin atribuirla a un modelo. Ambos muestran
+Esta aplicación Streamlit permite elegir tres ejemplos: el precio cero corregido
+por Codex y dos cestas que se mezclan por compartir una lista y un plan de riego que
+excluye el último día. Los dos últimos usan correcciones de referencia preparadas,
+sin atribuirlas a un modelo. Ambos muestran
 el código, la explicación y tres pruebas reales en carpetas temporales.
 
 ## Arrancar
@@ -65,3 +66,29 @@ una simulación nueva para no arrastrar el estado entre visitantes o ejecuciones
 El botón comprueba independencia de las listas nuevas y conservación de una lista
 existente, incluida una vacía. La salida técnica y el código son opcionales. Esta
 corrección se etiqueta como referencia: no se presenta como resultado de Claude.
+
+## Si aparece un ImportError tras actualizar el código
+
+El 17 de octubre el servidor iniciado antes de añadir las cestas conservó la
+versión anterior de `demo.engine` y no encontró `basket_trace`. El fichero sí
+contenía la función. Se detuvo y reinició Streamlit, y se observó la pantalla
+real de las cestas en Chrome sin ese error. Las comprobaciones anteriores en
+procesos nuevos no habían detectado el estado del servidor que seguía abierto.
+
+Tras cambios estructurales de módulos, detener el servidor con Ctrl+C y volver
+a ejecutar el comando de arranque. Recargar solo el navegador puede no bastar
+para renovar los módulos que el servidor Python ya tiene importados.
+
+## Tercer ejemplo: el último día se queda fuera
+
+Selecciona “El último día se queda fuera”. El calendario ficticio riega los días
+pares, incluyendo ambos extremos del periodo. Del 1 al 4 deberían regarse el
+2 y el 4: antes falta el 4 y después aparece. Los días impares se muestran como
+sin riego previsto, no como errores.
+
+También se puede elegir solo el día 2 o del 1 al 5 (caso que ya funcionaba).
+El botón ejecuta cuatro pruebas originales; el código y los detalles técnicos
+son opcionales. Es una corrección de referencia, no un resultado de Claude.
+Se verificaron los tres escenarios, el botón, el ejercicio y el cambio entre
+las tres pantallas. Pasaron 37 tests locales. Se reinició el servidor para
+cargar los módulos nuevos, como requiere la incidencia documentada arriba.

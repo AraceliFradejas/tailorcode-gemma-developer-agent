@@ -5,6 +5,24 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
+## Tercer ejemplo visual — 17 de octubre de 2026
+
+Se añadió “El último día se queda fuera”: calendario ficticio de riego en días
+pares que muestra la exclusión del límite final de `range`. Usa una corrección
+de referencia, no un resultado generado por un modelo. Tres escenarios visuales,
+cuatro tests originales reales en el botón y una pregunta sencilla. Pasaron
+37 tests locales y la interacción AppTest de las tres pantallas. Se reinició
+Streamlit después del cambio para no reutilizar el módulo anterior en memoria.
+
+## Corrección de la sesión local de Streamlit — 17 de octubre de 2026
+
+Araceli detectó `ImportError: cannot import name basket_trace`. El archivo
+actual sí tenía la función; el servidor anterior conservaba el módulo importado
+antes de la ampliación. Se detuvo ese servidor y se inició uno nuevo en
+127.0.0.1:8501. Se observó en Chrome la pantalla real de las cestas, con los
+resultados antes/después, sin el ImportError. No fue necesario cambiar el
+algoritmo. Documentado el reinicio tras cambios estructurales de módulos.
+
 ## Segundo ejemplo y preparación de Claude — 17 de octubre de 2026
 
 La demo permite elegir “Dos cestas que se mezclan”: Ana y Luis comparten por

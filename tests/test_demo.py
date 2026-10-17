@@ -1,6 +1,6 @@
 """Verify observable behavior and actual checks behind the portfolio demo."""
 import unittest
-from demo.engine import basket_trace, compare, run_checks
+from demo.engine import basket_trace, compare, range_trace, run_checks
 
 
 class DemoTests(unittest.TestCase):
@@ -36,6 +36,20 @@ class DemoTests(unittest.TestCase):
         self.assertIn('AssertionError', result['before']['output'])
         self.assertEqual(result['after']['exit_code'], 0)
         self.assertIn('Ran 3 tests', result['after']['output'])
+
+    def test_calendar_includes_boundaries_and_handles_other_ranges(self):
+        for start, end, expected in [(1, 4, [2, 4]), (2, 2, [2]), (1, 5, [2, 4]),
+                                      (-4, 0, [-4, -2, 0]), (5, 1, [])]:
+            with self.subTest(start=start, end=end):
+                self.assertEqual(range_trace(start, end)['after'], expected)
+        self.assertEqual(range_trace(1, 4)['before'], [2])
+
+    def test_calendar_acceptance_checks_fail_then_pass(self):
+        result = run_checks('inclusive-range')
+        self.assertNotEqual(result['before']['exit_code'], 0)
+        self.assertIn('AssertionError', result['before']['output'])
+        self.assertEqual(result['after']['exit_code'], 0)
+        self.assertIn('Ran 4 tests', result['after']['output'])
 
 
 if __name__ == '__main__':

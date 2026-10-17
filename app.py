@@ -3,10 +3,15 @@ import streamlit as st
 from demo.engine import compare, patch, run_checks, sources
 
 st.set_page_config(page_title='tAilorCode · Corrige y aprende', page_icon='🧵', layout='wide')
-example = st.selectbox('Elige un ejemplo', ['Un producto gratis', 'Dos cestas que se mezclan'])
+example = st.selectbox('Elige un ejemplo', ['Un producto gratis', 'Dos cestas que se mezclan', 'El último día se queda fuera'])
 if example == 'Dos cestas que se mezclan':
     from demo.basket_view import render_baskets
     render_baskets()
+    st.stop()
+
+if example == 'El último día se queda fuera':
+    from demo.range_view import render_range
+    render_range()
     st.stop()
 
 st.markdown('**tAilorCode · Corrige y aprende**')
