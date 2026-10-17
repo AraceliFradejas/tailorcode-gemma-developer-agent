@@ -1,0 +1,8 @@
+test_none_uses_fallback (__main__.PriceTests.test_none_uses_fallback) ... ok
+test_nonzero_prices_are_preserved (__main__.PriceTests.test_nonzero_prices_are_preserved) ... ok
+test_zero_is_a_valid_price (__main__.PriceTests.test_zero_is_a_valid_price) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

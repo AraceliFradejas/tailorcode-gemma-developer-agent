@@ -1,11 +1,68 @@
 {
-  "status": "not_run",
+  "status": "partial",
   "protocol": "docs/skill-evaluation.md",
-  "cases": ["independent-lists", "zero-price", "inclusive-range"],
-  "runs": [],
+  "cases": [
+    "independent-lists",
+    "zero-price",
+    "inclusive-range"
+  ],
+  "runs": [
+    {
+      "run_id": "20261017-zero-price-with-skill",
+      "case": "zero-price",
+      "assistant": "Codex",
+      "client_version": null,
+      "model": null,
+      "condition": "with-skill",
+      "date": "2026-10-17",
+      "skill_sha256": "3daa85a93d87dfbf260cf85dd0ea0ead688d1445e3fdad280f340fb50ee2a22c",
+      "prompt": "El precio puede ser cero: un producto gratuito no debe usar el precio de reserva. Solo None significa precio ausente. Conserva también los precios negativos. Corrige el fallo y explícame cómo lo has comprobado.",
+      "prompt_note": "Both supplied responses show the common task prompt without explicit skill invocation. Skill present only in with-skill project.",
+      "duration_seconds": null,
+      "user_reported_ui_worked_seconds": 12,
+      "test_exit_code": 0,
+      "tests_run": 3,
+      "acceptance_tests_unchanged": true,
+      "cause_explained": true,
+      "before_and_after_tests": "Reported by assistant in user-pasted response; original execution trace not captured. Independent before/after checks preserved separately.",
+      "patch": "evaluation/skill-comparison-2026-10-17/with-skill.patch",
+      "verification": "evaluation/skill-comparison-2026-10-17/with-skill-verification.txt",
+      "limits": "Model, reasoning settings and tool traces not captured; no causal claim."
+    },
+    {
+      "run_id": "20261017-zero-price-without-skill",
+      "case": "zero-price",
+      "assistant": "Codex",
+      "client_version": null,
+      "model": null,
+      "condition": "without-skill",
+      "date": "2026-10-17",
+      "skill_sha256": null,
+      "prompt": "El precio puede ser cero: un producto gratuito no debe usar el precio de reserva. Solo None significa precio ausente. Conserva también los precios negativos. Corrige el fallo y explícame cómo lo has comprobado.",
+      "prompt_note": "Both supplied responses show the common task prompt without explicit skill invocation. Skill present only in with-skill project.",
+      "duration_seconds": null,
+      "user_reported_ui_worked_seconds": 10,
+      "test_exit_code": 0,
+      "tests_run": 3,
+      "acceptance_tests_unchanged": true,
+      "cause_explained": true,
+      "before_and_after_tests": "Reported by assistant in user-pasted response; original execution trace not captured. Independent before/after checks preserved separately.",
+      "patch": "evaluation/skill-comparison-2026-10-17/without-skill.patch",
+      "verification": "evaluation/skill-comparison-2026-10-17/without-skill-verification.txt",
+      "limits": "Model, reasoning settings and tool traces not captured; no causal claim."
+    }
+  ],
+  "observations": [
+    "Both zero-price conditions generated the same one-line correction and independently passed all three original tests.",
+    "Both supplied explanations identify the cause and report checks before and after.",
+    "The with-skill response labels verification explicitly; this alone does not demonstrate improved repair quality."
+  ],
   "limitations": [
-    "Fixture self-checks are not model evaluations.",
-    "Codex and Claude Code discovery and execution have not yet been tested in fresh sessions.",
-    "The previous Gemma result does not validate this skill."
+    "One simple case, one run per condition.",
+    "Condition order differed from the initial plan due to opening the with-skill project first.",
+    "Model/client/reasoning settings and original tool traces unavailable; matching configurations unconfirmed.",
+    "Skill presence confirmed by project installation; actual skill reading/activation not directly observed.",
+    "UI-reported 12s and 10s are not controlled latency measurements.",
+    "Other cases and Claude Code remain untested."
   ]
 }

@@ -66,3 +66,17 @@ con `status: not_run` y `runs: []`. Cada futura entrada deberá incluir:
 Cambiar a `partial` si solo se ha ejecutado parte de la comparación y documentar
 qué falta. No rellenar entradas con resultados de las correcciones de referencia:
 esas correcciones validan el laboratorio, no la capacidad de un modelo.
+
+
+## Observación inicial del 17 de octubre de 2026
+
+En `zero-price` las dos condiciones produjeron el mismo parche y pasaron tres
+tests originales comprobados independientemente. Las explicaciones aportadas
+fueron similares. La respuesta del proyecto con skill incluyó un estado explícito
+de verificación; no se demostró una mejora funcional ni educativa medible.
+
+El orden real fue con/sin skill por una confusión inicial de carpeta. Falta
+confirmar modelo, razonamiento, cliente y lectura efectiva de la skill; las
+respuestas son extractos aportados por la usuaria, sin traza original de herramientas.
+Se registra como comparación exploratoria parcial, no como experimento controlado
+concluyente. Los tiempos de interfaz no permiten comparar rendimiento.

@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-17",
+  "kind": "local_streamlit_demo_validation",
+  "streamlit": "1.66.0",
+  "local_tests": {
+    "passed": 33
+  },
+  "ui_checks": [
+    "Initial zero vs fallback: original 20, corrected 0",
+    "Negative price preserved in both",
+    "None uses fallback in both",
+    "Button executes original and corrected acceptance tests",
+    "Learning answer shows feedback",
+    "No AppTest exceptions"
+  ],
+  "browser_observation": "Chrome rendered the local demo, price controls, results, code comparison and tabs.",
+  "scope": "Recorded Codex correction, prepared explanation, locally executed tests. No new model generation or public deployment."
+}

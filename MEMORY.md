@@ -1,9 +1,58 @@
-# Memoria de tAilorCode — actualizada el 16 de octubre de 2026
+# Memoria de tAilorCode — actualizada el 17 de octubre de 2026
 
 Este documento conserva el contexto del proyecto para retomarlo y para explicar
 su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
+
+## Demo visual local — 17 de octubre de 2026
+
+Araceli aprobó construir una demo pequeña después de que la comparación no
+mostrara una mejora funcional. `app.py` usa Streamlit para enseñar el caso guardado
+de precio cero, probar valores numéricos/None y ejecutar los tests antes/después.
+No hay generación nueva ni llamadas de modelo. Guía en `docs/demo-local.md`.
+La demo mantiene visible que el caso se resolvió también sin skill.
+Pasaron 33 pruebas locales y las comprobaciones AppTest de interacción. Chrome
+mostró la interfaz local. El servidor se inició en 127.0.0.1:8501 (solo local);
+no asumir que sigue vivo después de cerrar la sesión.
+
+## Primera comparación exploratoria — 17 de octubre de 2026
+
+Se verificaron las carpetas `with-skill` y `without-skill` del caso `zero-price`:
+ambas generan el mismo parche y pasan los tres tests originales intactos. Las
+respuestas aportadas por Araceli explican la causa y reportan checks antes/después.
+No se observa una mejora funcional de la skill en este caso sencillo.
+
+La primera respuesta de comparación correspondía a `with-skill` por una confusión
+al abrir la carpeta; Araceli lo confirmó y después completó `without-skill`.
+El orden real fue con/sin skill. En ambas peticiones pegadas no había invocación
+explícita: se confirma presencia de la skill, no su lectura efectiva. No tenemos
+modelo, nivel de razonamiento, versión ni traza de herramientas para confirmar
+igualdad de condiciones. Los 12 y 10 segundos de la interfaz no son una medición
+controlada de rendimiento.
+
+Registro en `evaluation/skill-comparison.json` con estado `partial`; parches y
+verificaciones en `evaluation/skill-comparison-2026-10-17/`. Siguiente objetivo:
+comprobar el valor educativo con casos más exigentes y confirmar activación y
+configuración, sin ajustar pruebas para fabricar una ventaja. Claude sigue pendiente.
+
+## Primera prueba de uso — 17 de octubre de 2026
+
+Araceli abrió una conversación nueva de Codex en el ejercicio `zero-price` e
+informó de su respuesta tras pedir `$tailorcode`. El archivo recibió el cambio
+`return fallback if price is None else price`. La respuesta explicó la causa,
+reportó pruebas antes y después y acotó su afirmación a los casos comprobados.
+
+Se comprobó independientemente que el fichero de aceptación no se modificó y
+que pasan sus tres tests. La preparación original había registrado un fallo:
+un precio cero devolvía 20. Evidencia pública revisada en
+`evaluation/skill-guided-demo-2026-10-17/`; salidas originales locales en
+`deliverables/session-20261017/`. No se dispone de la traza de herramientas de
+la otra conversación ni del modelo/versión. No afirmar descubrimiento automático
+comprobado ni mejora causal frente al asistente sin skill.
+
+Siguiente paso: una pareja comparable con/sin skill en carpetas y sesiones nuevas,
+registrando modelo, versión, respuestas y comandos. La comparación exploratoria posterior ya está registrada; Claude Code aún no ha sido probado.
 
 ## Objetivo vigente — cambio de enfoque aprobado el 16 de octubre
 
@@ -19,7 +68,7 @@ en `examples/repair-lab/` y un comprobador local en `scripts/repair_lab.py`.
 Las correcciones de referencia comprueban el laboratorio, no evalúan un modelo.
 Pasaron 31 pruebas locales, el validador de skills y los checks de empaquetado.
 El primer recorrido está en `docs/skill-quickstart.md`.
-La comparación con/sin skill sigue sin ejecutar y su registro está vacío.
+La comparación exploratoria de `zero-price` está registrada; no demuestra una mejora.
 
 Leer primero el [README](README.md), la
 [memoria de la decisión](docs/cambio-de-enfoque-2026-10-16.md) y el

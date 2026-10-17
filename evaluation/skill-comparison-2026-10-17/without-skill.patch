@@ -1,0 +1,6 @@
+--- a/repair_target.py
++++ b/repair_target.py
+@@ -1,2 +1,2 @@
+ def effective_price(price, fallback):
+-    return price or fallback
++    return fallback if price is None else price

@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-17",
+  "kind": "guided_usage_smoke_test",
+  "case": "zero-price",
+  "assistant": "Codex",
+  "model": null,
+  "client_version": null,
+  "skill_invocation": "User reports invoking $tailorcode in a fresh conversation; no raw tool trace captured.",
+  "skill_sha256": "3daa85a93d87dfbf260cf85dd0ea0ead688d1445e3fdad280f340fb50ee2a22c",
+  "user_reported_response": {
+    "cause": "or treats zero as false; only None should select fallback.",
+    "before": "Assistant reported one failing test before the edit.",
+    "after": "Assistant reported all three existing tests passed.",
+    "status": "Verified by relevant tests"
+  },
+  "independent_verification": {
+    "original_exit_code": 1,
+    "corrected_exit_code": 0,
+    "tests_run": 3,
+    "acceptance_tests_unchanged": true,
+    "patch": "repair.patch",
+    "output": "verification.txt"
+  },
+  "limitations": [
+    "This is a guided smoke test, not a with/without-skill comparison.",
+    "Model/version and original assistant tool trace were not captured.",
+    "Skill discovery and reading were not directly observed; invocation was reported by the user.",
+    "Passing three tests does not establish general repair quality."
+  ]
+}

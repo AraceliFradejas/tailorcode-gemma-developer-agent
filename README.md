@@ -5,8 +5,21 @@ el arreglo.** Proyecto de portfolio creado y dirigido por **Araceli Fradejas Mu�
 
 El usuario abre su proyecto en Codex o Claude Code, describe un fallo y recibe
 una corrección revisable, una explicación y evidencia de las comprobaciones.
-La primera versión está preparada para instalarse en ambos asistentes; falta
-validar su descubrimiento y comportamiento en sesiones nuevas de cada producto.
+La primera versión está preparada para instalarse en ambos asistentes; hay una primera prueba guiada en Codex con el arreglo comprobado
+independientemente. Falta completar las pruebas de compatibilidad y comparación.
+
+## Demo local interactiva
+
+La primera demo permite explorar el fallo del precio cero, ver el cambio y
+ejecutar sus pruebas. Muestra un resultado real guardado de Codex; no genera
+correcciones nuevas ni hace llamadas de IA.
+
+```bash
+python3 -m pip install -r requirements-demo.txt
+python3 -m streamlit run app.py --server.address 127.0.0.1
+```
+
+[Guía de la demo y sus límites](docs/demo-local.md).
 
 ## Por qué cambió el proyecto
 
@@ -99,9 +112,10 @@ originales deben conservarse para que el comprobador acepte el resultado.
 | Skill y metadatos | Creados y validados estructuralmente. |
 | Instalación para ambos asistentes | Copias verificadas en carpetas temporales; no sobrescriben instalaciones. |
 | Tres ejercicios | Fallan antes y pasan con correcciones de referencia; esto comprueba el laboratorio. |
-| Comportamiento de la skill en Codex y Claude Code | Pendiente de pruebas en sesiones nuevas. |
-| Mejora frente al asistente sin skill | Sin medir; [protocolo de comparación](docs/skill-evaluation.md) y [registro vacío](evaluation/skill-comparison.json). |
-| Demo web con Streamlit | Planificada, todavía no implementada. |
+| Primera prueba guiada en Codex | Caso `zero-price` corregido; tres tests comprobados independientemente. Invocación comunicada por la usuaria, sin traza de herramientas. |
+| Claude Code y descubrimiento automático | Pendientes de comprobar. |
+| Comparación exploratoria con/sin skill | `zero-price`: mismo parche y tres tests pasan en ambas condiciones; sin ventaja funcional observada. Configuración y activación no confirmadas con trazas. [Registro parcial](evaluation/skill-comparison.json). |
+| Demo local con Streamlit | Implementada con el caso guardado de precio cero, comparación interactiva y ejecución de tests. Sin generación de IA nueva ni despliegue público. |
 
 Validación local del proyecto:
 
@@ -114,6 +128,9 @@ python3 scripts/check_submission_notebook.py
 
 Las dos últimas comprobaciones conservan la reproducibilidad del trabajo previo
 de Kaggle; no ejecutan modelos ni prueban la nueva skill.
+
+La [primera prueba guiada del 17 de octubre](evaluation/skill-guided-demo-2026-10-17/result.json)
+conserva el parche y la verificación independiente. No es una comparación con/sin skill.
 
 ## Evidencia de la etapa anterior
 
