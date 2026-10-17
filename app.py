@@ -4,7 +4,7 @@ from demo.engine import compare, patch, run_checks, sources
 from demo.skill_downloads import render_skill_downloads
 from demo.footer import render_footer
 
-st.set_page_config(page_title='tAilorCode · Corrige y aprende', page_icon='🧵', layout='wide')
+st.set_page_config(page_title='tAilorCode · Fix and learn', page_icon='🧵', layout='wide')
 st.markdown("""
 <style>
 .st-key-case_selector {
@@ -25,123 +25,123 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 with st.container(border=True, key='case_selector'):
-    st.subheader('Empieza aquí: elige un caso')
-    st.caption('Tres situaciones cotidianas. Pulsa una opción para explorar su fallo y su solución.')
+    st.subheader('Start here: choose a case')
+    st.caption('Three everyday situations. Choose one to explore the bug and its correction.')
     labels = {
-        'Un producto gratis': '🏷️  1. Un producto gratis',
-        'Dos cestas que se mezclan': '🛒  2. Dos cestas que se mezclan',
-        'El último día se queda fuera': '💧  3. El último día se queda fuera',
+        'A free product': '🏷️  1. A free product',
+        'Mixed shopping baskets': '🛒  2. Mixed shopping baskets',
+        'The missing final day': '💧  3. The missing final day',
     }
-    example = st.radio('Elige un ejemplo', list(labels), format_func=labels.get,
+    example = st.radio('Choose an example', list(labels), format_func=labels.get,
                        horizontal=True, label_visibility='collapsed', key='selected_case')
-if example == 'Dos cestas que se mezclan':
+if example == 'Mixed shopping baskets':
     from demo.basket_view import render_baskets
     render_baskets()
     render_footer()
     st.stop()
 
-if example == 'El último día se queda fuera':
+if example == 'The missing final day':
     from demo.range_view import render_range
     render_range()
     render_footer()
     st.stop()
 
-st.markdown('**tAilorCode · Corrige y aprende**')
-st.title('Es gratis. ¿Por qué me cobran 20 €?')
-st.write('Imagina que estás probando la caja de una tienda. Un producto está marcado como gratuito, '
-         'pero al pasar por caja aparece un cobro de 20 €. Vamos a entender y comprobar el arreglo.')
-st.caption('No necesitas saber Python para seguir el ejemplo. Corrección real guardada de Codex; sin generación nueva de IA.')
+st.markdown('**tAilorCode · Fix and learn**')
+st.title('It is free. Why am I being charged €20?')
+st.write('Imagine testing a shop checkout. A product is marked as free, '
+         'but the checkout charges €20. Let us understand the bug and check the correction.')
+st.caption('No Python knowledge needed. Recorded Codex correction; no new AI generation.')
 
 with st.sidebar:
-    st.header('Tu recorrido')
-    st.write('1. Elige una situación.\n\n2. Compara lo que cobra la caja.\n\n3. Comprueba el arreglo.')
+    st.header('Your walkthrough')
+    st.write('1. Choose a situation.\n\n2. Compare the checkout results.\n\n3. Check the correction.')
     st.divider()
-    st.write('Proyecto de Araceli Fradejas Muñoz')
+    st.write('A project by Araceli Fradejas Muñoz')
     render_skill_downloads()
-    st.markdown('[Ver proyecto en GitHub](https://github.com/AraceliFradejas/tailorcode-gemma-developer-agent)')
+    st.markdown('[View the project on GitHub](https://github.com/AraceliFradejas/tailorcode-gemma-developer-agent)')
 
-st.subheader('1. Elige qué producto pasa por caja')
-st.write('**Regla de esta tienda ficticia:** se cobra el precio registrado. Solo si no hay precio registrado, '
-         'se aplica el importe de reserva de 20 €. Un precio de 0 € sí está registrado: significa gratis.')
-scenario = st.selectbox('Situación', ['Producto gratuito · 0 €', 'Producto con precio · 12,50 €', 'Producto sin precio registrado'])
-price = {'Producto gratuito · 0 €': 0, 'Producto con precio · 12,50 €': 12.5,
-         'Producto sin precio registrado': None}[scenario]
+st.subheader('1. Choose a product for the checkout')
+st.write('**Rule for this fictional shop:** charge the recorded price. Only when no price is recorded, '
+         'use a fallback price of €20. A price of €0 is recorded: it means free.')
+scenario = st.selectbox('Situation', ['Free product · €0', 'Recorded price · €12.50', 'No recorded price'])
+price = {'Free product · €0': 0, 'Recorded price · €12.50': 12.5,
+         'No recorded price': None}[scenario]
 before, after = compare(price, 20)
 expected = 20 if price is None else price
-money = lambda value: f'{value:g} €'.replace('.', ',')
-st.write(f'**Lo que debería cobrar:** {money(expected)}')
+money = lambda value: f'€{value:g}'
+st.write(f'**Expected charge:** {money(expected)}')
 a, b = st.columns(2)
-a.metric('La caja antes del arreglo cobra', money(before))
-b.metric('La caja después del arreglo cobra', money(after))
+a.metric('Checkout before the correction', money(before))
+b.metric('Checkout after the correction', money(after))
 if before != expected:
-    st.error('Aquí está el fallo: el producto es gratis, pero la caja cobra 20 €. Después del arreglo cobra 0 €, como debe.')
+    st.error('Here is the bug: the product is free, but the checkout charges €20. After the correction it charges €0, as required.')
 else:
-    st.info('En esta situación las dos versiones cobran lo esperado. Vuelve al producto gratuito para ver dónde estaba el fallo.')
+    st.info('Both versions are correct for this input. Choose the free product to see the bug.')
 
-explain_tab, tests_tab, code_tab = st.tabs(['Entender el ejemplo', 'Comprobar el arreglo', 'Ver el código · opcional'])
+explain_tab, tests_tab, code_tab = st.tabs(['Understand the example', 'Check the correction', 'View the code · optional'])
 with explain_tab:
-    st.subheader('2. ¿Qué estaba confundiendo el programa?')
-    st.write('La caja trataba estas dos situaciones como si fueran iguales:')
-    st.markdown('- **Precio 0 €:** sabemos el precio y el producto es gratis.\n'
-                '- **Sin precio registrado:** no sabemos el precio y usamos los 20 € de reserva.')
-    st.write('**La corrección:** preguntar si falta el precio, en lugar de interpretar el cero como si faltara.')
-    st.subheader('Una pregunta para ti')
-    answer = st.radio('Un producto tiene un precio registrado de 0 €. ¿Cuánto debería cobrar la caja?',
-                      ['0 €', '20 €'], index=None)
-    if answer == '0 €':
-        st.success('Eso es: sabemos que es gratis. No necesitamos el importe de reserva.')
+    st.subheader('2. What was the program confusing?')
+    st.write('The checkout treated these two situations as if they were the same:')
+    st.markdown('- **Price €0:** we know the price and the product is free.\n'
+                '- **No recorded price:** the price is missing, so we use the €20 fallback.')
+    st.write('**The correction:** check whether the price is missing, instead of treating zero as missing.')
+    st.subheader('A question for you')
+    answer = st.radio('A product has a recorded price of €0. What should the checkout charge?',
+                      ['€0', '€20'], index=None)
+    if answer == '€0':
+        st.success('Exactly: we know it is free. We do not need the fallback price.')
     elif answer is not None:
-        st.info('Fíjate en la diferencia: no falta el precio, está registrado como cero. Cero significa gratis.')
-    st.write('**Idea clave:** «vale cero» y «no sé cuánto vale» son cosas distintas.')
+        st.info('The price is not missing: it is recorded as zero. Zero means free.')
+    st.write('**Key idea:** zero value and an unknown value are different states.')
 
 with tests_tab:
-    st.subheader('3. ¿Cómo sabemos que el arreglo funciona?')
-    st.write('Una prueba automática hace lo mismo que tú: introduce un precio y comprueba si la caja cobra lo esperado.')
-    st.markdown('**Ejemplo:** introducir 0 € → esperar 0 €. Si la caja devuelve 20 €, la prueba detecta el fallo.')
-    st.write('El botón ejecuta ahora las pruebas sobre las dos versiones. También comprueba que sigan funcionando '
-             'el precio sin registrar y otros valores.')
-    if st.button('Comprobar el arreglo', type='primary'):
-        with st.spinner('Comprobando las dos versiones…'):
+    st.subheader('3. How do we know the correction works?')
+    st.write('An automated test does the same thing you do: it supplies a price and checks the charge.')
+    st.markdown('**Example:** enter €0 → expect €0. If the checkout returns €20, the test detects the bug.')
+    st.write('The button runs tests on both versions now. It also checks that '
+             'a missing price and other values still work.')
+    if st.button('Check the correction', type='primary'):
+        with st.spinner('Checking both versions…'):
             try:
                 st.session_state['checks'] = run_checks()
             except Exception as error:
                 st.session_state.pop('checks', None)
-                st.error(f'No se pudo completar la comprobación: {error}')
+                st.error(f'Could not complete the checks: {error}')
     if 'checks' in st.session_state:
         result = st.session_state['checks']
         reproduced = result['before']['exit_code'] != 0 and 'AssertionError' in result['before']['output']
         passed = result['after']['exit_code'] == 0
         if reproduced:
-            st.warning('ANTES: la prueba detecta que el producto gratis se cobra a 20 €. Esto confirma el fallo.')
+            st.warning('BEFORE: the test detects a €20 charge for a free product. This reproduces the bug.')
         else:
-            st.error('No se ha reproducido el fallo esperado. Revisa los detalles.')
+            st.error('The expected bug was not reproduced. Check the details.')
         if passed:
-            st.success('DESPUÉS: pasan las 3 pruebas. El producto gratis cuesta 0 € y los otros casos comprobados siguen funcionando.')
+            st.success('AFTER: all 3 tests pass. The free product costs €0 and the other tested cases still work.')
         else:
-            st.error('El arreglo no pasa las pruebas. Hay que revisarlo.')
-        with st.expander('Ver la salida técnica de las pruebas · opcional'):
-            st.markdown('**Antes**')
+            st.error('The correction fails the tests and needs another look.')
+        with st.expander('View technical test output · optional'):
+            st.markdown('**Before**')
             st.code(result['before']['output'], language='text')
-            st.markdown('**Después**')
+            st.markdown('**After**')
             st.code(result['after']['output'], language='text')
-        st.caption('Son tres pruebas de este ejemplo, no una garantía para todos los programas.')
+        st.caption('These are three tests of this example, not a guarantee for every program.')
     else:
-        st.info('Pulsa el botón para ejecutar la comprobación. Aún no se ha ejecutado en esta sesión.')
+        st.info('Press the button to run the checks. They have not run in this session yet.')
 
 with code_tab:
-    st.subheader('El cambio en Python')
+    st.subheader('The Python change')
     original, corrected = sources()
     a, b = st.columns(2)
     with a:
-        st.markdown('**Antes**')
+        st.markdown('**Before**')
         st.code(original, language='python')
     with b:
-        st.markdown('**Después · corrección guardada de Codex**')
+        st.markdown('**After · recorded Codex correction**')
         st.code(corrected, language='python')
-    st.write('`price` es el precio y `fallback` el importe de reserva. `None` significa que no hay precio registrado. '
-             'El operador `or` también considera falso el cero; `is None` comprueba únicamente si falta el dato.')
-    with st.expander('Ver exactamente la línea modificada'):
+    st.write('`price` is the recorded price and `fallback` is the fallback amount. `None` means no price is recorded. '
+             'The `or` operator also treats zero as false; `is None` checks only whether the value is missing.')
+    with st.expander('View the exact changed line'):
         st.code(patch(), language='diff')
-    st.download_button('Descargar el cambio', patch(), file_name='tailorcode-zero-price.patch', mime='text/plain')
+    st.download_button('Download the change', patch(), file_name='tailorcode-zero-price.patch', mime='text/plain')
 
 render_footer()

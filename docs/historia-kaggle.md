@@ -1,8 +1,9 @@
-# Archivo histórico: etapa Kaggle y Gemma
+# Historical archive: Kaggle and Gemma
 
-Este documento conserva la portada anterior al cambio de enfoque del 16 de
-octubre de 2026. Las referencias a próximos envíos o pruebas pendientes son
-históricas. El objetivo vigente está en el [README](../README.md).
+This file preserves the README from before the October 16, 2026 change of scope.
+References to future competition submissions and pending GPU checks describe
+that earlier stage. The current product is documented in the [README](../README.md)
+and [project report](../MEMORIA.md).
 
 # tAilorCode
 
@@ -17,7 +18,7 @@ Model startup and preparation are additional to the reported evaluation time.
 The FastAPI server compatibility issue was addressed by pinning FastAPI 0.136.3;
 HTTP checks and CUDA passed. Diagnostics were downloaded before runtime deletion,
 and Colab showed zero active sessions afterwards. See the
-[detailed session memory in Spanish](memoria-2026-10-16.md),
+[detailed session report](memoria-2026-10-16.md),
 [structured result](../evaluation/public-smoke-2026-10-16.json), and
 [new clean guided notebook](../notebooks/tailorcode-colab-limpio.ipynb).
 The clean notebook has not itself been run end to end. Earlier checkpoints below
@@ -85,7 +86,7 @@ The local smoke-suite preparation found all three public tasks and their snapsho
 
 ## Latest checkpoint and project memory
 
-Read [MEMORY.md — session record and explanation in Spanish](../MEMORY.md) to resume the work or explain its development. It records completed work, decisions, limitations, the Colab stop message, and the next steps.
+Read [MEMORY.md — technical handoff](../MEMORY.md) to resume the work or explain its development. It records completed work, decisions, limitations, the Colab stop message, and the next steps.
 
 | Stage | Verified status |
 | --- | --- |

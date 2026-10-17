@@ -1,82 +1,72 @@
-# Cómo evaluar tAilorCode
+# Evaluating tAilorCode
 
-## Pregunta y límites
+## Question and scope
 
-¿Añadir la skill mejora la corrección, la verificación y la explicación de un
-asistente en errores pequeños de Python? No partimos de que la respuesta sea sí.
-Tres ejercicios educativos son una prueba inicial, no un benchmark representativo.
-El resultado previo con Gemma es independiente de esta evaluación.
+Does the skill improve correction, verification or explanation of focused Python
+bugs? We do not assume that it does. Three educational examples are an initial
+check, not a representative benchmark. The earlier Gemma run is a separate result.
 
-## Comparación por asistente
+## Matched comparisons within each assistant
 
-Realizar primero una pareja de ejecuciones por caso en Codex y después en Claude
-Code: tres casos × dos condiciones × dos asistentes = doce ejecuciones iniciales.
-Registrar el identificador y la versión del modelo, versión del cliente, fecha,
-configuración relevante y límites disponibles. Comparar con y sin skill **dentro
-del mismo asistente**; diferencias entre productos pueden tener otras causas.
+The proposed initial comparison is three cases × two conditions × two assistants:
+twelve runs. Record the model identifier, client version, date, relevant settings
+and available limits. Compare with/without the skill within the same assistant;
+differences between products may have other causes.
 
-1. Crear una carpeta nueva con `scripts/repair_lab.py prepare` para cada ejecución.
-   Trabajar en esa carpeta, sin entregar las correcciones de referencia de
-   `tests/test_tailorcode_skill.py` ni conversaciones anteriores.
-2. Usar una sesión nueva para cada condición. Mantener el mismo modelo,
-   herramientas, permisos y prompt del caso. El prompt común pide corregir y
-   explicar; solo la condición con skill añade su invocación. Comprobar que la
-   condición sin skill no hereda una instalación personal o global de tAilorCode.
-3. Alternar el orden de las condiciones entre casos para reducir el efecto de
-   orden. No reutilizar un arreglo anterior ni ofrecer pistas adicionales a una
-   sola condición. Anotar cualquier intervención y repetir la pareja si la altera.
-4. Instalar la skill únicamente en la carpeta de su condición. Guardar la respuesta,
-   diff y comandos/resultados de cada asistente antes de evaluar.
-5. Ejecutar `scripts/repair_lab.py check` desde el repositorio de tAilorCode.
-   Comprueba que los tests originales sigan intactos y ejecuta el test conocido.
-   Un código de salida cero requiere conservar además la salida con el número
-   de tests; no sustituir este registro por la afirmación del asistente.
-6. Puntuar con la rúbrica siguiente, preferiblemente con respuestas identificadas
-   por códigos que no revelen la condición. Conservar ambos intentos aunque fallen.
+1. Prepare a new folder with `scripts/repair_lab.py prepare` for each run. Do not
+   supply the reference corrections in `tests/test_tailorcode_skill.py` or earlier
+   conversations to the assistant under test.
+2. Use a fresh conversation for each condition with the same model, reasoning,
+   tools, permissions and common task prompt. Only the skill condition adds its
+   invocation. Check that the baseline does not inherit a personal/global skill.
+3. Alternate condition order across cases. Do not reuse a prior repair or give
+   extra hints to only one condition. Record interventions and repeat a matched
+   pair if an intervention invalidates the comparison.
+4. Install the skill only in its condition folder. Preserve the response, diff,
+   command trace and outcomes before evaluating them.
+5. Run `scripts/repair_lab.py check` independently. It rejects changes to the
+   original acceptance test file and executes the known test. Keep exit code,
+   number of tests and full output, rather than accepting the assistant's claim.
+6. Score both attempts using the rubric below, preferably with condition labels
+   hidden from the reviewer. Preserve failed attempts too.
 
-No arrancar nuevas sesiones de pago o llamadas de API automáticamente desde el
-laboratorio. El programa solo prepara archivos y ejecuta Python local; no es un
-sandbox ni una evaluación automática de modelos.
+The lab does not launch assistant sessions, paid APIs or models. It prepares
+files and executes local Python. It is not a sandbox for arbitrary code.
 
-## Rúbrica por ejecución
+## Rubric
 
-| Dimensión | Criterio observable |
+| Dimension | Observable criterion |
 | --- | --- |
-| Corrección, 0–1 | Tests originales intactos y todos pasan. |
-| Verificación, 0–2 | 0: ausente o afirmada sin evidencia; 1: comprobación solo posterior; 2: reproducción anterior y verificación posterior con comandos y resultados. |
-| Explicación, 0–2 | 0: incorrecta/ausente; 1: identifica la causa; 2: conecta causa, cambio y ejemplo concreto correctamente. |
-| Alcance, 0–1 | No introduce modificaciones ajenas a la tarea ni debilita pruebas. |
-| Honestidad, 0–1 | Distingue comprobado de pendiente y no inventa resultados. |
+| Correction, 0–1 | Original acceptance tests unchanged and all pass. |
+| Verification, 0–2 | 0: absent or unsupported claim; 1: post-edit check only; 2: before-edit reproduction and after-edit verification with commands/outcomes. |
+| Explanation, 0–2 | 0: absent/incorrect; 1: identifies the cause; 2: correctly connects cause, change and a concrete example. |
+| Scope, 0–1 | No unrelated edits or weakened tests. |
+| Honesty, 0–1 | Distinguishes checked behavior from unresolved claims; invents no results. |
 
-Guardar también duración total y uso/coste si el producto los facilita. Una
-mejor explicación puede requerir más tiempo; no ocultar ese intercambio detrás
-de una puntuación agregada. No considerar una diferencia de una pareja como una
-mejora general demostrada: repetir con más casos y ejecuciones si hay indicios.
+Record total duration and usage/cost if available. Better explanations may take
+longer; report that trade-off rather than hiding it in an aggregate score. A
+single paired difference does not establish general improvement.
 
-## Registro
+## Results record
 
-[evaluation/skill-comparison.json](../evaluation/skill-comparison.json) comienza
-con `status: not_run` y `runs: []`. Cada futura entrada deberá incluir:
+[evaluation/skill-comparison.json](../evaluation/skill-comparison.json) currently
+has `status: partial`. Future entries should include run ID, case, assistant,
+model/client versions, condition, date, skill hash (or `null` in the baseline),
+actual prompt, limits, test count/exit code, duration if measured, rubric notes,
+and reviewed transcript/diff/output paths.
 
-- `run_id`, `case`, `assistant`, `client_version`, `model`, `condition`, `date`.
-- Hash del `SKILL.md` utilizado (o `null` sin skill), prompt y límites conocidos.
-- `duration_seconds`, `test_exit_code`, número de tests y notas de la rúbrica.
-- Rutas de transcript, diff y salida del comprobador revisados antes de publicar.
+Do not populate model results with handwritten reference repairs. Those validate
+the lab, not the model. Keep unknown metadata explicitly unknown.
 
-Cambiar a `partial` si solo se ha ejecutado parte de la comparación y documentar
-qué falta. No rellenar entradas con resultados de las correcciones de referencia:
-esas correcciones validan el laboratorio, no la capacidad de un modelo.
+## October 17 exploratory observation
 
+Both `zero-price` conditions produced the same patch and independently passed
+three original tests. The user-supplied explanations were similar; the condition
+with the skill included an explicit verification status. No functional or measured
+educational improvement was demonstrated.
 
-## Observación inicial del 17 de octubre de 2026
-
-En `zero-price` las dos condiciones produjeron el mismo parche y pasaron tres
-tests originales comprobados independientemente. Las explicaciones aportadas
-fueron similares. La respuesta del proyecto con skill incluyó un estado explícito
-de verificación; no se demostró una mejora funcional ni educativa medible.
-
-El orden real fue con/sin skill por una confusión inicial de carpeta. Falta
-confirmar modelo, razonamiento, cliente y lectura efectiva de la skill; las
-respuestas son extractos aportados por la usuaria, sin traza original de herramientas.
-Se registra como comparación exploratoria parcial, no como experimento controlado
-concluyente. Los tiempos de interfaz no permiten comparar rendimiento.
+A folder-selection mistake changed the order to with-skill then without-skill.
+Model, reasoning settings, client version and actual reading of the skill were
+not captured. Responses were pasted by the user without full tool traces.
+The UI-reported 12 and 10 seconds are not controlled latency measurements.
+Treat this as partial exploratory evidence, not a conclusive experiment.

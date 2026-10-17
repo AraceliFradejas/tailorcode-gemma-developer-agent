@@ -1,1 +1,1 @@
-Dos llamadas para añadir etiquetas sin proporcionar lista deben producir listas independientes. Si paso una lista, se debe añadir a esa misma lista. Corrige el fallo y explícame cómo lo has comprobado.
+Two calls that add labels without supplying a list must produce independent lists. If I supply a list, add to that same list. Fix the bug and explain how you checked the correction.

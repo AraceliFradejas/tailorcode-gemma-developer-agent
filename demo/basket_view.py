@@ -7,99 +7,99 @@ CASE = 'independent-lists'
 
 
 def render_baskets():
-    st.markdown('**tAilorCode · Corrige y aprende**')
-    st.title('Mi cesta tiene la compra de otra persona.')
-    st.write('Ana empieza una cesta y añade manzanas. Luis empieza otra y añade pan. '
-             'Pero el programa mete las dos compras en la misma cesta. ¿Qué ha pasado?')
-    st.caption('Ejemplo educativo con una corrección de referencia preparada. '
-               'Este segundo arreglo aún no se ha probado en una sesión de Codex o Claude Code.')
+    st.markdown('**tAilorCode · Fix and learn**')
+    st.title('Someone else’s shopping is in my basket.')
+    st.write('Ana starts a basket and adds apples. Luis starts another and adds bread. '
+             'But the program puts both purchases in the same basket. What happened?')
+    st.caption('Educational example with a prepared reference correction. '
+               'This correction has not yet been tested in a Codex or Claude Code skill session.')
     with st.sidebar:
-        st.header('Dos personas, dos cestas')
-        st.write('**La regla:** cada persona que empieza una cesta debe recibir una lista nueva y vacía.')
-        st.write('Si alguien continúa una cesta existente, se conserva esa misma cesta.')
+        st.header('Two people, two baskets')
+        st.write('**The rule:** each person starting a basket must get a new, empty list.')
+        st.write('If someone continues an existing basket, that same basket is preserved.')
         st.divider()
-        st.write('Proyecto de Araceli Fradejas Muñoz')
+        st.write('A project by Araceli Fradejas Muñoz')
         render_skill_downloads()
 
-    st.subheader('1. Elige la compra de cada persona')
+    st.subheader('1. Choose what each person buys')
     a, b = st.columns(2)
     with a:
-        first = st.selectbox('Ana compra', ['Manzanas', 'Leche', 'Arroz'], key='basket_first')
+        first = st.selectbox('Ana buys', ['Apples', 'Milk', 'Rice'], key='basket_first')
     with b:
-        second = st.selectbox('Luis compra', ['Pan', 'Huevos', 'Café'], key='basket_second')
+        second = st.selectbox('Luis buys', ['Bread', 'Eggs', 'Coffee'], key='basket_second')
     trace = basket_trace(first, second)
-    st.markdown(f'**Lo esperado:** Ana tiene solo **{first.lower()}** y Luis solo **{second.lower()}**.')
-    st.write(f'Primero Ana añade {first.lower()}. Después Luis abre una cesta nueva y añade {second.lower()}. '
-             'Mira cómo quedan las dos cestas al terminar:')
+    st.markdown(f'**Expected:** Ana has only **{first.lower()}** and Luis has only **{second.lower()}**.')
+    st.write(f'First Ana adds {first.lower()}. Then Luis starts a new basket and adds {second.lower()}. '
+             'Here are both baskets at the end:')
     a, b = st.columns(2)
     with a:
-        st.markdown('### Antes del arreglo')
-        st.write('Cesta de Ana: **' + ', '.join(trace['before']['first_final']) + '**')
-        st.write('Cesta de Luis: **' + ', '.join(trace['before']['second_final']) + '**')
-        st.error('Las dos personas comparten la misma cesta. Añadir la compra de Luis cambia también la de Ana.')
+        st.markdown('### Before the correction')
+        st.write('Ana’s basket: **' + ', '.join(trace['before']['first_final']) + '**')
+        st.write('Luis’s basket: **' + ', '.join(trace['before']['second_final']) + '**')
+        st.error('Both people share the same basket. Adding Luis’s item also changes Ana’s basket.')
     with b:
-        st.markdown('### Después del arreglo')
-        st.write('Cesta de Ana: **' + ', '.join(trace['after']['first_final']) + '**')
-        st.write('Cesta de Luis: **' + ', '.join(trace['after']['second_final']) + '**')
-        st.success('Cada persona conserva su propia compra en una cesta independiente.')
+        st.markdown('### After the correction')
+        st.write('Ana’s basket: **' + ', '.join(trace['after']['first_final']) + '**')
+        st.write('Luis’s basket: **' + ', '.join(trace['after']['second_final']) + '**')
+        st.success('Each person keeps their own purchase in an independent basket.')
 
-    explain, tests, code = st.tabs(['Entender el ejemplo', 'Comprobar el arreglo', 'Ver el código · opcional'])
+    explain, tests, code = st.tabs(['Understand the example', 'Check the correction', 'View the code · optional'])
     with explain:
-        st.subheader('2. Una cesta nueva debe empezar vacía')
-        st.write('El programa original prepara una única cesta vacía y la reutiliza cada vez que alguien pide '
-                 'una nueva. Por eso los artículos se mezclan.')
-        st.write('**La corrección:** crear una lista vacía nueva cada vez que alguien empieza una cesta. '
-                 'Si alguien entrega una cesta que ya existe, se añade a esa cesta sin reemplazarla.')
-        answer = st.radio('Luis empieza una cesta nueva. ¿Qué debería contener antes de añadir su compra?',
-                          ['Nada: debe estar vacía', 'La compra de Ana'], index=None, key='basket_quiz')
-        if answer == 'Nada: debe estar vacía':
-            st.success('Exacto. Una cesta nueva es independiente de las anteriores.')
+        st.subheader('2. A new basket must start empty')
+        st.write('The original program prepares a single empty basket and reuses it whenever someone asks for '
+                 'a new one. That is why the items get mixed.')
+        st.write('**The correction:** create a fresh empty list whenever someone starts a basket. '
+                 'If someone supplies an existing basket, add to it without replacing it.')
+        answer = st.radio('Luis starts a new basket. What should it contain before he adds an item?',
+                          ['Nothing: it should be empty', 'Ana’s shopping'], index=None, key='basket_quiz')
+        if answer == 'Nothing: it should be empty':
+            st.success('Exactly. A new basket is independent of earlier baskets.')
         elif answer is not None:
-            st.info('Luis está empezando una cesta, no continuando la de Ana. Debería recibir una vacía.')
-        st.markdown('**Idea clave:** volver a usar una función no siempre significa que sus objetos se creen de nuevo.')
+            st.info('Luis is starting a basket, not continuing Ana’s. He should get an empty one.')
+        st.markdown('**Key idea:** calling a function again does not always create its default objects again.')
     with tests:
-        st.subheader('3. Comprueba que las cestas ya no se mezclan')
-        st.write('El botón ejecuta tres pruebas reales: dos cestas nuevas son independientes; una cesta '
-                 'existente se conserva; y una cesta vacía entregada por el usuario también se conserva.')
-        if st.button('Comprobar las cestas', type='primary', key='basket_checks'):
+        st.subheader('3. Check that the baskets no longer mix')
+        st.write('The button runs three real tests: new baskets are independent; an existing '
+                 'basket is preserved; and a user-supplied empty basket is also preserved.')
+        if st.button('Check the baskets', type='primary', key='basket_checks'):
             try:
-                with st.spinner('Comprobando ambas versiones…'):
+                with st.spinner('Checking both versions…'):
                     st.session_state['basket_checks_result'] = run_checks(CASE)
             except Exception as error:
                 st.session_state.pop('basket_checks_result', None)
-                st.error(f'No se pudo completar la comprobación: {error}')
+                st.error(f'Could not complete the checks: {error}')
         result = st.session_state.get('basket_checks_result')
         if result:
             if result['before']['exit_code'] != 0 and 'AssertionError' in result['before']['output']:
-                st.warning('ANTES: la prueba detecta que las cestas nuevas comparten artículos.')
+                st.warning('BEFORE: the test detects items shared between new baskets.')
             else:
-                st.error('No se ha reproducido el fallo esperado. Revisa la salida.')
+                st.error('The expected bug was not reproduced. Check the output.')
             if result['after']['exit_code'] == 0:
-                st.success('DESPUÉS: pasan las 3 pruebas. Las cestas nuevas son independientes y las existentes se conservan.')
+                st.success('AFTER: all 3 tests pass. New baskets are independent and existing baskets are preserved.')
             else:
-                st.error('La corrección no pasa las pruebas.')
-            with st.expander('Ver la salida técnica · opcional'):
-                st.markdown('**Antes**')
+                st.error('The correction fails the tests.')
+            with st.expander('View technical output · optional'):
+                st.markdown('**Before**')
                 st.code(result['before']['output'], language='text')
-                st.markdown('**Después**')
+                st.markdown('**After**')
                 st.code(result['after']['output'], language='text')
-            st.caption('Las pruebas usan etiquetas genéricas para los artículos. Verifican esta función; '
-                       'no son pruebas de una tienda completa ni de la skill en un asistente.')
+            st.caption('The tests use generic labels for items. They verify this function; '
+                       'they do not validate a complete shop or the skill inside an assistant.')
         else:
-            st.info('Las pruebas aún no se han ejecutado en esta sesión. Pulsa el botón para comprobarlo.')
+            st.info('The tests have not run in this session yet. Press the button to check.')
     with code:
         original, corrected = sources(CASE)
         a, b = st.columns(2)
         with a:
-            st.markdown('**Antes**')
+            st.markdown('**Before**')
             st.code(original, language='python')
         with b:
-            st.markdown('**Después · corrección de referencia**')
+            st.markdown('**After · reference correction**')
             st.code(corrected, language='python')
-        st.write('`labels` representa la lista de artículos y `label` el artículo que añadimos. '
-                 'Python crea el valor por defecto `[]` al definir la función, no en cada llamada. '
-                 'Usar `None` permite crear una lista nueva dentro de la función solo cuando no se proporciona una.')
-        with st.expander('Ver las líneas modificadas'):
+        st.write('`labels` is the list of items and `label` is the item being added. '
+                 'Python creates the default `[]` when defining the function, not on each call. '
+                 'Using `None` lets us create a new list inside the function only when none was supplied.')
+        with st.expander('View the changed lines'):
             st.code(patch(CASE), language='diff')
-        st.download_button('Descargar el cambio de las cestas', patch(CASE),
+        st.download_button('Download the basket change', patch(CASE),
                            file_name='tailorcode-independent-lists.patch', mime='text/plain')

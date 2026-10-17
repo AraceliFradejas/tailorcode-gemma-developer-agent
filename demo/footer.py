@@ -5,7 +5,7 @@ import streamlit as st
 def render_footer():
     st.divider()
     st.markdown('''
-<footer aria-label="Autoría y redes sociales" style="text-align:center; padding:1rem 0 1.5rem;">
+<footer aria-label="Authorship and social links" style="text-align:center; padding:1rem 0 1.5rem;">
   <p style="margin-bottom:0.6rem;">© 2026 <strong>Araceli Fradejas Muñoz</strong> · tAilorCode</p>
   <p style="line-height:2; margin-bottom:0;">
     <a href="https://github.com/AraceliFradejas" target="_blank" rel="noopener noreferrer">GitHub</a>

@@ -23,19 +23,19 @@ def render_skill_downloads():
     import streamlit as st
 
     st.divider()
-    st.subheader('Descarga la skill')
-    st.write('Prueba los ejemplos y descubre cómo corregir errores de Python paso a paso. '
-             'Descarga la skill para usarla en tus proyectos.')
-    st.download_button('⬇ Descargar para Codex', build_skill_archive('codex'),
+    st.subheader('Download the skill')
+    st.write('Try the examples and learn how to correct Python bugs step by step. '
+             'Download the skill to use it in your own projects.')
+    st.download_button('⬇ Download for Codex', build_skill_archive('codex'),
                        file_name='tailorcode-codex.zip', mime='application/zip',
                        type='primary', key='download_codex_skill')
-    st.download_button('⬇ Descargar para Claude Code', build_skill_archive('claude'),
+    st.download_button('⬇ Download for Claude Code', build_skill_archive('claude'),
                        file_name='tailorcode-claude.zip', mime='application/zip',
                        key='download_claude_skill')
-    with st.expander('Cómo instalarla y usarla'):
-        st.write('1. Descarga y descomprime el ZIP de tu asistente. Obtendrás una carpeta llamada `tailorcode`.')
-        st.write('2. Coloca esa carpeta dentro de tu proyecto:')
+    with st.expander('How to install and use it'):
+        st.write('1. Download and extract the ZIP for your assistant. It contains a folder named `tailorcode`.')
+        st.write('2. Place that folder inside your project:')
         st.code('.agents/skills/tailorcode/  # Codex\n.claude/skills/tailorcode/  # Claude Code', language='text')
-        st.write('3. Abre una conversación nueva en ese proyecto y pide:')
-        st.code('Usa $tailorcode para corregir este error y explicarme el arreglo.', language='text')
-        st.caption('En Claude Code, empieza la petición por /tailorcode. Necesitas acceso al asistente elegido.')
+        st.write('3. Start a new conversation in that project and ask:')
+        st.code('Use $tailorcode to fix this bug and explain the correction.', language='text')
+        st.caption('In Claude Code, start the request with /tailorcode. You need access to your chosen assistant.')

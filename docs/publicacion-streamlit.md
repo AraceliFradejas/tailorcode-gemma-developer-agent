@@ -1,73 +1,71 @@
-# Publicación de la demo en Streamlit Community Cloud
+# Public deployment on Streamlit Community Cloud
 
-## Estado
+## Status
 
-Publicada y verificada el **17 de octubre de 2026**.
+Published and verified on **October 17, 2026**.
 
-**URL pública:** https://tailorcode-corrige-y-aprende.streamlit.app/
+**Public URL:** https://tailorcode-corrige-y-aprende.streamlit.app/
 
-El despliegue inicial utilizó el commit `2239242`, con Python 3.12. La aplicación
-local `127.0.0.1:8501` es independiente de esta dirección pública.
+The initial deployment used revision `2239242` and Python 3.12. This historical
+identifier records the deployment at that time; later history maintenance may
+provide an equivalent rewritten revision. The public URL is independent of the
+local development address `127.0.0.1:8501`.
 
-## Configuración del despliegue
+## Deployment settings
 
-- Repositorio: `AraceliFradejas/tailorcode-gemma-developer-agent`.
-- Rama: `main`.
-- Archivo principal: `app.py`.
-- Python: **3.12**, como el entorno local comprobado.
-- Subdominio propuesto: `tailorcode-corrige-y-aprende` (asignado y funcionando).
-- Secretos: ninguno; esta demo no llama a APIs ni descarga modelos.
+- Repository: `AraceliFradejas/tailorcode-gemma-developer-agent`.
+- Branch: `main`.
+- Entry point: `app.py`.
+- Python: **3.12**, matching local verification.
+- Subdomain: `tailorcode-corrige-y-aprende`.
+- Secrets: none; the app does not call model APIs or download model weights.
 
-El `requirements.txt` de la raíz incluye solo `requirements-demo.txt`, que fija
-Streamlit 1.66.0. No utiliza `requirements-gpu.txt`. El archivo
-`.streamlit/config.toml` configura el tema oscuro, el acento violeta y la
-telemetría de Streamlit desactivada. Los secretos locales quedan excluidos de Git.
+The root `requirements.txt` includes only `requirements-demo.txt`, pinning
+Streamlit 1.66.0. The historical GPU dependencies are separate. The Streamlit
+configuration sets a dark theme, violet accent and disabled usage telemetry.
+Local secrets are excluded from Git.
 
-La [documentación oficial de despliegue](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy)
-explica cómo seleccionar repositorio, rama, archivo y versión de Python. El
-[archivo de dependencias reconocido](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies)
-es `requirements.txt`; `requirements-demo.txt` por sí solo no es el nombre
-que detecta automáticamente el servicio.
+The official [deployment guide](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy)
+describes repository, entry-point and Python selection. The
+[dependency guide](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies)
+explains that `requirements.txt` is auto-detected; the demo-specific filename alone
+is not the service's automatic dependency entry point.
 
-## Comprobación después del despliegue
+## Checks completed on the public app
 
-Verificar desde la URL pública las tres pantallas y los resultados esperados:
-precio cero (tres tests), cestas (tres tests) y calendario (cuatro tests).
-Descargar ambos ZIP, comprobar su contenido y revisar el footer y el diseño
-en una pantalla estrecha. Guardar la URL real en el README solo cuando esté
-comprobada. Conservar capturas revisadas para no publicar elementos de la cuenta.
+All three screens loaded in Chrome. Their real test buttons reported the original
+bug and passing corrected behavior: 3 tests for price, 3 for baskets, and 4 for
+the inclusive range. This checks known examples, not new model performance.
 
-## Presentación acordada
+A fresh incognito window loaded the application without Streamlit sign-in.
+Both skill ZIPs were downloaded and inspected. Codex contains `SKILL.md`, the
+explanation reference and UI metadata; Claude Code contains the portable
+instructions and reference. No session files or credentials were included.
 
-“Disponible para descargar e instalar en Codex y Claude Code.”
+The footer identifies the author and links to her social profiles. The current
+interface and documentation are in English. Physical mobile-device validation
+remains pending; the original screenshots were desktop captures.
 
-En la documentación se mantiene: prueba de uso realizada en Codex; validación
-en Claude Code pendiente. Los ejemplos visuales están preparados, no generan
-respuestas nuevas de IA. No se afirma una mejora demostrada sobre Codex.
+## Screenshots and evidence
 
-## Resultado de las comprobaciones públicas
+Four real screenshots were captured with CUA from the published app, with browser
+bars hidden. They were reviewed before publication and were not generated or
+assembled as mockups. A later English-language refresh replaces the image set;
+the original release observation remains in the evidence record.
 
-Se abrió la aplicación real en Chrome desde su URL de Streamlit y se ejecutaron
-los tres botones: el precio pasó 3 tests; las cestas, 3; y el calendario, 4.
-También se abrió la URL en una ventana nueva de incógnito: la aplicación se
-mostró sin iniciar sesión.
+- [Price example](images/demo/01-precio.png).
+- [Basket example](images/demo/02-cestas.png).
+- [Calendar example](images/demo/03-calendario.png).
+- [Tests and author footer](images/demo/04-pruebas-cestas.png).
 
-Cada pantalla mostró primero el fallo original y después las pruebas aprobadas
-de su corrección. No son nuevas evaluaciones de modelos.
+The [structured record](../evaluation/publication-2026-10-17.json) preserves
+results and hashes. The [project report](../MEMORIA.md) explains the project journey.
 
-Ambos ZIP se descargaron desde la aplicación y se inspeccionaron: Codex contiene
-`SKILL.md`, la referencia y sus metadatos de interfaz; Claude Code contiene las
-instrucciones y la referencia portable. No se incluyeron sesiones ni credenciales.
+## Agreed public wording
 
-Las cuatro capturas se tomaron mediante CUA de la aplicación publicada, con las
-barras del navegador ocultas. No se editaron ni generaron. Se revisaron las
-imágenes antes de publicarlas. El footer muestra la firma y los enlaces sociales.
+“Available to download and install in Codex and Claude Code.”
 
-- [Caso del precio](images/demo/01-precio.png).
-- [Caso de las cestas](images/demo/02-cestas.png).
-- [Caso del calendario](images/demo/03-calendario.png).
-- [Evidencia de pruebas y footer](images/demo/04-pruebas-cestas.png).
-
-El [registro estructurado](../evaluation/publication-2026-10-17.json) conserva
-resultados y hashes de las capturas. La validación de la skill dentro de Claude
-Code sigue pendiente; la publicación de su paquete no cambia ese estado.
+Documentation also states that the usage test was completed in Codex and that
+execution inside Claude Code has not been validated. Distribution does not imply
+that both assistants were tested. The examples are prepared demonstrations, not
+fresh model generation, and no performance advantage over Codex is claimed.

@@ -1,1 +1,1 @@
-El precio puede ser cero: un producto gratuito no debe usar el precio de reserva. Solo None significa precio ausente. Conserva también los precios negativos. Corrige el fallo y explícame cómo lo has comprobado.
+Zero is a valid price: a free product must not use the fallback price. Only None means the price is missing. Preserve negative prices too. Fix the bug and explain how you checked the correction.

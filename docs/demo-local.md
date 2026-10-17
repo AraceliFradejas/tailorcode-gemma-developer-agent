@@ -1,105 +1,68 @@
-# Demo local · Un cero también tiene valor
+# Running the visual lab locally
 
-Esta aplicación Streamlit permite elegir tres ejemplos: el precio cero corregido
-por Codex y dos cestas que se mezclan por compartir una lista y un plan de riego que
-excluye el último día. Los dos últimos usan correcciones de referencia preparadas,
-sin atribuirlas a un modelo. Ambos muestran
-el código, la explicación y tres pruebas reales en carpetas temporales.
+The Streamlit app has three everyday examples: a zero price, shared shopping
+baskets and an excluded final day. The price uses a recorded Codex correction;
+the other two use handwritten reference corrections. No screen generates new
+model responses.
 
-## Arrancar
+## Start and stop
 
-Desde la raíz del repositorio:
+From the repository root:
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-demo.txt
+.venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python -m streamlit run app.py --server.address 127.0.0.1
 ```
 
-Abre la URL local que muestra Streamlit, habitualmente http://127.0.0.1:8501.
-Para detenerlo, pulsa Ctrl+C en la terminal. La versión pública está en
+Open the address printed by Streamlit, usually http://127.0.0.1:8501. Press Ctrl+C
+in the server terminal to stop it. The public version is
 https://tailorcode-corrige-y-aprende.streamlit.app/.
 
-## Recorrido
+## Walkthrough
 
-1. Elige “Producto gratuito · 0 €”: la pantalla muestra lo esperado, el cobro
-   incorrecto de 20 € y el cobro corregido de 0 €.
-2. Compara las otras dos situaciones: precio registrado y precio sin registrar.
-3. Lee “Entender el ejemplo” y responde cuánto debería cobrarse por algo gratis.
-4. En “Comprobar el arreglo”, pulsa el botón: se ejecutan las tres pruebas reales.
-   Los resultados se explican en lenguaje sencillo; la salida técnica es opcional.
-5. Abre “Ver el código” solo si quieres relacionar la explicación con Python.
+Choose one of the three visible options in the highlighted panel. Read the rule
+and expected result before looking at the original/corrected behavior. The
+“Understand the example” tab explains the cause and offers a small question.
+“Check the correction” runs real acceptance tests; code and technical output
+are optional details.
 
-El 17 de octubre se simplificó el recorrido tras indicar Araceli que no entendía
-la prueba. La caja de una tienda ficticia sustituye a las entradas técnicas;
-se mantiene el mismo código y las mismas pruebas. Los tres escenarios, ambas
-respuestas del ejercicio y el botón pasaron las comprobaciones de interfaz.
+- **Price:** choose a free product, a nonzero recorded price, or a missing price.
+  Only the missing value should select the fallback. The button runs three tests.
+- **Baskets:** Ana and Luis start new lists. The original shares items, while the
+  correction keeps them independent and preserves a supplied list. Three tests run.
+- **Calendar:** water on even days within an inclusive period. Days 1 through 4
+  should select 2 and 4. A single-day and an odd-final-day scenario clarify the
+  boundary. Four original tests run.
 
-## Alcance y procedencia
+The demo does not accept arbitrary Python to execute. Only known repository
+examples run in temporary folders. This is a local test mechanism, not a secure
+execution sandbox for visitor-supplied code.
 
-La interfaz muestra un caso guardado y una explicación editorial preparada.
-No genera correcciones nuevas ni llama a una API. Los dos intentos de Codex,
-con la skill presente y sin ella, produjeron el mismo parche: no se ha demostrado
-una mejora de la skill. Véase `evaluation/skill-comparison.json`.
+## Downloads and authorship
 
-La interacción usa números y el estado ausente; no acepta código arbitrario.
-El botón solo ejecuta archivos conocidos del repositorio mediante el laboratorio
-local. El resultado respalda sus casos de prueba, no garantiza cualquier entrada.
+Both skill ZIPs are built in memory from an explicit set of files. Codex includes
+its interface metadata; Claude Code receives the portable instructions/reference.
+Extract the `tailorcode` folder into `.agents/skills/` or `.claude/skills/` inside
+the target project. The sidebar explains how to start a fresh conversation.
+A shared footer identifies Araceli Fradejas Muñoz and links to her social profiles.
 
-`app.py` contiene la interfaz; `demo/engine.py` conecta los valores y el comprobador;
-`demo/verified_price.py` conserva la corrección mostrada. `requirements-demo.txt`
-separa las dependencias de la demo de la pila GPU histórica.
+## Checks and operational issue
 
-## Comprobación de esta entrega
+At release, 37 local tests passed. Streamlit AppTest exercised the three screens,
+scenario changes, questions and actual acceptance-check buttons. Dependencies
+passed `pip check`. Public checks and screenshots are recorded separately in
+[the deployment report](publicacion-streamlit.md).
 
-Con Streamlit 1.66.0 pasaron 33 pruebas locales y las comprobaciones de interfaz
-con AppTest: cero, negativo, None, ejecución real del botón y respuesta al
-ejercicio. Chrome mostró la pantalla local correctamente. Las dependencias
-pasaron `pip check`. Registro en `evaluation/demo-validation-2026-10-17.json`.
+A live server started before a structural change held the old imported engine
+and could not import `basket_trace`, although fresh-process checks passed.
+Restarting Streamlit loaded the updated module. Restart the server after changes
+to module structure; reloading the browser alone may not refresh imported modules.
 
-## Segundo ejemplo: dos cestas que se mezclan
+## Language revision
 
-El selector de la parte superior permite abrir “Dos cestas que se mezclan”.
-Ana y Luis añaden artículos a cestas nuevas. Antes, ambas listas comparten los
-artículos; después, cada una conserva solo su compra. Cambiar los artículos inicia
-una simulación nueva para no arrastrar el estado entre visitantes o ejecuciones.
-
-El botón comprueba independencia de las listas nuevas y conservación de una lista
-existente, incluida una vacía. La salida técnica y el código son opcionales. Esta
-corrección se etiqueta como referencia: no se presenta como resultado de Claude.
-
-## Si aparece un ImportError tras actualizar el código
-
-El 17 de octubre el servidor iniciado antes de añadir las cestas conservó la
-versión anterior de `demo.engine` y no encontró `basket_trace`. El fichero sí
-contenía la función. Se detuvo y reinició Streamlit, y se observó la pantalla
-real de las cestas en Chrome sin ese error. Las comprobaciones anteriores en
-procesos nuevos no habían detectado el estado del servidor que seguía abierto.
-
-Tras cambios estructurales de módulos, detener el servidor con Ctrl+C y volver
-a ejecutar el comando de arranque. Recargar solo el navegador puede no bastar
-para renovar los módulos que el servidor Python ya tiene importados.
-
-## Tercer ejemplo: el último día se queda fuera
-
-Selecciona “El último día se queda fuera”. El calendario ficticio riega los días
-pares, incluyendo ambos extremos del periodo. Del 1 al 4 deberían regarse el
-2 y el 4: antes falta el 4 y después aparece. Los días impares se muestran como
-sin riego previsto, no como errores.
-
-También se puede elegir solo el día 2 o del 1 al 5 (caso que ya funcionaba).
-El botón ejecuta cuatro pruebas originales; el código y los detalles técnicos
-son opcionales. Es una corrección de referencia, no un resultado de Claude.
-Se verificaron los tres escenarios, el botón, el ejercicio y el cambio entre
-las tres pantallas. Pasaron 37 tests locales. Se reinició el servidor para
-cargar los módulos nuevos, como requiere la incidencia documentada arriba.
-
-## Selección visible y descarga de la skill
-
-Los tres casos se eligen mediante opciones siempre visibles dentro de un panel
-destacado. La barra lateral incluye descargas ZIP reales para Codex y Claude
-Code. Cada ZIP contiene solo la carpeta `tailorcode` con instrucciones y
-referencias; Codex añade sus metadatos de interfaz. No incluye sesiones ni logs.
-Al descomprimir, copiar esa carpeta a `.agents/skills/` o `.claude/skills/`
-dentro del proyecto elegido. La interfaz muestra los pasos de instalación.
-Se comprobaron ambos archivos y la presencia de las descargas en los tres casos.
+The first walkthrough was too technical, so the design was changed to everyday
+situations with optional code details. The public interface was subsequently
+translated into English at the author's request. Original evidence records may
+quote the earlier interface or prompts; those observations are not retroactively
+translated into new experiments.

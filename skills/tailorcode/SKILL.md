@@ -3,7 +3,7 @@ name: tailorcode
 description: Fix a focused Python bug and teach the user why the correction works, with a reviewable diff and evidence from relevant checks. Use for debugging requests that ask to learn or understand the repair, rather than broad feature development.
 ---
 
-# tAilorCode — corrige y aprende
+# tAilorCode — fix and learn
 
 Work in the user's repository and reply in their language. Use the assistant's
 existing model and tools; this skill does not start Gemma or require Kaggle.

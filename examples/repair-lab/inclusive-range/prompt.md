@@ -1,1 +1,1 @@
-La función debe devolver los números pares del intervalo incluyendo ambos extremos, en orden ascendente. Un intervalo invertido devuelve una lista vacía. Corrige el fallo y explícame cómo lo has comprobado.
+Return the even numbers in the interval, including both boundaries, in ascending order. A reversed interval returns an empty list. Fix the bug and explain how you checked the correction.

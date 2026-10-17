@@ -1,49 +1,45 @@
-# Primera prueba en Claude Code
+# First Claude Code usage test
 
-La skill fuente es la misma que para Codex: `skills/tailorcode/SKILL.md`.
-El instalador copia las instrucciones y la referencia portable a
-`.claude/skills/tailorcode/`, sin los metadatos exclusivos de la interfaz de Codex.
-No hay una segunda skill distinta que deba mantenerse en paralelo.
+The skill has one source: `skills/tailorcode/SKILL.md`. The installer copies its
+portable instructions and reference to `.claude/skills/tailorcode/`. Codex-only
+interface metadata is omitted. No second workflow needs maintaining.
 
-El 17 de octubre se preparó una carpeta de ejercicio sin reparar, con la skill
-ya instalada, en `deliverables/session-20261017/claude-first-demo/` (local y excluida
-de Git). Contiene el ejemplo `independent-lists`. No se ha abierto una sesión de
-Claude ni se ha medido su resultado.
+**Status:** package prepared and inspected; actual execution inside Claude Code
+has not been validated. Do not use an employer's account for this personal test.
 
-## Usar la carpeta preparada
-
-Abre **esa carpeta** como proyecto en Claude Code e inicia una conversación nueva.
-Si utilizas la terminal, desde la raíz del repositorio:
-
-```bash
-cd deliverables/session-20261017/claude-first-demo
-claude
-```
-
-Envía:
-
-> /tailorcode Dos llamadas para añadir etiquetas sin proporcionar lista deben
-> producir listas independientes. Si paso una lista, se debe añadir a esa misma
-> lista. Corrige el fallo y explícame cómo lo has comprobado.
-
-La demo presenta estas listas como cestas; el ejercicio usa nombres genéricos.
-Guarda la respuesta y los comandos ejecutados. Después, desde la raíz del
-repositorio, comprueba el resultado independientemente:
-
-```bash
-python3 scripts/repair_lab.py check --case independent-lists --workspace deliverables/session-20261017/claude-first-demo
-```
-
-## Crear otra carpeta desde un clon nuevo
-
-La carpeta local no se distribuye con Git. Puedes recrear el ejercicio en una
-ruta que no exista:
+## Prepare a new project folder
 
 ```bash
 python3 scripts/repair_lab.py prepare --case independent-lists --workspace /tmp/tailorcode-claude-demo
 python3 scripts/install_tailorcode_skill.py --target claude --project /tmp/tailorcode-claude-demo
 ```
 
-Instalar archivos no demuestra su descubrimiento ni su lectura en Claude Code.
-Solo después de la prueba real registraremos esos resultados. Los permisos y
-el consumo siguen siendo los de la cuenta de Claude; no se necesita Colab.
+Both scripts preserve existing folders. Open this exact exercise folder as a new
+project in Claude Code. If using its CLI, start it from that folder:
+
+```bash
+cd /tmp/tailorcode-claude-demo
+claude
+```
+
+Ask:
+
+> /tailorcode Two calls that add labels without supplying a list must produce
+> independent lists. If I supply a list, add to that same list. Fix the bug and
+> explain how you checked the correction.
+
+The visual demo maps these generic lists onto shopping baskets. Save the response,
+commands and observed outputs. Then check from the tAilorCode repository:
+
+```bash
+python3 scripts/repair_lab.py check --case independent-lists --workspace /tmp/tailorcode-claude-demo
+```
+
+A local copy was also prepared on October 17 at
+`deliverables/session-20261017/claude-first-demo/`, excluded from Git. It is not
+part of a fresh clone and may use the earlier language version of the instructions;
+use a fresh installation for a new test.
+
+Record discovery, model/client versions and observed behavior only after actual
+execution. Installing the files alone does not establish those results. No Colab
+runtime is needed; access and usage limits remain those of the assistant account.
