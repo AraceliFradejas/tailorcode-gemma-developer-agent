@@ -1,8 +1,9 @@
 # Demo local · Un cero también tiene valor
 
-Esta primera aplicación Streamlit permite explorar el caso de precio cero que
-Codex corrigió el 17 de octubre. Enseña el código antes y después, explica el
-cambio y ejecuta las tres pruebas originales en carpetas temporales.
+Esta aplicación Streamlit permite elegir dos ejemplos: el precio cero corregido
+por Codex y dos cestas que se mezclan por compartir una lista. El segundo usa una
+corrección de referencia preparada, sin atribuirla a un modelo. Ambos muestran
+el código, la explicación y tres pruebas reales en carpetas temporales.
 
 ## Arrancar
 
@@ -19,13 +20,18 @@ Para detenerlo, pulsa Ctrl+C en la terminal. No se ha desplegado públicamente.
 
 ## Recorrido
 
-1. Deja el precio en cero y la reserva en 20: observa la diferencia de resultados.
-2. Cambia a −3 o activa el precio ausente: comprueba cuándo coinciden.
-3. Abre “El cambio” y relaciona la condición `is None` con la regla del problema.
-4. En “Las pruebas”, ejecuta el botón. El código original debe fallar por la
-   aserción del cero y el corregido pasar las tres pruebas. Se muestra la salida
-   de esta ejecución, no una animación ni un resultado simulado.
-5. En “Lo que aprendes”, responde a la pregunta y contrasta la respuesta arriba.
+1. Elige “Producto gratuito · 0 €”: la pantalla muestra lo esperado, el cobro
+   incorrecto de 20 € y el cobro corregido de 0 €.
+2. Compara las otras dos situaciones: precio registrado y precio sin registrar.
+3. Lee “Entender el ejemplo” y responde cuánto debería cobrarse por algo gratis.
+4. En “Comprobar el arreglo”, pulsa el botón: se ejecutan las tres pruebas reales.
+   Los resultados se explican en lenguaje sencillo; la salida técnica es opcional.
+5. Abre “Ver el código” solo si quieres relacionar la explicación con Python.
+
+El 17 de octubre se simplificó el recorrido tras indicar Araceli que no entendía
+la prueba. La caja de una tienda ficticia sustituye a las entradas técnicas;
+se mantiene el mismo código y las mismas pruebas. Los tres escenarios, ambas
+respuestas del ejercicio y el botón pasaron las comprobaciones de interfaz.
 
 ## Alcance y procedencia
 
@@ -48,3 +54,14 @@ Con Streamlit 1.66.0 pasaron 33 pruebas locales y las comprobaciones de interfaz
 con AppTest: cero, negativo, None, ejecución real del botón y respuesta al
 ejercicio. Chrome mostró la pantalla local correctamente. Las dependencias
 pasaron `pip check`. Registro en `evaluation/demo-validation-2026-10-17.json`.
+
+## Segundo ejemplo: dos cestas que se mezclan
+
+El selector de la parte superior permite abrir “Dos cestas que se mezclan”.
+Ana y Luis añaden artículos a cestas nuevas. Antes, ambas listas comparten los
+artículos; después, cada una conserva solo su compra. Cambiar los artículos inicia
+una simulación nueva para no arrastrar el estado entre visitantes o ejecuciones.
+
+El botón comprueba independencia de las listas nuevas y conservación de una lista
+existente, incluida una vacía. La salida técnica y el código son opcionales. Esta
+corrección se etiqueta como referencia: no se presenta como resultado de Claude.

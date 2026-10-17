@@ -10,9 +10,10 @@ independientemente. Falta completar las pruebas de compatibilidad y comparación
 
 ## Demo local interactiva
 
-La primera demo permite explorar el fallo del precio cero, ver el cambio y
-ejecutar sus pruebas. Muestra un resultado real guardado de Codex; no genera
-correcciones nuevas ni hace llamadas de IA.
+La demo permite explorar dos casos: un producto gratis que se cobra a 20 €
+y dos cestas que mezclan sus artículos. Incluye explicación, cambio y pruebas
+reales. El precio usa un resultado guardado de Codex; las cestas, una corrección
+de referencia preparada. No genera correcciones nuevas ni hace llamadas de IA.
 
 ```bash
 python3 -m pip install -r requirements-demo.txt
@@ -90,6 +91,9 @@ Las ubicaciones se basan en la documentación oficial de
 La [guía de la primera demo](docs/skill-quickstart.md) desarrolla este recorrido
 paso a paso, desde el fallo inicial hasta su comprobación independiente.
 
+La [guía de Claude Code](docs/claude-quickstart.md) explica cómo probar la misma
+skill en ese asistente. Instalación comprobada; ejecución en Claude pendiente.
+
 ## Tres casos reproducibles
 
 | Caso | Comportamiento que debe conservar el arreglo |
@@ -115,7 +119,7 @@ originales deben conservarse para que el comprobador acepte el resultado.
 | Primera prueba guiada en Codex | Caso `zero-price` corregido; tres tests comprobados independientemente. Invocación comunicada por la usuaria, sin traza de herramientas. |
 | Claude Code y descubrimiento automático | Pendientes de comprobar. |
 | Comparación exploratoria con/sin skill | `zero-price`: mismo parche y tres tests pasan en ambas condiciones; sin ventaja funcional observada. Configuración y activación no confirmadas con trazas. [Registro parcial](evaluation/skill-comparison.json). |
-| Demo local con Streamlit | Implementada con el caso guardado de precio cero, comparación interactiva y ejecución de tests. Sin generación de IA nueva ni despliegue público. |
+| Demo local con Streamlit | Dos ejemplos interactivos: precio cero y cestas compartidas. Pruebas reales; sin generación nueva ni despliegue público. |
 
 Validación local del proyecto:
 

@@ -5,6 +5,26 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
+## Segundo ejemplo y preparación de Claude — 17 de octubre de 2026
+
+La demo permite elegir “Dos cestas que se mezclan”: Ana y Luis comparten por
+error la lista por defecto. El arreglo de referencia crea una lista nueva al
+omitirla y conserva una lista proporcionada. No atribuir ese arreglo a un modelo.
+Pasaron 35 tests locales y la interacción AppTest de ambos ejemplos, cambio de
+artículos, pruebas reales, pregunta y retorno al caso del precio.
+
+La skill sí tiene instalador para Claude. Se ha dejado instalada en
+`deliverables/session-20261017/claude-first-demo/.claude/skills/tailorcode/`.
+El ejercicio original sigue sin reparar. Guía en `docs/claude-quickstart.md`.
+Claude Code todavía no se ha ejecutado: no afirmar compatibilidad observada.
+
+## Simplificación didáctica — 17 de octubre de 2026
+
+Araceli no entendía el primer recorrido. Se sustituyeron los controles numéricos
+por tres situaciones de tienda, mostrando primero el cobro esperado y el real.
+El código y la salida técnica quedan como detalles opcionales. Se verificaron
+los escenarios, las respuestas de aprendizaje y el botón con AppTest.
+
 ## Demo visual local — 17 de octubre de 2026
 
 Araceli aprobó construir una demo pequeña después de que la comparación no
