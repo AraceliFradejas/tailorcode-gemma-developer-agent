@@ -212,5 +212,3 @@ Private originals, account links, and raw session diagnostics stay excluded from
 [X](https://twitter.com/AraceliFradejas) ·
 [Medium](https://medium.com/@araceli.fradejas) ·
 [YouTube](https://www.youtube.com/@aracelifradejasmunoz2758)
-
-Created and directed by Araceli Fradejas Muñoz, with AI assistance during development.

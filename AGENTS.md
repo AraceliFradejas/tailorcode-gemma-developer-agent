@@ -5,6 +5,8 @@
 - This project is created, directed and owned by Araceli Fradejas Muñoz. Preserve
   the configured Git author identity. Do not add assistant or automation co-author
   trailers to commits. Add human co-authors only when the user explicitly requests it.
+- Do not add AI-assistance credits or assistant bylines to project authorship text
+  unless the user explicitly requests them.
 - Maintain current UI text, README, guides, project report and commit messages in
   English. The conversation may use the user's preferred language.
 - `MEMORIA.md` is the formal portfolio report. `MEMORY.md` is a concise technical
