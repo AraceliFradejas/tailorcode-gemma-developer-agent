@@ -24,7 +24,8 @@ def render_skill_downloads():
 
     st.divider()
     st.subheader('Descarga la skill')
-    st.write('Lleva tAilorCode a tus proyectos para corregir errores de Python y entender el arreglo.')
+    st.write('Prueba los ejemplos y descubre cómo corregir errores de Python paso a paso. '
+             'Descarga la skill para usarla en tus proyectos.')
     st.download_button('⬇ Descargar para Codex', build_skill_archive('codex'),
                        file_name='tailorcode-codex.zip', mime='application/zip',
                        type='primary', key='download_codex_skill')

@@ -2,6 +2,7 @@
 import streamlit as st
 from demo.engine import compare, patch, run_checks, sources
 from demo.skill_downloads import render_skill_downloads
+from demo.footer import render_footer
 
 st.set_page_config(page_title='tAilorCode · Corrige y aprende', page_icon='🧵', layout='wide')
 st.markdown("""
@@ -36,11 +37,13 @@ with st.container(border=True, key='case_selector'):
 if example == 'Dos cestas que se mezclan':
     from demo.basket_view import render_baskets
     render_baskets()
+    render_footer()
     st.stop()
 
 if example == 'El último día se queda fuera':
     from demo.range_view import render_range
     render_range()
+    render_footer()
     st.stop()
 
 st.markdown('**tAilorCode · Corrige y aprende**')
@@ -140,3 +143,5 @@ with code_tab:
     with st.expander('Ver exactamente la línea modificada'):
         st.code(patch(), language='diff')
     st.download_button('Descargar el cambio', patch(), file_name='tailorcode-zero-price.patch', mime='text/plain')
+
+render_footer()

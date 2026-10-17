@@ -5,6 +5,12 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
+## Firma y redes — 17 de octubre de 2026
+
+Se añadió un footer compartido en los tres casos: © 2026 Araceli Fradejas Muñoz
+· tAilorCode, con enlaces a GitHub, LinkedIn, X, Medium y YouTube reutilizados
+de la documentación del proyecto. AppTest comprobó que aparece una vez por caso.
+
 ## Navegación y descarga de skills — 17 de octubre de 2026
 
 A petición de Araceli, se destacó la elección de caso con un panel violeta y
