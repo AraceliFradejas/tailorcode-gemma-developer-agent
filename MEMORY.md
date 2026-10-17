@@ -71,3 +71,14 @@ Keep authorship under Araceli's configured identity. Public commit messages are
 in English. Do not add assistant co-author trailers. Historic measured commit
 identifiers in evaluation records describe the original execution; if history
 is rewritten, preserve that evidence and record equivalent source revisions.
+
+## History maintenance
+
+Unwanted assistant co-author trailers were removed from 11 historical commit
+messages at the author's request. Every original commit tree, author, committer,
+timestamp and parent order was preserved; descendant identifiers changed. A
+verified Git bundle and revision map are retained privately under
+`deliverables/session-20261017/history-backup/`. No signature was removed.
+The Colab templates now pin the tree-equivalent clean historical revision.
+Measured records keep their original identifiers and an additional equivalent
+revision so that evidence is not represented as a new execution.

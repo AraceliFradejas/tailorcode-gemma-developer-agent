@@ -35,5 +35,6 @@
     "Mobile layout not yet checked on a physical device."
   ],
   "anonymous_access_verified": true,
-  "anonymous_access_method": "Opened public URL in a new Chrome Incognito window; app rendered without Streamlit sign-in."
+  "anonymous_access_method": "Opened public URL in a new Chrome Incognito window; app rendered without Streamlit sign-in.",
+  "equivalent_rewritten_initial_revision": "00164070810a9178ad0b4669593a256ddc416593"
 }

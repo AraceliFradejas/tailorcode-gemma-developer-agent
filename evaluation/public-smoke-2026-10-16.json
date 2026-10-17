@@ -45,5 +45,7 @@
     "One public development task; no hidden evaluation or Kaggle score.",
     "43.65 seconds is evaluator duration, not total cloud session or model startup time.",
     "Clean notebook reorganizes tested components but has not been run end to end."
-  ]
+  ],
+  "equivalent_rewritten_source_revision": "8fd6267741b786bce69bb150182ba264a3b73ffe",
+  "revision_note": "source_revision is the original measured checkout; equivalent_rewritten_source_revision has an identical Git tree after author-trailer cleanup."
 }
