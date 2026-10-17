@@ -5,6 +5,15 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
+## Navegación y descarga de skills — 17 de octubre de 2026
+
+A petición de Araceli, se destacó la elección de caso con un panel violeta y
+las tres opciones visibles. La barra lateral ahora enfatiza “Descarga la skill”,
+con ZIPs reales para Codex y Claude Code y pasos de instalación. Los paquetes
+contienen solo instrucciones/referencia y metadatos de Codex cuando corresponde;
+se verificó su contenido y el renderizado en los tres casos. La descarga no
+cambia el estado pendiente de la prueba dentro de Claude Code.
+
 ## Tercer ejemplo visual — 17 de octubre de 2026
 
 Se añadió “El último día se queda fuera”: calendario ficticio de riego en días

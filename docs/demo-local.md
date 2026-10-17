@@ -92,3 +92,13 @@ son opcionales. Es una corrección de referencia, no un resultado de Claude.
 Se verificaron los tres escenarios, el botón, el ejercicio y el cambio entre
 las tres pantallas. Pasaron 37 tests locales. Se reinició el servidor para
 cargar los módulos nuevos, como requiere la incidencia documentada arriba.
+
+## Selección visible y descarga de la skill
+
+Los tres casos se eligen mediante opciones siempre visibles dentro de un panel
+destacado. La barra lateral incluye descargas ZIP reales para Codex y Claude
+Code. Cada ZIP contiene solo la carpeta `tailorcode` con instrucciones y
+referencias; Codex añade sus metadatos de interfaz. No incluye sesiones ni logs.
+Al descomprimir, copiar esa carpeta a `.agents/skills/` o `.claude/skills/`
+dentro del proyecto elegido. La interfaz muestra los pasos de instalación.
+Se comprobaron ambos archivos y la presencia de las descargas en los tres casos.

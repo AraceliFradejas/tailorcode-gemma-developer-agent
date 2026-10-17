@@ -1,9 +1,38 @@
 """A beginner-friendly replay of the recorded Codex price correction."""
 import streamlit as st
 from demo.engine import compare, patch, run_checks, sources
+from demo.skill_downloads import render_skill_downloads
 
 st.set_page_config(page_title='tAilorCode · Corrige y aprende', page_icon='🧵', layout='wide')
-example = st.selectbox('Elige un ejemplo', ['Un producto gratis', 'Dos cestas que se mezclan', 'El último día se queda fuera'])
+st.markdown("""
+<style>
+.st-key-case_selector {
+    background: color-mix(in srgb, #8b5cf6 13%, var(--background-color, #0e1117));
+    border: 2px solid #8b5cf6;
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+}
+.st-key-case_selector [role="radiogroup"] {
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+}
+.st-key-case_selector [data-testid="stRadio"] label p {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+</style>
+""", unsafe_allow_html=True)
+with st.container(border=True, key='case_selector'):
+    st.subheader('Empieza aquí: elige un caso')
+    st.caption('Tres situaciones cotidianas. Pulsa una opción para explorar su fallo y su solución.')
+    labels = {
+        'Un producto gratis': '🏷️  1. Un producto gratis',
+        'Dos cestas que se mezclan': '🛒  2. Dos cestas que se mezclan',
+        'El último día se queda fuera': '💧  3. El último día se queda fuera',
+    }
+    example = st.radio('Elige un ejemplo', list(labels), format_func=labels.get,
+                       horizontal=True, label_visibility='collapsed', key='selected_case')
 if example == 'Dos cestas que se mezclan':
     from demo.basket_view import render_baskets
     render_baskets()
@@ -25,7 +54,7 @@ with st.sidebar:
     st.write('1. Elige una situación.\n\n2. Compara lo que cobra la caja.\n\n3. Comprueba el arreglo.')
     st.divider()
     st.write('Proyecto de Araceli Fradejas Muñoz')
-    st.caption('Esta demo explica un caso guardado. No analiza código nuevo. El ejemplo se resolvió también sin la skill.')
+    render_skill_downloads()
     st.markdown('[Ver proyecto en GitHub](https://github.com/AraceliFradejas/tailorcode-gemma-developer-agent)')
 
 st.subheader('1. Elige qué producto pasa por caja')

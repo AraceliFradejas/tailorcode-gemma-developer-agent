@@ -1,6 +1,7 @@
 """Show an exclusive-boundary bug using a fictional watering calendar."""
 import streamlit as st
 from demo.engine import patch, range_trace, run_checks, sources
+from demo.skill_downloads import render_skill_downloads
 
 CASE = 'inclusive-range'
 
@@ -31,7 +32,7 @@ def render_range():
         st.write('Los días impares no tienen riego previsto. Eso es correcto.')
         st.divider()
         st.write('Proyecto de Araceli Fradejas Muñoz')
-        st.caption('El botón ejecuta pruebas locales. Esta corrección aún no se ha probado con la skill en un asistente.')
+        render_skill_downloads()
 
     st.subheader('1. Elige el periodo del plan')
     scenario = st.selectbox('Periodo', ['Del día 1 al 4', 'Solo el día 2', 'Del día 1 al 5'])

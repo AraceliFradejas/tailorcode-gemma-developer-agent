@@ -1,6 +1,7 @@
 """Explain shared mutable defaults through two fictional shopping baskets."""
 import streamlit as st
 from demo.engine import basket_trace, patch, run_checks, sources
+from demo.skill_downloads import render_skill_downloads
 
 CASE = 'independent-lists'
 
@@ -18,7 +19,7 @@ def render_baskets():
         st.write('Si alguien continúa una cesta existente, se conserva esa misma cesta.')
         st.divider()
         st.write('Proyecto de Araceli Fradejas Muñoz')
-        st.caption('No hay llamadas nuevas a IA. Las pruebas del botón sí se ejecutan en este momento.')
+        render_skill_downloads()
 
     st.subheader('1. Elige la compra de cada persona')
     a, b = st.columns(2)
