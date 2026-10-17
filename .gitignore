@@ -25,3 +25,6 @@ results/
 
 # Private session originals (notebooks, account links and logs)
 deliverables/session-*/
+
+# Local Streamlit credentials
+.streamlit/secrets.toml

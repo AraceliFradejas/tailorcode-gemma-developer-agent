@@ -5,8 +5,8 @@ el arreglo.** Proyecto de portfolio creado y dirigido por **Araceli Fradejas Mu�
 
 El usuario abre su proyecto en Codex o Claude Code, describe un fallo y recibe
 una corrección revisable, una explicación y evidencia de las comprobaciones.
-La primera versión está preparada para instalarse en ambos asistentes; hay una primera prueba guiada en Codex con el arreglo comprobado
-independientemente. Falta completar las pruebas de compatibilidad y comparación.
+Disponible para descargar e instalar en **Codex y Claude Code**.
+Prueba de uso realizada en Codex; validación en Claude Code pendiente.
 
 ## Demo local interactiva
 

@@ -5,6 +5,16 @@ su desarrollo. Distingue lo que se ha comprobado de lo que solo está preparado.
 Los documentos técnicos y el código se mantienen en inglés; esta memoria está
 en español para facilitar el relato de Araceli.
 
+## Preparación de publicación — 17 de octubre de 2026
+
+Araceli autorizó publicar la demo y la presentación “Disponible para descargar
+e instalar en Codex y Claude Code”, manteniendo la validación pendiente de
+Claude en el README. Se añadió `requirements.txt` para que Streamlit detecte
+las dependencias de la demo, tema oscuro/violeta y exclusión de secrets locales.
+Las 37 pruebas locales pasan. Ver `docs/publicacion-streamlit.md`.
+Aún no hay URL pública comprobada: falta completar el panel de Streamlit.
+No anunciar el despliegue como terminado hasta verificarlo.
+
 ## Firma y redes — 17 de octubre de 2026
 
 Se añadió un footer compartido en los tres casos: © 2026 Araceli Fradejas Muñoz
